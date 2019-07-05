@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#01C475</color>
+    <color name="colorPrimaryDark">#01C475</color>
+    <color name="colorAccent">#01C475</color>
+
+    <!--bar颜色配置 开始-->
+    <color name="bar_bg_white">#FFFFFF</color>
+    <color name="bar_bg_green">#01C475</color>
+
+    <color name="bar_titie_white">#45494D</color>
+    <color name="bar_titie_green">#FFFFFF</color>
+
+    <color name="bar_back_button_white">#ACAFB3</color>
+    <color name="bar_back_button_green">#FFFFFF</color>
+    <!--结束-->
+
+    <color name="bar_button_press">#C9C1C1</color>
+    <color name="bar_button">#FFFFFF</color>
+
+    <color name="gray_bg">#F6F6F6</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="divider_spinner">#72777D</color>
+
+
+</resources>

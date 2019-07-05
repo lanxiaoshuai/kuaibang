@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">witkeyhelp</string>
+    <string name="title_home">首页</string>
+    <string name="title_rewardhall">悬赏大厅</string>
+    <string name="title_message">消息</string>
+    <string name="title_me">我</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm">确定</string>
+    <string name="consult">信息咨询</string>
+    <string name="offerWard">悬赏帮忙</string>
+</resources>
