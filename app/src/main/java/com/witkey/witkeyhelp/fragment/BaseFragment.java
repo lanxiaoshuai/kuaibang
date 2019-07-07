@@ -13,12 +13,12 @@ import android.widget.TextView;
 import com.witkey.witkeyhelp.R;
 
 
-    public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
     /**
      * 根View
      **/
     protected View rootView;
-//    private ReplaceViewHelper replaceViewHelper;
+    //    private ReplaceViewHelper replaceViewHelper;
     private View targetView;
     protected String TAG = "llx";
 
@@ -72,7 +72,8 @@ import com.witkey.witkeyhelp.R;
 //        if (view != null) {
 //            view.setVisibility(View.GONE);
 //        }
-        initWeight();
+        //实现控件
+        initWidght();
         initEvent();
 //        addPresenters();
         onInitPresenters();
@@ -117,7 +118,7 @@ import com.witkey.witkeyhelp.R;
     /**
      * 实例化view
      */
-    protected abstract void initWeight();
+    protected abstract void initWidght();
 
     /**
      * 根据id查找View

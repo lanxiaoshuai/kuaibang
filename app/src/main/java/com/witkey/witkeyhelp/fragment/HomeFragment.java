@@ -56,7 +56,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void initWeight() {
+    protected void initWidght() {
         setIncludeTitle("威客帮");
         rl_consult = (RelativeLayout) findViewById(R.id.rl_consult);
         rl_help = (RelativeLayout) findViewById(R.id.rl_help);
@@ -64,6 +64,7 @@ public class HomeFragment extends BaseFragment {
         iv_bottom = (ImageView) findViewById(R.id.iv_bottom);
         initData();
     }
+
 
     private void initData() {
         funtionData = new ArrayList<Map<String, Object>>();
