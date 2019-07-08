@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#01C475</color>
-    <color name="colorPrimaryDark">#01C475</color>
-    <color name="colorAccent">#01C475</color>
+    <color name="colorPrimaryDark">#019157</color>
+    <color name="colorAccent">#FFFFFF</color>
 
     <!--bar颜色配置 开始-->
     <color name="bar_bg_white">#FFFFFF</color>
@@ -22,7 +22,8 @@
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="divider_spinner">#72777D</color>
 
+    <!--swipeRefreshLayout-->
+    <color name="swipeRefreshLayout_blueStatus">#1680E2</color>
 
 </resources>

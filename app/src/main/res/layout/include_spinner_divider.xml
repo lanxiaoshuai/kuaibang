@@ -5,4 +5,4 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="@dimen/spinner_divider_top_bottom"
     android:layout_marginTop="@dimen/spinner_divider_top_bottom"
-    android:background="@color/divider_spinner"/>
+    android:background="#222422"/>

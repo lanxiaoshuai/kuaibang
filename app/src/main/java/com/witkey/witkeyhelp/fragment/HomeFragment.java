@@ -55,7 +55,6 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    @Override
     protected void initWidght() {
         setIncludeTitle("威客帮");
         rl_consult = (RelativeLayout) findViewById(R.id.rl_consult);
