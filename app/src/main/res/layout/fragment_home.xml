@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_bg"
-    tools:context=".fragment.HomeFragment">
+    tools:context=".view.impl.fragment.HomeFragment">
 
     <include
         android:id="@+id/include"
@@ -45,7 +45,7 @@
                         android:layout_width="57dp"
                         android:layout_height="47dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_test" />
+                        android:src="@mipmap/ic_home_consult" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                         android:layout_width="57dp"
                         android:layout_height="47dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_test" />
+                        android:src="@mipmap/ic_home_help" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
             android:id="@+id/iv_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:src="@drawable/ic_home_test" />
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_home_bottom" />
     </LinearLayout>
 </RelativeLayout>

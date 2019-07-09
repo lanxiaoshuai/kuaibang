@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp.fragment;
+package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.presenter.IPresenter;
+import com.witkey.witkeyhelp.view.IView;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements IView {
     /**
      * 根View
      **/
@@ -32,12 +37,12 @@ public abstract class BaseFragment extends Fragment {
      **/
     protected abstract int getContentView();
 
-//    private Set<IPresenter> mAllPresenters = new HashSet<>(1);
-//
-//    /**
-//     * 需要子类来实现，获取子类的IPresenter，一个activity有可能有多个IPresenter
-//     */
-//    protected abstract IPresenter[] getPresenters();
+    private Set<IPresenter> mAllPresenters = new HashSet<>(1);
+
+    /**
+     * 需要子类来实现，获取子类的IPresenter，一个activity有可能有多个IPresenter
+     */
+    protected abstract IPresenter[] getPresenters();
 
     /**
      * 初始化presenters
@@ -49,14 +54,14 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void initEvent();
 
-//    private void addPresenters() {
-//        IPresenter[] presenters = getPresenters();
-//        if (presenters != null) {
-//            for (int i = 0; i < presenters.length; i++) {
-//                mAllPresenters.add(presenters[i]);
-//            }
-//        }
-//    }
+    private void addPresenters() {
+        IPresenter[] presenters = getPresenters();
+        if (presenters != null) {
+            for (int i = 0; i < presenters.length; i++) {
+                mAllPresenters.add(presenters[i]);
+            }
+        }
+    }
 
     @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,13 +83,14 @@ public abstract class BaseFragment extends Fragment {
         initEvent();
 //        addPresenters();
         onInitPresenters();
+
         initViewExceptPresenter();
         return rootView;
     }
 
     //上传数据
 //    private RequestBean bean;
-
+//
 //    protected RequestBean getRequestBean() {
 //        if (bean == null) {
 //            String name = "page--ActivityName=" + getActivity().getClass().getName() + ",fragmentName=" + getFragmentName();
@@ -92,9 +98,11 @@ public abstract class BaseFragment extends Fragment {
 //        }
 //        return bean;
 //    }
+//    protected abstract String getFragmentName();
 
-    protected abstract String getFragmentName();
-
+    /**
+     * 初始化presenter结束进行的操作
+     */
     protected abstract void initViewExceptPresenter();
 
     //为想设置不重复加载的界面准备,重写返回null将重复接在此fragment界面
@@ -223,8 +231,8 @@ public abstract class BaseFragment extends Fragment {
 //    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    @Override
-//    public void onError(String error) {
+    @Override
+    public void onError(String error) {
 //        DialogUtil.dismissProgress();
 //        if (!"请确认网络已连接~~".equals(error)) {
 //            Log.d(TAG, "onError: " + error);
@@ -236,7 +244,7 @@ public abstract class BaseFragment extends Fragment {
 //                showErrorView();
 //            }
 //        }
-//    }
+    }
 
     //封装通用toast方法
 //    protected void Toast(String info, int state) {

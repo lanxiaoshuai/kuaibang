@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp.fragment;
+package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.content.Context;
 import android.net.Uri;

@@ -1,13 +1,16 @@
-package com.witkey.witkeyhelp.fragment;
+package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.content.Context;
 import android.net.Uri;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.presenter.IPresenter;
+import com.witkey.witkeyhelp.view.IHomeFragView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +22,7 @@ import java.util.Map;
  * @date 2019/7/4 14:13
  * @description 首页fragment
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements IHomeFragView, View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     private RelativeLayout rl_consult;
     private RelativeLayout rl_help;
@@ -27,12 +30,17 @@ public class HomeFragment extends BaseFragment {
     private ImageView iv_bottom;
     private ArrayList<Map<String, Object>> funtionData;
     private String[] functionStrs = {"紧急求助", "失物招领", "微通知", "钻石通知"};
-    private int[] functionImg = {R.drawable.ic_test, R.drawable.ic_test, R.drawable.ic_test, R.drawable.ic_test};
+    private int[] functionImg = {R.mipmap.ic_home_emergencyhelp, R.mipmap.ic_home_lostfound, R.mipmap.ic_home_notice, R.mipmap.ic_home_diamondnotice};
     private SimpleAdapter adapter_function;
 
     @Override
     protected int getContentView() {
         return R.layout.fragment_home;
+    }
+
+    @Override
+    protected IPresenter[] getPresenters() {
+        return new IPresenter[0];
     }
 
     @Override
@@ -42,12 +50,9 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initEvent() {
-
-    }
-
-    @Override
-    protected String getFragmentName() {
-        return "首页";
+        rl_consult.setOnClickListener(this);
+        rl_help.setOnClickListener(this);
+        iv_bottom.setOnClickListener(this);
     }
 
     @Override
@@ -103,6 +108,27 @@ public class HomeFragment extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            //信息咨询
+            case R.id.rl_consult:
+                break;
+            //悬赏帮忙
+            case R.id.rl_help:
+                break;
+            //下面广告位
+            case R.id.iv_bottom:
+                break;
+        }
+
+    }
+
+    @Override
+    public void onError(String error) {
+
     }
 
     public interface OnFragmentInteractionListener {

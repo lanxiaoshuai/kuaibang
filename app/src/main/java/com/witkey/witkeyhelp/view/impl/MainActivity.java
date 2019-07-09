@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp;
+package com.witkey.witkeyhelp.view.impl;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,10 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
-import com.witkey.witkeyhelp.fragment.HomeFragment;
-import com.witkey.witkeyhelp.fragment.MeFragment;
-import com.witkey.witkeyhelp.fragment.MessageFragment;
-import com.witkey.witkeyhelp.fragment.RewardHallFragment;
+import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.view.impl.fragment.HomeFragment;
+import com.witkey.witkeyhelp.view.impl.fragment.MeFragment;
+import com.witkey.witkeyhelp.view.impl.fragment.MessageFragment;
+import com.witkey.witkeyhelp.view.impl.fragment.RewardHallFragment;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp.fragment;
+package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;

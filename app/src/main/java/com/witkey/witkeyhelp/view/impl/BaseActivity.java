@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp;
+package com.witkey.witkeyhelp.view.impl;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.util.StatusbarColorUtils;
 import com.witkey.witkeyhelp.util.SystemBarTintManager;
+import com.witkey.witkeyhelp.view.IView;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements IView {
 
     private Bundle savedInstanceState;
     private BaseActivity mActivity;
@@ -73,4 +75,12 @@ public class BaseActivity extends AppCompatActivity {
             tv.setText(title);
     }
 
+    /**
+     * 错误时操作
+     * @param error 错误信息
+     */
+    @Override
+    public void onError(String error) {
+
+    }
 }
