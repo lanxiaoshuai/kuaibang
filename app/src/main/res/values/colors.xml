@@ -25,5 +25,6 @@
 
     <!--swipeRefreshLayout-->
     <color name="swipeRefreshLayout_blueStatus">#1680E2</color>
+    <color name="item_mission_red">#ff0000</color>
 
 </resources>

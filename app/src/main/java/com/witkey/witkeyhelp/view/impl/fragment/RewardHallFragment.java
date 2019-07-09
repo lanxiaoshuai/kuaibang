@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.Mission;
 import com.witkey.witkeyhelp.bean.MissionFilter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
@@ -51,13 +52,13 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 
     @Override
     protected IPresenter[] getPresenters() {
-        presenter=new ReawardHallFragPresenterImpl();
+        presenter = new ReawardHallFragPresenterImpl();
         return new IPresenter[]{presenter};
     }
 
     @Override
     protected void onInitPresenters() {
-
+        presenter.init(this);
     }
 
     @Override
@@ -77,8 +78,8 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
         tv_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("llx","click");
-                Toast.makeText(getActivity(),"click",Toast.LENGTH_LONG).show();
+                Log.i("llx", "click");
+                Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -99,11 +100,41 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     }
 
 
-
-
     @Override
     protected void initViewExceptPresenter() {
+        // TODO: 2019/7/9 刷新操作
+        getData();
+    }
 
+    /**
+     * 刷新数据
+     */
+    private void getData() {
+        //不确定是否全部刷新
+//        if (spin_classify != null) {
+//            spin_classify.setSelectedIndex(0);
+//            chooseClassify = "线上任务";
+//        }
+//        if (spin_order != null) {
+//            spin_order.setSelectedIndex(0);
+//            chooseOrder = "任务价格";
+//        }
+//        if(filter!=null){
+//            //todo 设为空
+//        }
+        if (missionList != null) {
+            missionList.clear();
+            missionList = null;
+        }
+        allGet();
+    }
+
+    /**
+     * 获取数据
+     */
+    private void allGet() {
+        presenter.getMissionList(chooseClassify, chooseOrder, filter);
+        // TODO: 2019/7/9 显示刷新
     }
 
     @Override
@@ -126,7 +157,26 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 
     @Override
     public void showMissionList(List<Mission> missions) {
+        if (missions != null) {
+            // TODO: 2019/7/9 获取成功的操作
+            if (isLoading) {
+                missionList.addAll(missions);
+                isLoading = false;
+            } else {
+                missionList = missions;
+            }
+            showAdapter();
+        }
+    }
 
+    private void showAdapter() {
+        if (adapter == null) {
+            adapter = new MissionRecyAdapter(getActivity(), missionList);
+            recyclerView.setAdapter(adapter);
+        } else {
+            ((MissionRecyAdapter) adapter).setData(missionList);
+            adapter.notifyDataSetChanged();
+        }
     }
 
 
