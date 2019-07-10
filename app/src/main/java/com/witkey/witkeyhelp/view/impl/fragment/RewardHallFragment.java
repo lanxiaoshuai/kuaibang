@@ -63,6 +63,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 
     @Override
     protected void initEvent() {
+        super.initEvent();
         spin_classify.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
             @Override
             public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
@@ -86,22 +87,33 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 
     @Override
     protected void onLoadMore() {
-
+        if (!isLoading) {
+//            if (customer != null) {
+//                if (customer.getMeta().getPagination().getTotal_pages() > customer.getMeta().getPagination().getCurrent_page()) {
+//                    page = customer.getMeta().getPagination().getCurrent_page() + 1;
+                    isLoading = true; // 在获取前修改状态
+                    allGet();
+//                }
+//            }
+        }
     }
 
     @Override
     protected void onRefresh() {
-
+        // TODO: 2019/7/10 设置页
+        isLoading=false;
+        allGet();
     }
 
     @Override
     protected int setRecyDividerHeight() {
-        return 30;
+        return 0;
     }
 
 
     @Override
     protected void initViewExceptPresenter() {
+        super.initViewExceptPresenter();
         // TODO: 2019/7/9 刷新操作
         getData();
     }
@@ -139,6 +151,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 
     @Override
     protected void initWidght() {
+        super.initWidght();
         setIncludeTitle("悬赏大厅");
         spin_classify = (NiceSpinner) findViewById(R.id.spin_classify);
         spin_order = (NiceSpinner) findViewById(R.id.spin_order);
@@ -152,13 +165,13 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 
     @Override
     public void onError(String error) {
-
+        
     }
 
     @Override
     public void showMissionList(List<Mission> missions) {
         if (missions != null) {
-            // TODO: 2019/7/9 获取成功的操作
+            getSuc();
             if (isLoading) {
                 missionList.addAll(missions);
                 isLoading = false;

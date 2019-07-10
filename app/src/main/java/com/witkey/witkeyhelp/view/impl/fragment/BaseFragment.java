@@ -81,7 +81,7 @@ public abstract class BaseFragment extends Fragment implements IView {
         //实现控件
         initWidght();
         initEvent();
-//        addPresenters();
+        addPresenters();
         onInitPresenters();
 
         initViewExceptPresenter();

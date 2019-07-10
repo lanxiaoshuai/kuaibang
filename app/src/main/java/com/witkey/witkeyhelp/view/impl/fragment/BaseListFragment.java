@@ -26,7 +26,7 @@ public abstract class BaseListFragment extends BaseFragment {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                Log.d(TAG, "StateChanged = " + newState);
+//                Log.d(TAG, "StateChanged = " + newState);
             }
 
             @Override
@@ -87,7 +87,12 @@ public abstract class BaseListFragment extends BaseFragment {
         //author:lingxu
 //        DialogUtil.dismissProgress();
 //        removeOtherView();
-        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
