@@ -10,8 +10,11 @@ import com.witkey.witkeyhelp.util.SpaceItemDecoration;
 
 /**
  * Created by Administrator on 2018/4/3.
+ * 需
+ * super.initEvent();
+ * super.initWidght();
+ * super.initViewExceptPresenter();
  */
-
 public abstract class BaseListFragment extends BaseFragment {
     protected SwipeRefreshLayout swipeRefreshLayout;
     protected RecyclerView recyclerView;

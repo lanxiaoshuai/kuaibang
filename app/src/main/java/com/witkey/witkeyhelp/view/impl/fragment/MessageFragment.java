@@ -2,28 +2,33 @@ package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.adapter.MessageRecyAdapter;
+import com.witkey.witkeyhelp.bean.Message;
+import com.witkey.witkeyhelp.presenter.IMessageFragPresenter;
+import com.witkey.witkeyhelp.presenter.IPresenter;
+import com.witkey.witkeyhelp.presenter.impl.MessageFragPresenterImpl;
+import com.witkey.witkeyhelp.view.IMessageFragView;
+
+import java.util.List;
 
 /**
-* @author lingxu
-* @date 2019/7/4 14:13
-* @description  消息fragment
-*/
-public class MessageFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+ * @author lingxu
+ * @date 2019/7/4 14:13
+ * @description 消息fragment
+ */
+public class MessageFragment extends BaseListFragment implements IMessageFragView, View.OnClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private RelativeLayout rl_message_sys;
+    private RelativeLayout rl_message_diamonon;
+    private RelativeLayout rl_message_we;
+
+    private IMessageFragPresenter presenter;
+
+    private List<Message> messageList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -31,46 +36,7 @@ public class MessageFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MessageFragment newInstance(String param1, String param2) {
-        MessageFragment fragment = new MessageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+    private boolean isLoading = false;
 
     @Override
     public void onAttach(Context context) {
@@ -89,16 +55,117 @@ public class MessageFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    protected int getContentView() {
+        return R.layout.fragment_message;
+    }
+
+    @Override
+    protected IPresenter[] getPresenters() {
+        presenter = new MessageFragPresenterImpl();
+        return new IPresenter[]{presenter};
+    }
+
+    @Override
+    protected void onInitPresenters() {
+        presenter.init(this);
+    }
+
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+        rl_message_sys.setOnClickListener(this);
+        rl_message_diamonon.setOnClickListener(this);
+        rl_message_we.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onLoadMore() {
+        if (!isLoading) {
+            isLoading = true;
+            allGet();
+        }
+    }
+
+    private void allGet() {
+        presenter.getMessageList();
+    }
+
+    @Override
+    protected void onRefresh() {
+        isLoading = false;
+        allGet();
+    }
+
+    @Override
+    protected int setRecyDividerHeight() {
+        return 10;
+    }
+
+    @Override
+    protected void initViewExceptPresenter() {
+        super.initViewExceptPresenter();
+        getData();
+    }
+
+    private void getData() {
+        //刚进来的操作
+        if (messageList != null) {
+            messageList.clear();
+            messageList = null;
+        }
+        allGet();
+    }
+
+    @Override
+    protected void initWidght() {
+        super.initWidght();
+        setIncludeTitle("消息中心");
+        rl_message_sys = (RelativeLayout) findViewById(R.id.rl_message_sys);
+        rl_message_diamonon = (RelativeLayout) findViewById(R.id.rl_message_diamonon);
+        rl_message_we = (RelativeLayout) findViewById(R.id.rl_message_we);
+    }
+
+    @Override
+    public void showMessageList(List<Message> messageList) {
+        if(messageList!=null){
+            getSuc();
+            if (isLoading) {
+                this.messageList.addAll(messageList);
+                isLoading = false;
+            } else {
+                this.messageList = messageList;
+            }
+            showAdapter();
+        }
+    }
+
+    private void showAdapter() {
+        if (adapter == null) {
+            adapter = new MessageRecyAdapter(getActivity(), messageList);
+            recyclerView.setAdapter(adapter);
+        } else {
+            ((MessageRecyAdapter) adapter).setData(messageList);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.rl_message_sys:
+
+                break;
+            case R.id.rl_message_diamonon:
+
+                break;
+            case R.id.rl_message_we:
+
+                break;
+        }
+    }
+
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
