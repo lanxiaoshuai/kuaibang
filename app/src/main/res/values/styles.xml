@@ -24,4 +24,14 @@
         <item name="android:textSize">@dimen/include_title_text_size</item>
         <item name="android:textColor">@color/bar_titie_white</item>
     </style>
+
+    <!-- 去掉dialog头部 -->
+    <style name="ShareDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--不显示遮罩-->
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+
+    </style>
 </resources>

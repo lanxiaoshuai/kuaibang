@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReawardHallFragModelImpl implements IReawardHallFragModel {
     @Override
-    public void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter, AsyncCallback callback) {
+    public void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter,String searchKeyWord, AsyncCallback callback) {
         List<Mission> missions=new ArrayList<>();
         missions.add(new Mission("我是title","紧急求助","我是content","152"));
         missions.add(new Mission("我是title","紧急求助","我是content","152"));

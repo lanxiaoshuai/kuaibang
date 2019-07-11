@@ -21,8 +21,8 @@ public class ReawardHallFragPresenterImpl implements IReawardHallFragPresenter {
     }
 
     @Override
-    public void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter) {
-        model.getMissionList(chooseClassify, chooseOrder, filter, new IModel.AsyncCallback() {
+    public void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter,String searchKeyWord) {
+        model.getMissionList(chooseClassify, chooseOrder, filter,searchKeyWord, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
                 view.showMissionList((List<Mission>) data);

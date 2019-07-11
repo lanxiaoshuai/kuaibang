@@ -28,4 +28,5 @@
     <dimen name="spinner_padding_left_right">6dp</dimen>
     <dimen name="spinner_divider_top_bottom">9dp</dimen>
     <dimen name="spinner_divider_width">1dp</dimen>
+    <dimen name="dia_mission_filter_title">15sp</dimen>
 </resources>

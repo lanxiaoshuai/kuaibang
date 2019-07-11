@@ -46,4 +46,13 @@ public class MissionFilter {
 
     public MissionFilter() {
     }
+
+    @Override
+    public String toString() {
+        return "MissionFilter{" +
+                "missionFilter='" + missionFilter + '\'' +
+                ", missionType='" + missionType + '\'' +
+                ", isNeedBond=" + isNeedBond +
+                '}';
+    }
 }

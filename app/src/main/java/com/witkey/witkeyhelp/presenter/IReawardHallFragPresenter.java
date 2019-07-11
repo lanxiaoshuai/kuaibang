@@ -4,5 +4,5 @@ import com.witkey.witkeyhelp.bean.MissionFilter;
 import com.witkey.witkeyhelp.view.IReawardHallFragView;
 
 public interface IReawardHallFragPresenter extends IPresenter<IReawardHallFragView>{
-    void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter);
+    void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter,String searchKeyWord);
 }

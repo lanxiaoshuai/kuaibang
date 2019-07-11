@@ -1,15 +1,18 @@
 package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.net.Uri;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.Mission;
 import com.witkey.witkeyhelp.bean.MissionFilter;
+import com.witkey.witkeyhelp.dialog.MissionFilterDialog;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.IReawardHallFragPresenter;
 import com.witkey.witkeyhelp.presenter.impl.ReawardHallFragPresenterImpl;
@@ -30,19 +33,24 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     private NiceSpinner spin_classify;
     private NiceSpinner spin_order;
     private TextView tv_filter;
+    private EditText et_search;
 
     private String[] classifyData = {"线上任务", "线下任务", "人命币", "钻石"};
     private String[] orderData = {"任务价格", "截止时间", "按照距离"};
 
     private IReawardHallFragPresenter presenter;
-
+    private boolean isLoading = false;
+    //控制数据的变量
     private String chooseClassify;
     private String chooseOrder;
     private MissionFilter filter;
+    private String searchKeyWord;
 
+    //获取的任务列表数据
     private List<Mission> missionList;
 
-    private boolean isLoading = false;
+    //高级筛选dialog
+    private MissionFilterDialog missionFilterDialog;
 
 
     @Override
@@ -67,20 +75,49 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
         spin_classify.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
             @Override
             public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
-
+                chooseClassify = classifyData[position];
+                allGet();
             }
         });
         spin_order.setOnSpinnerItemSelectedListener(new OnSpinnerItemSelectedListener() {
             @Override
             public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
-
+                chooseOrder = orderData[position];
+                allGet();
             }
         });
         tv_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("llx", "click");
-                Toast.makeText(getActivity(), "click", Toast.LENGTH_LONG).show();
+                missionFilterDialog = new MissionFilterDialog(getActivity(), filter, findViewById(R.id.ll_spinner));
+                missionFilterDialog.setOnclickListener(new MissionFilterDialog.ICommitOnclickListener() {
+                    @Override
+                    public void onCommit(MissionFilter missionFilter) {
+                        filter = missionFilter;
+                        allGet();
+                    }
+                });
+                missionFilterDialog.show();
+            }
+        });
+        //搜索框操作
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!TextUtils.isEmpty(s.toString())) {
+                    searchKeyWord = s.toString().trim();
+                    allGet();
+                }
             }
         });
     }
@@ -91,8 +128,8 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
 //            if (customer != null) {
 //                if (customer.getMeta().getPagination().getTotal_pages() > customer.getMeta().getPagination().getCurrent_page()) {
 //                    page = customer.getMeta().getPagination().getCurrent_page() + 1;
-                    isLoading = true; // 在获取前修改状态
-                    allGet();
+            isLoading = true; // 在获取前修改状态
+            allGet();
 //                }
 //            }
         }
@@ -101,7 +138,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     @Override
     protected void onRefresh() {
         // TODO: 2019/7/10 设置页
-        isLoading=false;
+        isLoading = false;
         allGet();
     }
 
@@ -145,7 +182,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
      * 获取数据
      */
     private void allGet() {
-        presenter.getMissionList(chooseClassify, chooseOrder, filter);
+        presenter.getMissionList(chooseClassify, chooseOrder, filter, searchKeyWord);
         // TODO: 2019/7/9 显示刷新
     }
 
@@ -156,16 +193,19 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
         spin_classify = (NiceSpinner) findViewById(R.id.spin_classify);
         spin_order = (NiceSpinner) findViewById(R.id.spin_order);
         tv_filter = (TextView) findViewById(R.id.tv_filter);
+        et_search = (EditText) findViewById(R.id.et_search);
 
         spin_classify.attachDataSource(Arrays.asList(classifyData));
         spin_order.attachDataSource(Arrays.asList(orderData));
         tv_filter.setText("高级筛选");
+
+        filter = new MissionFilter();
     }
 
 
     @Override
     public void onError(String error) {
-        
+
     }
 
     @Override
