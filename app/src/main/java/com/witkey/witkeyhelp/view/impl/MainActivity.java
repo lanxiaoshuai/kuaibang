@@ -1,7 +1,6 @@
 package com.witkey.witkeyhelp.view.impl;
 
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -16,6 +15,11 @@ import com.witkey.witkeyhelp.view.impl.fragment.RewardHallFragment;
 
 import java.util.ArrayList;
 
+/**
+ * @author lingxu
+ * @date 2019/7/12 14:19
+ * @description 主页面
+ */
 public class MainActivity extends BaseActivity implements HomeFragment.OnFragmentInteractionListener, RewardHallFragment.OnFragmentInteractionListener, MessageFragment.OnFragmentInteractionListener, MeFragment.OnFragmentInteractionListener {
     private ArrayList<Fragment> mFragments;
     private int lastIndex;
@@ -45,8 +49,7 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnFragmen
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreateActivity() {
         setContentView(R.layout.activity_main);
         initViews();
         setTitle(R.string.title_home);
@@ -86,7 +89,6 @@ public class MainActivity extends BaseActivity implements HomeFragment.OnFragmen
     private void initViews() {
 
     }
-
 
 
     @Override

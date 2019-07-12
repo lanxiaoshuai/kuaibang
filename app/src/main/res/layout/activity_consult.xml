@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_title_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_primary_ver_line"
+            android:drawablePadding="5dp"
+            android:text="咨询内容"
+            android:textColor="@color/colorPrimary" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/shape_gray_stroke"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top|left"
+                android:hint="输入您的问题"
+                android:minLines="9"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/iv_pic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/et_content" />
+
+            <Button
+                android:id="@+id/btn_add_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/shape_primary_solid"
+                android:padding="8dp"
+                android:text="添加图片"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_title_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_primary_ver_line"
+            android:drawablePadding="5dp"
+            android:text="任务截止时间"
+            android:textColor="@color/colorPrimary" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tv_title_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_primary_ver_line"
+            android:drawablePadding="5dp"
+            android:text="悬赏金额"
+            android:textColor="@color/colorPrimary" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_open_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_primary_solid"
+        android:padding="8dp"
+        android:text="展开更多高级设置"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/ll_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_title_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="任务标题"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_title_isBargaining"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="是否可以议价"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_title_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="联系方式"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_title_mission_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="任务数量"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_title_isNeedBidding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="是否需要竞标"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_title_isNeedBond"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="是否需要保证金"
+                android:textColor="@color/colorPrimary" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -9,6 +9,7 @@ public class Message {
     private String title;
     private String content;
     private String date;
+    private String avatar;
 
     @Override
     public String toString() {
@@ -16,7 +17,23 @@ public class Message {
                 "title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Message(String title, String content, String date, String avatar) {
+        this.title = title;
+        this.content = content;
+        this.date = date;
+        this.avatar = avatar;
     }
 
     public String getTitle() {

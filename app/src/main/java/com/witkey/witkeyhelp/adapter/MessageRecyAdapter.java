@@ -27,7 +27,7 @@ public class MessageRecyAdapter extends BaseRecyAdapter<Message> {
     @Override
     protected void onBindBiewHolder(RecyclerView.ViewHolder holder, int position) {
         final Message message = data.get(position);
-//        ((ViewHolder) holder).iv_avatar.
+//        ImgUtil.loadImg(context, message.getAvatar(), ((ViewHolder) holder).iv_avatar);
         ((ViewHolder) holder).tv_mission_title.setText(message.getTitle());
         ((ViewHolder) holder).tv_mission_content.setText(message.getContent());
         ((ViewHolder) holder).tv_mission_date.setText(message.getDate());
@@ -41,6 +41,7 @@ public class MessageRecyAdapter extends BaseRecyAdapter<Message> {
             }
         });
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView iv_avatar;
         private TextView tv_mission_title;
@@ -50,9 +51,9 @@ public class MessageRecyAdapter extends BaseRecyAdapter<Message> {
         public ViewHolder(View v) {
             super(v);
             iv_avatar = (ImageView) v.findViewById(R.id.iv_avatar);
-           tv_mission_title= (TextView) v.findViewById(R.id.tv_mission_title);
-           tv_mission_content= (TextView) v.findViewById(R.id.tv_mission_content);
-            tv_mission_date= (TextView) v.findViewById(R.id.tv_mission_date);
+            tv_mission_title = (TextView) v.findViewById(R.id.tv_mission_title);
+            tv_mission_content = (TextView) v.findViewById(R.id.tv_mission_content);
+            tv_mission_date = (TextView) v.findViewById(R.id.tv_mission_date);
         }
     }
 }
