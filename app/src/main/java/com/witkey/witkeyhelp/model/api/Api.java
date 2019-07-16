@@ -25,7 +25,25 @@ public interface Api {
     String CHANNEL = "channel";
     String BELOW = "below";
 
-    //公用
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
+    @POST("add")
+    @FormUrlEncoded
+    Call<String> login(
+            @Field("userName") String username,
+            @Field("password") String password
+            );
+
+
+
+
+
+    //模板
 
     //用户
 
@@ -57,7 +75,6 @@ public interface Api {
                                 @Field("verification_code") String verification_code,
                                 @Field("verification_key") String verification_key
     );
-
     /**
      * 登出
      */

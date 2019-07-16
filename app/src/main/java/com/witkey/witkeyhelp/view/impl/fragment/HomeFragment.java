@@ -10,7 +10,9 @@ import android.widget.SimpleAdapter;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.presenter.IPresenter;
+import com.witkey.witkeyhelp.util.IntentUtil;
 import com.witkey.witkeyhelp.view.IHomeFragView;
+import com.witkey.witkeyhelp.view.impl.ConsultActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,6 +117,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragView, View.On
         switch (v.getId()) {
             //信息咨询
             case R.id.rl_consult:
+                IntentUtil.startActivity(getContext(), ConsultActivity.class);
                 break;
             //悬赏帮忙
             case R.id.rl_help:
