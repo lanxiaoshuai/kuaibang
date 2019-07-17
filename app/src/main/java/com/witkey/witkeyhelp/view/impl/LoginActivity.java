@@ -3,7 +3,6 @@ package com.witkey.witkeyhelp.view.impl;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,13 +11,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.LoginRequest;
 import com.witkey.witkeyhelp.presenter.ILoginPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.LoginPresenterImpl;
+import com.witkey.witkeyhelp.util.CountDownUtil;
+import com.witkey.witkeyhelp.util.FormatUtil;
+import com.witkey.witkeyhelp.util.SharedPreferencesUtil;
 import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.ILoginView;
 
@@ -42,9 +43,8 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     private Button bt_login;
     private TextView tv_change_state;
 
-    private String[] strs = {"密码登录", "验证码登录"};
     private boolean isPass = true; //是否为密码登录
-
+    private boolean isSave = true; //默认记住密码
 
     private ILoginPresenter presenter;
 
@@ -68,6 +68,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
 
     @Override
     public void initEvent() {
+        //切换显示
         tv_change_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,11 +77,15 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
                     etPass.setHint("请输入验证码");
                     isPass = false;
                     tv_change_state.setText("密码登录");
+                    cb_rm_pass.setChecked(false);
+                    cb_rm_pass.setEnabled(false);
                 } else {
                     bt_code.setVisibility(View.GONE);
                     isPass = true;
                     etPass.setHint("请输入密码");
                     tv_change_state.setText("验证码登录");
+                    cb_rm_pass.setEnabled(true);
+                    cb_rm_pass.setChecked(true);
                 }
                 etPass.setText("");
             }
@@ -98,14 +103,12 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
                 }
             }
         });
+        //记住密码操作
         cb_rm_pass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // TODO: 2019/7/16 登录成功保存密码
-                } else {
-                    // TODO: 2019/7/16  登录成功时不保存密码
-                }
+//                登录成功是否保存密码
+                isSave = isChecked;
             }
         });
         tv_forget_pass.setOnClickListener(this);
@@ -124,6 +127,10 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
 
     @Override
     protected void initViewExceptPresenter() {
+        //显示已保存的用户名跟密码
+        etName.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("name"));
+        // TODO: 2019/7/17 无法显示
+        etPass.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("pass"));
     }
 
     @Override
@@ -147,56 +154,47 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
             case R.id.bt_login:
                 //密码登录
                 if (isPass) {
-//                    if (FormatUtil.isMobileNO(phone)) {
-//                        if (FormatUtil.isPassword(pass)) {
-//                            phone = phone.trim().replaceAll(" ", "");
-//                            presenter.Login(getRequestBean().setLoginParams(phone, pass, Contacts.PASSLOGIN));
-//                            startGetData(false);
-//                        } else {
-//                            Toast("请输入6位以上的数字+字母", 3);
-//                        }
-//                    } else {
-//                        Toast("请输入正确的手机号", 3);
-//                    }
-
-                    presenter.Login(new LoginRequest(phone,pass));
+                    if (FormatUtil.isPassword(pass)) {
+                        startGetData(false);
+                        presenter.Login(new LoginRequest(phone, pass));
+                    } else {
+                        Toast("请输入6位以上的数字+字母", 3);
+                    }
                 } else {
                     //验证码登录
-//                    if (FormatUtil.isMobileNO(phone)) {
-//                        if (FormatUtil.isFourNumber(pass)) {
-//                            phone = phone.trim().replaceAll(" ", "");
-//                            presenter.Login(getRequestBean().setLoginParams(phone, pass, Contacts.CODELOGIN));
-//                            startGetData(false);
-//                        } else {
-//                            Toast("请输入验证码", 3);
-//                        }
-//                    } else {
-//                        Toast("请输入正确的手机号", 3);
-//                    }
+                    if (FormatUtil.isMobileNO(phone)) {
+                        if (FormatUtil.isFourNumber(pass)) {
+                            startGetData(false);
+                            presenter.Login(new LoginRequest(phone, pass));
+                        } else {
+                            Toast("请输入验证码", 3);
+                        }
+                    } else {
+                        Toast("请输入正确的手机号", 3);
+                    }
                 }
                 break;
-
             case R.id.bt_code:
-//                Log.d(TAG, "onClick: bt_code");
-//                //获取验证码
-//                if (FormatUtil.isMobileNO(phone)) {
-//                    phone = phone.trim().replaceAll(" ", "");
-//                    presenter.GetCode(getRequestBean().setSmsParams(phone, Contacts.GET_LOGINCODE));
-//                    startGetData(true);
-//                } else {
-//                    Toast("请输入正确的手机号", 3);
-//                }
+                //获取验证码
+                if (FormatUtil.isMobileNO(phone)) {
+                    startGetData(true);
+                    presenter.GetCode(new LoginRequest());
+                } else {
+                    Toast("请输入正确的手机号", 3);
+                }
+
                 break;
             case R.id.tv_forget_pass:
-
+                // TODO: 2019/7/17 忘记密码
                 break;
             case R.id.iv_login_qq:
-
+                // TODO: 2019/7/17 qq登录
                 break;
             case R.id.iv_login_wechat:
-
+                // TODO: 2019/7/17 微信登录
                 break;
 //            case R.id.login1:
+            //测试账号
 //                if (MyAPP.ISUSENEW) {
 //                    presenter.Login(getRequestBean().setLoginParams("18552432822", "111111a", Contacts.PASSLOGIN));
 //                } else {
@@ -207,6 +205,11 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     }
 
 
+    /**
+     * 开始获取数据时,不可以操作按钮
+     *
+     * @param isGetCode 是否为获取code时
+     */
     private void startGetData(boolean isGetCode) {
         DialogUtil.showProgress(mActivity);
         if (isGetCode) {
@@ -229,6 +232,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     @Override
     public void passSuccess() {
         Toast("登录成功", 1);
+        SharedPreferencesUtil.saveNamePass(getApplicationContext(), etName.getText().toString().trim(), etPass.getText().toString().trim());
         finish();
         isIntent();
     }
@@ -261,7 +265,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     @Override
     public void getCodeSuccess() {
         DialogUtil.dismissProgress();
-//        isGetCode = CountDownUtil.countDown(bt_code);
+        CountDownUtil.countDown(bt_code);
         Toast("验证码已发送", 3);
     }
 

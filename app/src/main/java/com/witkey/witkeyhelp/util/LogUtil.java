@@ -3,7 +3,6 @@ package com.witkey.witkeyhelp.util;
 import android.util.Log;
 
 import com.witkey.witkeyhelp.Contacts.Contacts;
-import com.witkey.witkeyhelp.bean.net.RequestBean;
 
 /**
  * @author lingxu
@@ -11,16 +10,8 @@ import com.witkey.witkeyhelp.bean.net.RequestBean;
  * @description Log工具类
  */
 public class LogUtil {
-    public static void logModelOnError(String error, RequestBean handleErrorBean) {
-        logw(handleErrorBean.getMethodName() + ": onError--" + error +
-                ";\n" + handleErrorBean.getClassName());
-    }
-
-    public static void logModelOnReady(RequestBean requestBean) {
-        logi(requestBean.getMethodName() + ": " + requestBean.getClassName());
-        if (requestBean instanceof RequestBean) {
-            logi(requestBean.getMethodName() + ": " + requestBean.toString());
-        }
+    public static void  logModelOnError(String error) {
+        logw("onError--" + error );
     }
 
     public static void logModelOnResponse(String methodName, String body) {

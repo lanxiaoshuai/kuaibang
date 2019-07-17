@@ -1,7 +1,6 @@
 package com.witkey.witkeyhelp.presenter;
 
 import com.witkey.witkeyhelp.bean.LoginRequest;
-import com.witkey.witkeyhelp.bean.net.RequestBean;
 import com.witkey.witkeyhelp.model.ILoginModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.LoginModelImpl;

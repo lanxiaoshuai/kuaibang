@@ -32,15 +32,25 @@ public interface Api {
      * @param password
      * @return
      */
-    @POST("add")
+    @POST("apiuser/login")
     @FormUrlEncoded
     Call<String> login(
             @Field("userName") String username,
             @Field("password") String password
             );
-
-
-
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * userType 未用 用户类型 1悬赏主 2威客
+     * @return
+     */
+    @POST("apiuser/add")
+    @FormUrlEncoded
+    Call<String> register(
+            @Field("userName") String username,
+            @Field("password") String password
+            );
 
 
     //模板

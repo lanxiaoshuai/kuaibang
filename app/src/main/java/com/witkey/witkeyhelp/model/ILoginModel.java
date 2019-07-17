@@ -13,6 +13,11 @@ public interface ILoginModel extends IModel {
     void Login(LoginRequest loginRequest, AsyncCallback callback);
 
     /**
+     * 登录
+     */
+    void register(LoginRequest loginRequest, AsyncCallback callback);
+
+    /**
      * 发送验证码
      */
     void GetCode(LoginRequest loginRequest, AsyncCallback callback);

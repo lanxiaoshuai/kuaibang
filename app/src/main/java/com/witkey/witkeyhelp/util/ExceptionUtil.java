@@ -3,7 +3,6 @@ package com.witkey.witkeyhelp.util;
 import android.util.Log;
 
 import com.witkey.witkeyhelp.URL;
-import com.witkey.witkeyhelp.bean.net.RequestBean;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,19 +35,6 @@ public class ExceptionUtil {
         sendInfo(info);
     }
 
-    public static void CatchException(Exception e, RequestBean handleErrorBean) {
-        String info = null;
-//        if (MyAPP.ISRELEASE) {
-        // 收集异常信息,联网发送给服务器,开发人员通过服务器随时查看异常信息
-        StringWriter wr = new StringWriter();
-        final PrintWriter err = new PrintWriter(wr);
-        e.printStackTrace(err);
-        // 详细异常信息打印到printWriter
-        // printWriter有把信息达到StringWirter
-        // 通过StringWriter转成String
-        info = wr.toString();
-        sendInfo(info);
-    }
 
     public static void CatchException(Throwable e) {
         String info = null;
@@ -64,19 +50,6 @@ public class ExceptionUtil {
         sendInfo(info);
     }
 
-    public static void CatchException(Throwable e, RequestBean handleErrorBean) {
-        String info = null;
-//        if (MyAPP.ISRELEASE) {
-        // 收集异常信息,联网发送给服务器,开发人员通过服务器随时查看异常信息
-        StringWriter wr = new StringWriter();
-        final PrintWriter err = new PrintWriter(wr);
-        e.printStackTrace(err);
-        // 详细异常信息打印到printWriter
-        // printWriter有把信息达到StringWirter
-        // 通过StringWriter转成String
-        info = handleErrorBean.getClassName() + ";\n methodName=" + handleErrorBean.getMethodName() + ";\n" + wr.toString();
-        sendInfo(info);
-    }
 
     private static void sendInfo(String info) {
         OkHttpClient mOkHttpClient = new OkHttpClient();
