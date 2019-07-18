@@ -2,7 +2,9 @@ package com.witkey.witkeyhelp.model.impl;
 
 import android.util.Log;
 
+import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.bean.LoginRequest;
+import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.model.ILoginModel;
 import com.witkey.witkeyhelp.util.Error;
 import com.witkey.witkeyhelp.util.ExceptionUtil;
@@ -27,12 +29,15 @@ public class LoginModelImpl implements ILoginModel {
                             int code = JSONUtil.getValueToInt(body, "errorCode");
                             if (code == 200) {
                                 //登录成功
+                                User user = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), User.class);
+                                MyAPP.getInstance().setUser(user);
+                                Log.d(TAG, "onResponse: " + user.toString());
                                 callback.onSuccess("登录成功");
                             } else if (code == 305) {
                                 //用户为null,未注册
                                 LoginModelImpl.this.register(loginRequest, callback);
                             }
-                        }else{
+                        } else {
                             try {
                                 String errorResponse = response.errorBody().string();
                                 Error.isNoToken(errorResponse, callback);
@@ -65,7 +70,7 @@ public class LoginModelImpl implements ILoginModel {
                     } else {
                         Error.isNoToken(body, callback);
                     }
-                }else{
+                } else {
                     try {
                         String errorResponse = response.errorBody().string();
                         Error.isNoToken(errorResponse, callback);

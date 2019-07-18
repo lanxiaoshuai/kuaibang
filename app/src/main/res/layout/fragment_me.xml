@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white">
+
+            <RelativeLayout
+                android:id="@+id/rl_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.witkey.witkeyhelp.widght.CircleImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="11dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_toRightOf="@+id/iv_avatar"
+                    android:text="Linda"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_ID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_alignLeft="@+id/tv_name"
+                    android:layout_marginTop="8dp"
+                    android:text="Linda"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_reputation_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_ID"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/tv_ID"
+                    android:gravity="right"
+                    android:text="信誉分:1000" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_top"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/tv_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="5dp"
+                    android:text="余额\n0.00" />
+
+                <include layout="@layout/include_spinner_divider" />
+
+                <TextView
+                    android:id="@+id/tv_diamons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="5dp"
+                    android:text="钻石\n0.00" />
+
+                <include layout="@layout/include_spinner_divider" />
+
+                <TextView
+                    android:id="@+id/tv_bond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:lineSpacingExtra="5dp"
+                    android:text="保证金\n0.00" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_receive_mission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_receive_mission"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="领取的任务" />
+
+        <TextView
+            android:id="@+id/tv_publish_mission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_publish_mission"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="发布的任务" />
+
+        <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_collect"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="我的收藏" />
+
+        <TextView
+            android:id="@+id/tv_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_share"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="分享给好友" />
+
+        <TextView
+            android:id="@+id/tv_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_setting"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="账户设置" />
+
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_about"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="关于我们" />
+
+        <TextView
+            android:id="@+id/tv_quit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@color/white"
+            android:drawableLeft="@mipmap/ic_me_quit"
+            android:drawableRight="@mipmap/ic_me_right"
+            android:drawablePadding="10dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="退出" />
+    </LinearLayout>
+</RelativeLayout>

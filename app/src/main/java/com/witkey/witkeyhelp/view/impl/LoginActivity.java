@@ -2,7 +2,8 @@ package com.witkey.witkeyhelp.view.impl;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.text.TextUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -92,15 +93,21 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
         });
         bt_code.setOnClickListener(this);
         bt_login.setOnClickListener(this);
-        //修改数据后停止计时
-        etName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//        修改数据
+        etName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    if (!TextUtils.isEmpty(etPass.getText().toString())) {
-                        etPass.setText("");
-                    }
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                etPass.setText("");
             }
         });
         //记住密码操作
@@ -114,7 +121,6 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
         tv_forget_pass.setOnClickListener(this);
         iv_login_qq.setOnClickListener(this);
         iv_login_wechat.setOnClickListener(this);
-//        PhoneFormatUtil.formatInput(etName); //不限制与数字
         //关闭在此之前的activity
         List<Activity> activityList = MyAPP.getInstance().getActivityList();
         for (Activity activity : activityList) {
@@ -129,7 +135,6 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     protected void initViewExceptPresenter() {
         //显示已保存的用户名跟密码
         etName.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("name"));
-        // TODO: 2019/7/17 无法显示
         etPass.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("pass"));
     }
 
