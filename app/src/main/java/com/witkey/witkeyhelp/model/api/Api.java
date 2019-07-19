@@ -28,6 +28,7 @@ public interface Api {
 
     /**
      * 登录
+     *
      * @param username
      * @param password
      * @return
@@ -37,12 +38,13 @@ public interface Api {
     Call<String> login(
             @Field("userName") String username,
             @Field("password") String password
-            );
+    );
+
     /**
      * 注册
+     *
      * @param username
-     * @param password
-     * userType 未用 用户类型 1悬赏主 2威客
+     * @param password userType 未用 用户类型 1悬赏主 2威客
      * @return
      */
     @POST("apiuser/add")
@@ -50,7 +52,82 @@ public interface Api {
     Call<String> register(
             @Field("userName") String username,
             @Field("password") String password
-            );
+    );
+
+    /**
+     * 获取用户信息
+     *
+     * @return
+     */
+    @POST("apiuser/find/{userId}")
+    @FormUrlEncoded
+    Call<String> getUser(@Path("userId") int userId);
+
+
+    /**
+     * 发布信息咨询
+     *
+     * @return
+     */
+    @POST("apiorder/add")
+    @FormUrlEncoded
+    Call<String> addOrder(
+            @Field("businessId") String businessId,
+            @Field("password") String password
+    );
+
+    /**
+     * 信息咨询
+     * 暂时保存
+     *
+     * @return businessId
+     */
+    @POST("apibusiness/add")
+    @FormUrlEncoded
+    Call<String> addBusiness(
+            @Field("title") String title,
+            @Field("describes") String describes,
+            @Field("businessImgUrl") String businessImgUrl,
+            @Field("price") String price,
+            @Field("contactsPhone") String contactsPhone,
+            @Field("createUserId") String createUserId,
+            @Field("businessType") String businessType,
+            @Field("productType") String productType,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("businessNum") String businessNum,
+            @Field("paymentType") String paymentType,
+            @Field("endDate") String endDate,
+            @Field("bargainingType") String bargainingType,
+            @Field("biddingType") String biddingType,
+            @Field("bondType") String bondType
+//            title	否	string	标题
+//            describes	是	string	描述
+//            businessImgUrl	是	string	图片地址
+//            price	是	BigDecimal	昵称
+//            contactsPhone	是	string	联系电话
+//            createUserId	是	int	用户ID
+//            businessType	是	string	任务类型 1 信息咨询 2悬赏帮助 3紧急求助 4失物招领
+//            productType	是	string	产品类型 1普通 2竞标
+//            longitude	否	string	坐标（经度）
+//            latitude	否	string	坐标（纬度）
+//            businessNum	是	int	任务数量
+//            paymentType	是	string	付款方式 1人民币 2钻石
+//            endDate	否	date	结束日期
+//            bargainingType	否	string	是否可以议价 0否 1是
+//            biddingType	否	string	是否需要竞标 0否 1是
+//            bondType	是	string	是否需要保证金 0否 1是
+    );
+
+
+    /**
+     * 获取广告位地址
+     *
+     * @return
+     */
+    @POST("apibanner/list")
+    @FormUrlEncoded
+    Call<String> getBanner();
 
 
     //模板
@@ -85,6 +162,7 @@ public interface Api {
                                 @Field("verification_code") String verification_code,
                                 @Field("verification_key") String verification_key
     );
+
     /**
      * 登出
      */

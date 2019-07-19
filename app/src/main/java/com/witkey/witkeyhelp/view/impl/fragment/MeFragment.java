@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.presenter.IMeFragPresenter;
@@ -38,6 +39,8 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
 
     private IMeFragPresenter presenter;
 
+    private User user;
+
     @Override
     protected int getContentView() {
         return R.layout.fragment_me;
@@ -45,7 +48,7 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
 
     @Override
     protected IPresenter[] getPresenters() {
-        presenter=new MeFragPresenterImpl();
+        presenter = new MeFragPresenterImpl();
         return new IPresenter[]{presenter};
     }
 
@@ -71,7 +74,19 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
 
     @Override
     protected void initViewExceptPresenter() {
+        user = MyAPP.getInstance().getUser();
+        show(user);
+    }
 
+    private void show(User user) {
+        //显示个人中心信息
+        if (user != null && user.getUserId() != 0) {
+            // TODO: 2019/7/19 个人中心图片
+//            iv_avatar
+            tv_name.setText(user.getUserName());
+            tv_ID.setText("ID:" + user.getUserId());
+
+        }
     }
 
     @Override
@@ -94,7 +109,10 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
 
     @Override
     public void showUser(User user) {
-
+        // TODO: 2019/7/19 获取user信息 修改数据后
+//        presenter.getUser(user.getUserId());
+        this.user = user;
+        show(this.user);
     }
 
     @Override
@@ -125,6 +143,7 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
 
         }
     }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
