@@ -243,7 +243,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     }
 
     private void isIntent() {
-//        int type = MyAPP.getInstance().getType();
+//        int type = MyAPP.getInstance().getBusinessType();
 //        if (type == 4) {
 //            intentClass(DrMainActivity.class);
 //        } else if (type == 1 || type == 2 || type == 3) {

@@ -26,10 +26,10 @@ public class MissionRecyAdapter extends BaseRecyAdapter<Mission> {
     @Override
     protected void onBindBiewHolder(RecyclerView.ViewHolder holder, int position) {
         final Mission mission = data.get(position);
-        ((ViewHolder) holder).tv_mission_type.setText(mission.getType());
+        ((ViewHolder) holder).tv_mission_type.setText(mission.getBusinessType());
         ((ViewHolder) holder).tv_mission_title.setText(mission.getTitle());
-        ((ViewHolder) holder).tv_mission_content.setText(mission.getContent());
-        ((ViewHolder) holder).tv_mission_money.setText(mission.getMoney());
+        ((ViewHolder) holder).tv_mission_content.setText(mission.getDescribes());
+        ((ViewHolder) holder).tv_mission_money.setText(mission.getTradeAmt());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

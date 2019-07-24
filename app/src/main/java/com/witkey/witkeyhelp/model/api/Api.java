@@ -71,9 +71,7 @@ public interface Api {
      */
     @POST("apiorder/add")
     @FormUrlEncoded
-    Call<String> addOrder(
-            @Field("businessId") String businessId
-    );
+    Call<String> addOrder(@Field("businessId") String businessId);
 
     /**
      * 信息咨询
@@ -113,7 +111,56 @@ public interface Api {
     Call<String> getBanner();
 
 
-    //模板
+    /**
+     * 悬赏大厅列表
+     *
+     * @return
+     */
+    @GET("apiorder/taskList")
+    Call<String> getTaskList(
+//            pageNum	是	int	第几页
+//            pageSize	是	int	每页多少条
+//            businessType	否	string	任务类型 1 信息咨询 2悬赏帮助 3紧急求助 4失物招领
+//            productType	否	string	产品类型 1普通 2竞标
+//            longitude	否	string	坐标（经度）
+//            latitude	否	string	坐标（纬度）
+//            paymentType	否	string	付款方式 1人民币 2钻石
+//            biddingType	否	string	是否需要竞标 0否 1是
+//            bondType	否	string	是否需要保证金 0否 1是
+            @Query("pageNum") String pageNum,
+            @Query("pageSize") String pageSize,
+            @Query("businessType") String businessType,
+            @Query("productType") String productType,
+            @Query("longitude") String longitude,
+            @Query("latitude") String latitude,
+            @Query("paymentType") String paymentType,
+            @Query("biddingType") String biddingType,
+            @Query("bondType") String bondType
+    );
+
+    /**
+     * 悬赏大厅 任务详情
+     *
+     * @return
+     */
+    @GET("apibusiness/find/{businessId}")
+    Call<String> getBusiness(
+            @Query("businessId") String businessId
+    );
+
+    /**
+     * 悬赏大厅 任务接单
+     *
+     * @return
+     */
+    @POST("apiorder/receipt")
+    @FormUrlEncoded
+    Call<String> receipt(
+            @Field("orderId") String orderId,
+            @Field("receiver") String receiver
+    );
+
+    //todo 模板
 
     //用户
 
