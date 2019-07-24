@@ -187,8 +187,8 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     }
 
     @Override
-    protected void initWidght() {
-        super.initWidght();
+    protected void initWidget() {
+        super.initWidget();
         setIncludeTitle("悬赏大厅");
         spin_classify = (NiceSpinner) findViewById(R.id.spin_classify);
         spin_order = (NiceSpinner) findViewById(R.id.spin_order);

@@ -16,7 +16,7 @@ public abstract class InitViewBaseActivity extends BaseActivity {
     /**
      * 加载控件
      */
-    protected abstract void initWidght();
+    protected abstract void initWidget();
 
     /**
      * 获取layout的id，具体由子类实现
@@ -44,7 +44,7 @@ public abstract class InitViewBaseActivity extends BaseActivity {
         if (getIntent() != null) {
             parseArgumentsFromIntent(getIntent());
         }
-        initWidght();
+        initWidget();
         initEvent();
         initView();
     }

@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp.widght;
+package com.witkey.witkeyhelp.widget;
 
 import android.app.Activity;
 import android.app.Application;

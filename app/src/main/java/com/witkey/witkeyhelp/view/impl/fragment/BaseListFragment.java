@@ -12,7 +12,7 @@ import com.witkey.witkeyhelp.util.SpaceItemDecoration;
  * Created by Administrator on 2018/4/3.
  * 需
  * super.initEvent();
- * super.initWidght();
+ * super.initWidget();
  * super.initViewExceptPresenter();
  */
 public abstract class BaseListFragment extends BaseFragment {
@@ -99,7 +99,7 @@ public abstract class BaseListFragment extends BaseFragment {
     }
 
     @Override
-    protected void initWidght() {
+    protected void initWidget() {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.SwipeRefreshLayout);
         if (!isUseSwipeRefreshLayout()) {
             swipeRefreshLayout.setEnabled(false);

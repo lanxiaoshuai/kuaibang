@@ -1,6 +1,8 @@
 package com.witkey.witkeyhelp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -35,7 +37,11 @@ public class ChoosePicAdapter extends BaseAdapter<Tag> {
     public View getView(final int position, View v, ViewGroup parent) {
         final ViewHolder holder;
         if (v == null) {
-            v = View.inflate(context, R.layout.item_lv_choose_pic, null);
+            Log.d(TAG, "getView: "+context);
+            v = View.inflate(
+                    (Activity) context,
+                    R.layout.item_lv_choose_pic,
+                    null);
             holder = new ViewHolder();
             holder.tv_title = (TextView) v.findViewById(R.id.tv_title);
             holder.cb_is = (CheckBox) v.findViewById(R.id.cb_is);

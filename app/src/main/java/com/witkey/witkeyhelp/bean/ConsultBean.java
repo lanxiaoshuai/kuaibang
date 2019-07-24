@@ -1,5 +1,7 @@
 package com.witkey.witkeyhelp.bean;
 
+import java.util.HashMap;
+
 public class ConsultBean {
     //	否	string	标题
     private String title;
@@ -7,12 +9,12 @@ public class ConsultBean {
     private String describes;
     //	是	string	图片地址
     private String businessImgUrl;
-    //	是	BigDecimal	昵称
+    //	是	BigDecimal	悬赏金额
     private String price;
     //	是	string	联系电话
     private String contactsPhone;
     //	是	int	用户ID
-    private int    createUserId;
+    private int createUserId;
     //是	string	任务类型 1 信息咨询 2悬赏帮助 3紧急求助 4失物招领
     private String businessType;
     //	是	string	产品类型 1普通 2竞标
@@ -22,7 +24,7 @@ public class ConsultBean {
     //否	string	坐标（纬度）
     private String latitude;
     //	是	int	任务数量
-    private int    businessNum;
+    private int businessNum;
     //	是	string	付款方式 1人民币 2钻石
     private String paymentType;
     //	否	date	结束日期
@@ -34,24 +36,7 @@ public class ConsultBean {
     //	是	string	是否需要保证金 0否 1是
     private String bondType;
 
-    public ConsultBean(String title, String describes, String businessImgUrl, String price, String contactsPhone, int createUserId, String businessType, String productType, String longitude, String latitude, int businessNum, String paymentType, String endDate, String bargainingType, String biddingType, String bondType) {
-        this.title = title;
-        this.describes = describes;
-        this.businessImgUrl = businessImgUrl;
-        this.price = price;
-        this.contactsPhone = contactsPhone;
-        this.createUserId = createUserId;
-        this.businessType = businessType;
-        this.productType = productType;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.businessNum = businessNum;
-        this.paymentType = paymentType;
-        this.endDate = endDate;
-        this.bargainingType = bargainingType;
-        this.biddingType = biddingType;
-        this.bondType = bondType;
-    }
+    private HashMap<String, String> photoMap;
 
     @Override
     public String toString() {
@@ -72,7 +57,35 @@ public class ConsultBean {
                 ", bargainingType='" + bargainingType + '\'' +
                 ", biddingType='" + biddingType + '\'' +
                 ", bondType='" + bondType + '\'' +
+                ", photoMap=" + photoMap +
                 '}';
+    }
+
+    public HashMap<String, String> getPhotoMap() {
+        return photoMap;
+    }
+
+    public void setPhotoMap(HashMap<String, String> photoMap) {
+        this.photoMap = photoMap;
+    }
+
+    public ConsultBean(String title, String describes, String businessImgUrl, String price, String contactsPhone, int createUserId, String businessType, String productType, String longitude, String latitude, int businessNum, String paymentType, String endDate, String bargainingType, String biddingType, String bondType) {
+        this.title = title;
+        this.describes = describes;
+        this.businessImgUrl = businessImgUrl;
+        this.price = price;
+        this.contactsPhone = contactsPhone;
+        this.createUserId = createUserId;
+        this.businessType = businessType;
+        this.productType = productType;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.businessNum = businessNum;
+        this.paymentType = paymentType;
+        this.endDate = endDate;
+        this.bargainingType = bargainingType;
+        this.biddingType = biddingType;
+        this.bondType = bondType;
     }
 
     public ConsultBean() {

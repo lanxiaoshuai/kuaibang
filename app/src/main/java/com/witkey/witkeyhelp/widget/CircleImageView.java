@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp.widght;
+package com.witkey.witkeyhelp.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,7 +13,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 public class CircleImageView extends android.support.v7.widget.AppCompatImageView {
 

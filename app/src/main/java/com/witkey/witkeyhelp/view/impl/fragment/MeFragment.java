@@ -90,7 +90,7 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
     }
 
     @Override
-    protected void initWidght() {
+    protected void initWidget() {
         iv_avatar = (ImageView) findViewById(R.id.iv_avatar);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_ID = (TextView) findViewById(R.id.tv_ID);

@@ -139,7 +139,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     }
 
     @Override
-    protected void initWidght() {
+    protected void initWidget() {
         tv_change_state = (TextView) findViewById(R.id.tv_change_state);
         etName = (EditText) findViewById(R.id.et_name);
         etPass = (EditText) findViewById(R.id.et_pass);

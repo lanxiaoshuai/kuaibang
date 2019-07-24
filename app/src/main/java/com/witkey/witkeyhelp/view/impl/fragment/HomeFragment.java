@@ -1,8 +1,10 @@
 package com.witkey.witkeyhelp.view.impl.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -10,7 +12,6 @@ import android.widget.SimpleAdapter;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.presenter.IPresenter;
-import com.witkey.witkeyhelp.util.IntentUtil;
 import com.witkey.witkeyhelp.view.IHomeFragView;
 import com.witkey.witkeyhelp.view.impl.ConsultActivity;
 
@@ -55,6 +56,22 @@ public class HomeFragment extends BaseFragment implements IHomeFragView, View.On
         rl_consult.setOnClickListener(this);
         rl_help.setOnClickListener(this);
         iv_bottom.setOnClickListener(this);
+        gv_function.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    //紧急求助
+                    startActivity("3");
+                } else if (position == 1) {
+                    //失物招领
+
+                } else if (position == 2) {
+                    //微通知
+                } else if (position == 3) {
+                    //钻石通知
+                }
+            }
+        });
     }
 
     @Override
@@ -62,7 +79,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragView, View.On
 
     }
 
-    protected void initWidght() {
+    protected void initWidget() {
         setIncludeTitle("威客帮");
         rl_consult = (RelativeLayout) findViewById(R.id.rl_consult);
         rl_help = (RelativeLayout) findViewById(R.id.rl_help);
@@ -117,16 +134,23 @@ public class HomeFragment extends BaseFragment implements IHomeFragView, View.On
         switch (v.getId()) {
             //信息咨询
             case R.id.rl_consult:
-                IntentUtil.startActivity(getContext(), ConsultActivity.class);
+                startActivity("1");
                 break;
             //悬赏帮忙
             case R.id.rl_help:
+                startActivity("2");
                 break;
             //下面广告位
             case R.id.iv_bottom:
                 break;
         }
 
+    }
+
+    private void startActivity(String s) {
+        Intent i = new Intent(getActivity(), ConsultActivity.class);
+        i.putExtra("EXTRA_PAGE_TYPE", s);
+        startActivity(i);
     }
 
     @Override

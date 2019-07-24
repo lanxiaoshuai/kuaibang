@@ -72,8 +72,7 @@ public interface Api {
     @POST("apiorder/add")
     @FormUrlEncoded
     Call<String> addOrder(
-            @Field("businessId") String businessId,
-            @Field("password") String password
+            @Field("businessId") String businessId
     );
 
     /**
@@ -83,24 +82,8 @@ public interface Api {
      * @return businessId
      */
     @POST("apibusiness/add")
-    @FormUrlEncoded
     Call<String> addBusiness(
-            @Field("title") String title,
-            @Field("describes") String describes,
-            @Field("businessImgUrl") String businessImgUrl,
-            @Field("price") String price,
-            @Field("contactsPhone") String contactsPhone,
-            @Field("createUserId") String createUserId,
-            @Field("businessType") String businessType,
-            @Field("productType") String productType,
-            @Field("longitude") String longitude,
-            @Field("latitude") String latitude,
-            @Field("businessNum") String businessNum,
-            @Field("paymentType") String paymentType,
-            @Field("endDate") String endDate,
-            @Field("bargainingType") String bargainingType,
-            @Field("biddingType") String biddingType,
-            @Field("bondType") String bondType
+            @Body RequestBody requestBody
 //            title	否	string	标题
 //            describes	是	string	描述
 //            businessImgUrl	是	string	图片地址

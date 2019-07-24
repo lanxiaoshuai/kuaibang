@@ -78,7 +78,7 @@ public abstract class BaseFragment extends Fragment implements IView {
 //            view.setVisibility(View.GONE);
 //        }
         //实现控件
-        initWidght();
+        initWidget();
         initEvent();
         addPresenters();
         onInitPresenters();
@@ -126,7 +126,7 @@ public abstract class BaseFragment extends Fragment implements IView {
     /**
      * 实例化view
      */
-    protected abstract void initWidght();
+    protected abstract void initWidget();
 
     /**
      * 根据id查找View

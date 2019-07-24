@@ -118,8 +118,8 @@ public class MessageFragment extends BaseListFragment implements IMessageFragVie
     }
 
     @Override
-    protected void initWidght() {
-        super.initWidght();
+    protected void initWidget() {
+        super.initWidget();
         setIncludeTitle("消息中心");
         rl_message_sys = (RelativeLayout) findViewById(R.id.rl_message_sys);
         rl_message_diamonon = (RelativeLayout) findViewById(R.id.rl_message_diamonon);

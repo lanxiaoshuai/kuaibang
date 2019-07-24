@@ -80,13 +80,9 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
-
-
-
 //    protected int monthOfYear;
 //    protected int dayOfMonth;
 //    protected int year;
-
 
     protected abstract void onCreateActivity();
 
@@ -151,11 +147,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         res.updateConfiguration(config, res.getDisplayMetrics());
         return res;
     }
-
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     /**
      * Android点击EditText文本框之外任何地方隐藏键盘的解决办法
      */

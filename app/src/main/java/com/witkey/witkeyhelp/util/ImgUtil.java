@@ -624,7 +624,7 @@ public class ImgUtil {
         final ListView lv = new ListView(context);
         lv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         List<Tag> tags = new ArrayList<>();
-        tags.add(new Tag(1, "拍照", R.drawable.ic_choose_camera));
+//        tags.add(new Tag(1, "拍照", R.drawable.ic_choose_camera));
         tags.add(new Tag(2, "选择图片", R.drawable.ic_choose_pick_pic));
         ChoosePicAdapter adapter = new ChoosePicAdapter(context, tags);
         lv.setAdapter(adapter);

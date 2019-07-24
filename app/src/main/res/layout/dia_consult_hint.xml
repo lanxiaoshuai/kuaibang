@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center|left"
+        android:background="@drawable/ic_consult_dialog"
+        android:text="因威客个人原因造成任务未完成\n能完成则扣除保证金作为对您的补偿">
+
+</TextView>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:layout_height="match_parent">
+    android:focusableInTouchMode="true">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,7 +15,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray_bg"
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
@@ -89,12 +90,25 @@
                     android:text="任务截止时间"
                     android:textColor="@color/colorPrimary" />
 
-                <org.angmarch.views.NiceSpinner
-                    android:id="@+id/spin_date"
+
+                <TextView
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_title_date"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_gray_stroke"
+                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                    android:drawablePadding="12dp"
+                    android:gravity="center_vertical|start"
+                    android:paddingLeft="24dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="6dp"
+                    android:text="选择结束日期"
+                    android:textColor="#000000" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -163,8 +177,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
-                android:padding="5dp"
                 android:background="@drawable/shape_primary_solid"
+                android:padding="5dp"
                 android:text="展开更多高级设置"
                 android:textColor="@color/white" />
 
@@ -172,7 +186,8 @@
                 android:id="@+id/ll_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -306,7 +321,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_title_mission_num"
-                        android:layout_marginTop="8dp" />
+                        android:layout_marginTop="8dp"
+                        app:backgroundSelector="@drawable/shape_gray_stroke" />
                 </RelativeLayout>
 
                 <RelativeLayout

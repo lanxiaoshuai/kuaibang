@@ -23,7 +23,9 @@ import java.util.Set;
 
 
 /**
- * 查看粉丝详情
+ * @author lingxu
+ * @date 2019/7/24 14:19
+ * @description 高级筛选
  */
 public class MissionFilterDialog extends Dialog {
     private String TAG = "llx";
