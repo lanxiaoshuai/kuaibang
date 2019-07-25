@@ -1,4 +1,4 @@
-package com.witkey.witkeyhelp.view.impl;
+package com.witkey.witkeyhelp.view.impl.base;
 
 import com.witkey.witkeyhelp.presenter.IPresenter;
 

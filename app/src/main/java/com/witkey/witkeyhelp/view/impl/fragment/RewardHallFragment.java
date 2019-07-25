@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
-import com.witkey.witkeyhelp.bean.Mission;
+import com.witkey.witkeyhelp.bean.MissionBean;
 import com.witkey.witkeyhelp.bean.MissionFilter;
 import com.witkey.witkeyhelp.dialog.MissionFilterDialog;
 import com.witkey.witkeyhelp.presenter.IPresenter;
@@ -46,8 +46,10 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     private MissionFilter filter;
     private String searchKeyWord;
 
+    private MissionBean chooseMissionBean;
+
     //获取的任务列表数据
-    private List<Mission> missionList;
+    private List<MissionBean> missionList;
 
     //高级筛选dialog
     private MissionFilterDialog missionFilterDialog;
@@ -209,10 +211,11 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     }
 
     @Override
-    public void showMissionList(List<Mission> missions) {
+    public void showMissionList(List<MissionBean> missions) {
         if (missions != null) {
             getSuc();
             if (isLoading) {
+                missionList.addAll(missions);
                 missionList.addAll(missions);
                 isLoading = false;
             } else {

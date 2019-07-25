@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.witkey.witkeyhelp.Contacts.Contacts;
 import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.bean.ConsultBean;
+import com.witkey.witkeyhelp.bean.MissionBean;
 import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.dialog.ConsultHintDialog;
 import com.witkey.witkeyhelp.presenter.IConsultPresenter;
@@ -108,7 +108,14 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
 
     @Override
     protected void initWidget() {
-        setIncludeTitle("信息咨询");
+        int businessTypeNum=Integer.parseInt(businessType);
+        if(businessTypeNum==1) {
+            setIncludeTitle("信息咨询");
+        }else if(businessTypeNum==2){
+            setIncludeTitle("悬赏帮助");
+        }else if(businessTypeNum==3){
+            setIncludeTitle("紧急求助");
+        }
         tv_title_content = findViewById(R.id.tv_title_content);
         et_content = findViewById(R.id.et_content);
         iv_pic = findViewById(R.id.iv_pic);
@@ -302,52 +309,52 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
     }
 
     private void saveConsult() {
-        ConsultBean consultBean = new ConsultBean();
+        MissionBean missionBean = new MissionBean();
         String describes = et_content.getText().toString();
         if (describes.isEmpty()) {
             Toast("请填写问题详情~", 3);
             return;
         }
-        consultBean.setDescribes(describes);
+        missionBean.setDescribes(describes);
         // 不弄String businessImgUrl;
         if (!isHavePic) {
             Toast("请添加图片~", 3);
             return;
         }
-        consultBean.setBusinessImgUrl("123");
-        consultBean.setPhotoMap(photoMap);
+        missionBean.setBusinessImgUrl("123");
+        missionBean.setPhotoMap(photoMap);
         if (chooseTime.isEmpty()) {
             Toast("请选择结束日期~", 3);
             return;
         }
-        consultBean.setEndDate(chooseTime);
+        missionBean.setEndDate(chooseTime);
         String money = et_money.getText().toString();
         if (money.isEmpty()) {
             Toast("请输入悬赏金额~", 3);
             return;
         }
-        consultBean.setPrice(money);
-        consultBean.setPaymentType(isMoneyTypeRmb ? "1" : "2");
+        missionBean.setPrice(money);
+        missionBean.setPaymentType(isMoneyTypeRmb ? "1" : "2");
         String title = et_title.getText().toString();
-        consultBean.setTitle(title);
-        consultBean.setBargainingType(isBargaining ? "1" : "0");
+        missionBean.setTitle(title);
+        missionBean.setBargainingType(isBargaining ? "1" : "0");
         String contact = et_contact.getText().toString();
         if (contact.isEmpty()) {
             Toast("请输入联系方式~", 3);
             return;
         }
-        consultBean.setContactsPhone(contact);
-        consultBean.setBusinessNum(mission_num);
-        consultBean.setBiddingType(isNeedBidding ? "1" : "0");
-        consultBean.setProductType(isNeedBidding ? "1" : "0"); //于上方重复
-        consultBean.setBondType(isNeedBond ? "1" : "0");
+        missionBean.setContactsPhone(contact);
+        missionBean.setBusinessNum(mission_num);
+        missionBean.setBiddingType(isNeedBidding ? "1" : "0");
+        missionBean.setProductType(isNeedBidding ? "1" : "0"); //于上方重复
+        missionBean.setBondType(isNeedBond ? "1" : "0");
         //非填写
-        consultBean.setCreateUserId(user.getUserId());
-        consultBean.setBusinessType(businessType);//信息咨询
+        missionBean.setCreateUserId(user.getUserId());
+        missionBean.setBusinessType(businessType);//信息咨询
         //未必须
-        consultBean.setLatitude("");
-        consultBean.setLongitude("");
-        presenter.saveConsult(consultBean);
+        missionBean.setLatitude("");
+        missionBean.setLongitude("");
+        presenter.saveConsult(missionBean);
     }
 
     @Override

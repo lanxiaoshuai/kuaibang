@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.bean.Mission;
+import com.witkey.witkeyhelp.bean.MissionBean;
 
 import java.util.List;
 
-public class MissionRecyAdapter extends BaseRecyAdapter<Mission> {
+public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
 
     public MissionRecyAdapter(Context context, List data) {
         super(context, data);
@@ -25,7 +25,7 @@ public class MissionRecyAdapter extends BaseRecyAdapter<Mission> {
 
     @Override
     protected void onBindBiewHolder(RecyclerView.ViewHolder holder, int position) {
-        final Mission mission = data.get(position);
+        final MissionBean mission = data.get(position);
         ((ViewHolder) holder).tv_mission_type.setText(mission.getBusinessType());
         ((ViewHolder) holder).tv_mission_title.setText(mission.getTitle());
         ((ViewHolder) holder).tv_mission_content.setText(mission.getDescribes());

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.view.impl.base.BaseActivity;
 import com.witkey.witkeyhelp.view.impl.fragment.HomeFragment;
 import com.witkey.witkeyhelp.view.impl.fragment.MeFragment;
 import com.witkey.witkeyhelp.view.impl.fragment.MessageFragment;

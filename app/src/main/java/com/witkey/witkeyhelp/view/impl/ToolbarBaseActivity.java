@@ -9,13 +9,14 @@ import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.util.callback.IAddCallback;
 import com.witkey.witkeyhelp.util.callback.IImageViewCallback;
 import com.witkey.witkeyhelp.util.callback.ITextViewCallback;
+import com.witkey.witkeyhelp.view.impl.base.InitPresenterBaseActivity;
 
 
 /**
  * Created by Administrator on 2018/2/2.
  */
 
-public abstract class ToolbarBaseActivity extends InitPresenterBaseActivity{
+public abstract class ToolbarBaseActivity extends InitPresenterBaseActivity {
     private RelativeLayout backButton;
     private IAddCallback addCallback;
     private IImageViewCallback delCallback;

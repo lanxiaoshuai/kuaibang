@@ -34,16 +34,19 @@ public class MissionFilterDialog extends Dialog {
     private TagFlowLayout tfl_mission_filter;
     private TagFlowLayout tfl_mission_type;
     private TagFlowLayout tfl_is_need_bond;
+    private TagFlowLayout tfl_is_need_bidding;
 
     private TagAdapter filterAdapter;
     private TagAdapter typeAdapter;
-    private TagAdapter isNeedAdapter;
+    private TagAdapter isNeedBondAdapter;
+    private TagAdapter isNeedBiddingAdapter;
 
     private Button btn_commit;
 
-    private String[] filterData = {"信息咨询", "悬赏帮忙"};
-    private String[] typeData = {"单赏", "悬赏", "计件", "招标"};
+    private String[] filterData = {"信息咨询", "悬赏帮忙","紧急求助","失物招领"};
+    private String[] typeData = {"普通","竞标"};
     private String[] isNeedBondData = {"是", "否"};
+    private String[] isNeedBiddingData = {"是", "否"};
 
     private Context context; //tagflowlayout需要context  getcontext不可以
 
@@ -126,7 +129,7 @@ public class MissionFilterDialog extends Dialog {
             tfl_mission_type.setAdapter(typeAdapter);
             setTagSelect(missionFilter.getMissionType(), typeAdapter, typeData);
             //是否有保证金
-            isNeedAdapter = new TagAdapter<String>(isNeedBondData) {
+            isNeedBondAdapter = new TagAdapter<String>(isNeedBondData) {
                 @Override
                 public View getView(FlowLayout parent, int position, String s) {
                     TextView tv = (TextView) LayoutInflater.from(
@@ -135,8 +138,20 @@ public class MissionFilterDialog extends Dialog {
                     return tv;
                 }
             };
-            tfl_is_need_bond.setAdapter(isNeedAdapter);
-            setTagSelect(this.missionFilter.isNeedBond() ? "是" : "否", isNeedAdapter, isNeedBondData);
+            tfl_is_need_bond.setAdapter(isNeedBondAdapter);
+            setTagSelect(this.missionFilter.isNeedBond() ? "是" : "否", isNeedBondAdapter, isNeedBondData);
+        //是否需要竞标
+            isNeedBiddingAdapter = new TagAdapter<String>(isNeedBiddingData) {
+                @Override
+                public View getView(FlowLayout parent, int position, String s) {
+                    TextView tv = (TextView) LayoutInflater.from(
+                            getContext()).inflate(R.layout.item_tag_mission_filter, tfl_is_need_bidding, false);
+                    tv.setText(s);
+                    return tv;
+                }
+            };
+            tfl_is_need_bidding.setAdapter(isNeedBiddingAdapter);
+            setTagSelect(this.missionFilter.isNeedBond() ? "是" : "否", isNeedBiddingAdapter, isNeedBiddingData);
 
             tfl_mission_filter.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
                 @Override
@@ -204,12 +219,14 @@ public class MissionFilterDialog extends Dialog {
         tfl_mission_filter = findViewById(R.id.tfl_mission_filter);
         tfl_mission_type = findViewById(R.id.tfl_mission_type);
         tfl_is_need_bond = findViewById(R.id.tfl_is_need_bond);
+        tfl_is_need_bidding = findViewById(R.id.tfl_is_need_bidding);
         btn_commit = findViewById(R.id.btn_commit);
 
         //设置单选
         tfl_mission_filter.setMaxSelectCount(1);
         tfl_mission_type.setMaxSelectCount(1);
         tfl_is_need_bond.setMaxSelectCount(1);
+        tfl_is_need_bidding.setMaxSelectCount(1);
     }
 
     @Override

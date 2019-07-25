@@ -1,43 +1,98 @@
 package com.witkey.witkeyhelp.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.HashMap;
 
-public class ConsultBean {
+/**
+ * @author lingxu
+ * @date 2019/7/25 16:28
+ * @description 咨询,悬赏大厅列表
+ */
+public class MissionBean {
     //	否	string	标题
+    @SerializedName("title")
     private String title;
     //	是	string	描述
+    @SerializedName("describes")
     private String describes;
     //	是	string	图片地址
+    @SerializedName("businessImgUrl")
     private String businessImgUrl;
     //	是	BigDecimal	悬赏金额
+    @SerializedName("price")
     private String price;
     //	是	string	联系电话
+    @SerializedName("contactsPhone")
     private String contactsPhone;
     //	是	int	用户ID
+    @SerializedName("createUserId")
     private int createUserId;
     //是	string	任务类型 1 信息咨询 2悬赏帮助 3紧急求助 4失物招领
+    @SerializedName("businessType")
     private String businessType;
     //	是	string	产品类型 1普通 2竞标
+    @SerializedName("productType")
     private String productType;
     //	否	string	坐标（经度）
+    @SerializedName("longitude")
     private String longitude;
     //否	string	坐标（纬度）
+    @SerializedName("latitude")
     private String latitude;
     //	是	int	任务数量
+    @SerializedName("businessNum")
     private int businessNum;
     //	是	string	付款方式 1人民币 2钻石
+    @SerializedName("paymentType")
     private String paymentType;
     //	否	date	结束日期
+    @SerializedName("endDate")
     private String endDate;
     //	否	string	是否可以议价 0否 1是
+    @SerializedName("bargainingType")
     private String bargainingType;
     //	否	string	是否需要竞标 0否 1是
+    @SerializedName("biddingType")
     private String biddingType;
     //	是	string	是否需要保证金 0否 1是
+    @SerializedName("bondType")
     private String bondType;
 
     private HashMap<String, String> photoMap;
 
+    //获取列表
+    @SerializedName("businessId")
+    private int businessId;
+    @SerializedName("orderId")
+    private int orderId;
+    @SerializedName("createDate")
+    private String createDate;
+    @SerializedName("remark")
+    private String remark;
+    @SerializedName("tradeAmt")
+    private String tradeAmt; //悬赏金额
+    @SerializedName("pageNum")
+    private int pageNum;
+    @SerializedName("pageSize")
+    private int pageSize; //默认为10
+
+//列表
+//      "businessId": 168,
+//      "orderId": 988,
+//      "title": "擦玻璃",
+//      "businessType": null,
+//      "createDate": "2019-06-05 16:27:57",
+//      "longitude": null,
+//      "latitude": null,
+//      "paymentType": null,
+//      "endDate": null,
+//      "bargainingType": null,
+//      "biddingType": "0",
+//      "bondType": "0",
+//      "remark": null,
+//      "describes": null,
+//      "tradeAmt": 30
     @Override
     public String toString() {
         return "ConsultBean{" +
@@ -58,8 +113,74 @@ public class ConsultBean {
                 ", biddingType='" + biddingType + '\'' +
                 ", bondType='" + bondType + '\'' +
                 ", photoMap=" + photoMap +
+                ", businessId=" + businessId +
+                ", orderId=" + orderId +
+                ", createDate='" + createDate + '\'' +
+                ", remark='" + remark + '\'' +
+                ", tradeAmt='" + tradeAmt + '\'' +
+                ", pageNum=" + pageNum +
+                ", pageSize=" + pageSize +
                 '}';
     }
+    public MissionBean(String title, String type, String content, String money) {
+        this.title = title;
+        this.businessType = type;
+        this.describes = content;
+        this.tradeAmt = money;
+    }
+
+    public int getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(int businessId) {
+        this.businessId = businessId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getTradeAmt() {
+        return tradeAmt;
+    }
+
+    public void setTradeAmt(String tradeAmt) {
+        this.tradeAmt = tradeAmt;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return 10;
+    }
+
 
     public HashMap<String, String> getPhotoMap() {
         return photoMap;
@@ -69,7 +190,7 @@ public class ConsultBean {
         this.photoMap = photoMap;
     }
 
-    public ConsultBean(String title, String describes, String businessImgUrl, String price, String contactsPhone, int createUserId, String businessType, String productType, String longitude, String latitude, int businessNum, String paymentType, String endDate, String bargainingType, String biddingType, String bondType) {
+    public MissionBean(String title, String describes, String businessImgUrl, String price, String contactsPhone, int createUserId, String businessType, String productType, String longitude, String latitude, int businessNum, String paymentType, String endDate, String bargainingType, String biddingType, String bondType) {
         this.title = title;
         this.describes = describes;
         this.businessImgUrl = businessImgUrl;
@@ -88,7 +209,7 @@ public class ConsultBean {
         this.bondType = bondType;
     }
 
-    public ConsultBean() {
+    public MissionBean() {
     }
 
     public String getTitle() {

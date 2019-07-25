@@ -1,6 +1,6 @@
 package com.witkey.witkeyhelp.presenter.impl;
 
-import com.witkey.witkeyhelp.bean.ConsultBean;
+import com.witkey.witkeyhelp.bean.MissionBean;
 import com.witkey.witkeyhelp.model.IConsultModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.ConsultModelImpl;
@@ -10,8 +10,8 @@ public class ConsultPresenterImpl implements com.witkey.witkeyhelp.presenter.ICo
     private IConsultView view;
     private IConsultModel model;
     @Override
-    public void saveConsult(ConsultBean consultBean) {
-        model.saveConsult(consultBean, new IModel.AsyncCallback() {
+    public void saveConsult(MissionBean missionBean) {
+        model.saveConsult(missionBean, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
                 view.saveSuc((String)data);

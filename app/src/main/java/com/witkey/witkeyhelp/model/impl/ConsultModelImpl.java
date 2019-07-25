@@ -3,7 +3,7 @@ package com.witkey.witkeyhelp.model.impl;
 import android.util.Log;
 
 import com.witkey.witkeyhelp.Contacts.Contacts;
-import com.witkey.witkeyhelp.bean.ConsultBean;
+import com.witkey.witkeyhelp.bean.MissionBean;
 import com.witkey.witkeyhelp.model.util.Callback;
 import com.witkey.witkeyhelp.util.JSONUtil;
 
@@ -17,33 +17,33 @@ import okhttp3.RequestBody;
 public class ConsultModelImpl implements com.witkey.witkeyhelp.model.IConsultModel {
 
     @Override
-    public void saveConsult(ConsultBean consultBean,final AsyncCallback callback) {
-        Log.d(TAG, "ConsultModelImpl-saveConsult-request: "+consultBean.toString());
+    public void saveConsult(MissionBean missionBean, final AsyncCallback callback) {
+        Log.d(TAG, "ConsultModelImpl-saveConsult-request: "+ missionBean.toString());
         // form 表单形式上传
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
-        for (Map.Entry<String, String> entry : consultBean.getPhotoMap().entrySet()) {
+        for (Map.Entry<String, String> entry : missionBean.getPhotoMap().entrySet()) {
             Log.d(TAG, "getFileUploads: key= " + entry.getKey() + " and value= " + entry.getValue());
             RequestBody body = RequestBody.create(MediaType.parse("image/*"),
                     new File(Contacts.imgPath + entry.getValue()));
             requestBody.addFormDataPart(entry.getKey(), entry.getKey(), body);
         }
-        requestBody.addFormDataPart("title", consultBean.getTitle()+"");
-        requestBody.addFormDataPart("describes", consultBean.getDescribes()+"");
-        requestBody.addFormDataPart("businessImgUrl", consultBean.getBusinessImgUrl()+"");
-        requestBody.addFormDataPart("price", consultBean.getPrice()+"");
-        requestBody.addFormDataPart("contactsPhone", consultBean.getContactsPhone()+"");
-        requestBody.addFormDataPart("createUserId", consultBean.getCreateUserId() + "");
-        requestBody.addFormDataPart("businessType", consultBean.getBusinessType()+"");
-        requestBody.addFormDataPart("productType", consultBean.getProductType()+"");
-        requestBody.addFormDataPart("longitude", consultBean.getLongitude()+"");
-        requestBody.addFormDataPart("latitude", consultBean.getLatitude()+"");
-        requestBody.addFormDataPart("businessNum", consultBean.getBusinessNum() + "");
-        requestBody.addFormDataPart("paymentType", consultBean.getPaymentType()+"");
-        requestBody.addFormDataPart("endDate", consultBean.getEndDate()+"");
-        requestBody.addFormDataPart("bargainingType", consultBean.getBargainingType()+"");
-        requestBody.addFormDataPart("biddingType", consultBean.getBiddingType()+"");
-        requestBody.addFormDataPart("bondType", consultBean.getBondType()+"");
+        requestBody.addFormDataPart("title", missionBean.getTitle()+"");
+        requestBody.addFormDataPart("describes", missionBean.getDescribes()+"");
+        requestBody.addFormDataPart("businessImgUrl", missionBean.getBusinessImgUrl()+"");
+        requestBody.addFormDataPart("price", missionBean.getPrice()+"");
+        requestBody.addFormDataPart("contactsPhone", missionBean.getContactsPhone()+"");
+        requestBody.addFormDataPart("createUserId", missionBean.getCreateUserId() + "");
+        requestBody.addFormDataPart("businessType", missionBean.getBusinessType()+"");
+        requestBody.addFormDataPart("productType", missionBean.getProductType()+"");
+        requestBody.addFormDataPart("longitude", missionBean.getLongitude()+"");
+        requestBody.addFormDataPart("latitude", missionBean.getLatitude()+"");
+        requestBody.addFormDataPart("businessNum", missionBean.getBusinessNum() + "");
+        requestBody.addFormDataPart("paymentType", missionBean.getPaymentType()+"");
+        requestBody.addFormDataPart("endDate", missionBean.getEndDate()+"");
+        requestBody.addFormDataPart("bargainingType", missionBean.getBargainingType()+"");
+        requestBody.addFormDataPart("biddingType", missionBean.getBiddingType()+"");
+        requestBody.addFormDataPart("bondType", missionBean.getBondType()+"");
         api.addBusiness(
                 requestBody.build()
         ).enqueue(new Callback(callback, "保存失败") {

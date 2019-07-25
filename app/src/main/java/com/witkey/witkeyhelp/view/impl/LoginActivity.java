@@ -23,6 +23,7 @@ import com.witkey.witkeyhelp.util.FormatUtil;
 import com.witkey.witkeyhelp.util.SharedPreferencesUtil;
 import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.ILoginView;
+import com.witkey.witkeyhelp.view.impl.base.InitPresenterBaseActivity;
 
 import java.util.List;
 
