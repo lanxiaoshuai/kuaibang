@@ -1,13 +1,16 @@
 package com.witkey.witkeyhelp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.MissionBean;
+import com.witkey.witkeyhelp.view.impl.MissionDetailActivity;
 
 import java.util.List;
 
@@ -34,9 +37,11 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
             @Override
             public void onClick(View v) {
                 // TODO: 2019/7/9 跳转界面
-//                Intent i = new Intent(context, PatientIntroDetailActivity.class);
-//                i.putExtra(EXTRA_INTRO_DETAIL, introHistory.getIntro());
-//                context.startActivity(i);
+                Intent i = new Intent(context, MissionDetailActivity.class);
+                Log.d(TAG, "onClick: "+mission.getBusinessId());
+                i.putExtra("EXTRA_BUSINESS_ID", mission.getBusinessId());
+                i.putExtra("EXTRA_ORDER_ID", mission.getOrderId());
+                context.startActivity(i);
             }
         });
     }

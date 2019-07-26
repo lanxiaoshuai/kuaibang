@@ -144,12 +144,12 @@ public interface Api {
      * @return
      */
     @GET("apibusiness/find/{businessId}")
-    Call<String> getBusiness(
-            @Query("businessId") String businessId
+    Call<String> getMissionDetail(
+            @Path("businessId") String businessId
     );
 
     /**
-     * 悬赏大厅 任务接单
+     * 悬赏大厅 -接单
      *
      * @return
      */
@@ -157,9 +157,85 @@ public interface Api {
     @FormUrlEncoded
     Call<String> receipt(
             @Field("orderId") String orderId,
+            @Field("userId") String receiver
+    );
+
+    /**
+     * 我的 发布的任务
+     * 任务异常(已取消),已完成,进行中
+     * 3,,,4,,,1
+     *
+     * @return
+     */
+    @GET("apiorder/releaseList")
+    Call<String> getReleaseList(
+//            pageNum	    是	int	第几页
+//            pageSize	    是	int	每页多少条
+//            createUserId	是	int	用户ID
+//            orderState	否	string	订单状态（0 未付款，1 进行中，2 已经提交 3 已取消 4 已完成 5 退款）
+            @Query("pageNum") String pageNum,
+            @Query("pageSize") String pageSize,
+            @Query("createUserId") String createUserId,
+            @Query("orderState") String orderState
+    );
+
+    /**
+     * 我的 发布的任务
+     * 未发布
+     * 3
+     *
+     * @return
+     */
+    @GET("apibusiness/list")
+    Call<String> getBusinessList(
+//            createUserId	是	int	用户ID
+//            pageNum	    是	int	第几页
+//            pageSize	    是	int	每页多少条
+//            businessState	是	int	3暂存（未发布）
+            @Query("createUserId") String createUserId,
+            @Query("pageNum") String pageNum,
+            @Query("pageSize") String pageSize,
+            @Query("businessState") String businessState
+    );
+
+    /**
+     * 我的-确认订单
+     *
+     * @return
+     */
+    @POST("apiorder/confirm")
+    @FormUrlEncoded
+    Call<String> confirm(
+            @Field("orderId") String orderId,
             @Field("receiver") String receiver
     );
 
+    /**
+     * 我的 领取的任务
+     * 进行中 已完成 任务异常
+     * 1,,,4,,,3
+     *
+     * @return
+     */
+    @GET("apiorder/receiveList")
+    Call<String> getReceiveList(
+//            pageNum	    是	int	第几页
+//            pageSize	    是	int	每页多少条
+//            receiver	    是	int	用户ID
+//            orderState	否	string	订单状态（0 未付款，1 进行中，2 已经提交 3已取消 4已完成 5退款）
+            @Query("receiver") String receiver,
+            @Query("pageNum") String pageNum,
+            @Query("pageSize") String pageSize,
+            @Query("orderState") String businessState
+    );
+
+    /**
+     * 我的钱包
+     */
+    @GET("apiwallet/find/{userId}")
+    Call<String> getAcount(
+            @Path("userId") String userId
+    );
     //todo 模板
 
     //用户

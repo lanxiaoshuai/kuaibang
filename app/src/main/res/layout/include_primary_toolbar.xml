@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:id="@+id/tvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/include_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:onClick="goBack"
+        android:paddingLeft="@dimen/toolbar_padding_left"
+        android:paddingTop="@dimen/toolbar_padding_top"
+        android:visibility="gone"
+        android:paddingRight="@dimen/toolbar_padding_right"
+        android:paddingBottom="@dimen/toolbar_padding_bottom">
+
+        <ImageView
+            android:id="@+id/ivBarLeft"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/ic_white_back_icon"
+            tools:targetApi="lollipop" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/include_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:paddingTop="@dimen/toolbar_padding_top"
+        android:paddingBottom="@dimen/toolbar_padding_bottom"
+        android:textColor="@color/white"
+        android:textSize="@dimen/include_title_text_size" />
+
+
+    <Button
+        android:id="@+id/tv_confirm"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/tv_bar_margin_top"
+        android:layout_marginRight="5dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="confirm"
+        android:paddingLeft="@dimen/tv_bar_left"
+        android:paddingTop="@dimen/tv_bar_top"
+        android:paddingRight="@dimen/tv_bar_right"
+        android:paddingBottom="@dimen/tv_bar_bottom"
+        android:text="@string/confirm"
+        android:textColor="@drawable/selector_bt_text_color"
+        android:textSize="@dimen/tv_bar_size"
+        android:visibility="gone"
+        tools:targetApi="lollipop" />
+
+</RelativeLayout>

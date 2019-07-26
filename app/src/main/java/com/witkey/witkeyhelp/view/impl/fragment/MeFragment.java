@@ -1,5 +1,6 @@
 package com.witkey.witkeyhelp.view.impl.fragment;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,11 +8,13 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.bean.Acount;
 import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.presenter.IMeFragPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MeFragPresenterImpl;
 import com.witkey.witkeyhelp.view.IMeFragView;
+import com.witkey.witkeyhelp.view.impl.MyMissionActivity;
 
 /**
  * @author lingxu
@@ -40,6 +43,7 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
     private IMeFragPresenter presenter;
 
     private User user;
+    private Acount acount;
 
     @Override
     protected int getContentView() {
@@ -74,8 +78,10 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
 
     @Override
     protected void initViewExceptPresenter() {
+        setIncludeTitle("个人中心");
         user = MyAPP.getInstance().getUser();
         show(user);
+        presenter.getAcount(user.getUserId());
     }
 
     private void show(User user) {
@@ -116,7 +122,17 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
     }
 
     @Override
+    public void showAcount(Acount acount) {
+        if (acount != null) {
+            this.acount = acount;
+            tv_balance.setText("余额\n" + acount.getBalance());
+            tv_diamons.setText("钻石\n" + acount.getBalance());
+        }
+    }
+
+    @Override
     public void onClick(View v) {
+        Intent i;
         switch (v.getId()) {
             case R.id.iv_avatar:
                 break;
@@ -127,8 +143,14 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
             case R.id.tv_bond:
                 break;
             case R.id.tv_receive_mission:
+                i = new Intent(getActivity(), MyMissionActivity.class);
+                i.putExtra("EXTRA_IS_RELEASE", false);
+                startActivity(i);
                 break;
             case R.id.tv_publish_mission:
+                i = new Intent(getActivity(), MyMissionActivity.class);
+                i.putExtra("EXTRA_IS_RELEASE", true);
+                startActivity(i);
                 break;
             case R.id.tv_collect:
                 break;

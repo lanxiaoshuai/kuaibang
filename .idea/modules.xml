@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/witkeyHelp.iml" filepath="$PROJECT_DIR$/witkeyHelp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/witkeyhelp.iml" filepath="$PROJECT_DIR$/witkeyhelp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/witkeyHelp.iml" filepath="$PROJECT_DIR$/witkeyHelp.iml" />
     </modules>
   </component>
 </project>

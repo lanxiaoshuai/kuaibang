@@ -15,6 +15,7 @@ public class User {
     @SerializedName("realName")
     private String realName;//用户昵称
 
+
     @Override
     public String  toString() {
         return "User{" +

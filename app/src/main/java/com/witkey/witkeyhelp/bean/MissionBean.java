@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * @author lingxu
  * @date 2019/7/25 16:28
- * @description 咨询,悬赏大厅列表
+ * @description 咨询, 悬赏大厅列表
  */
 public class MissionBean {
     //	否	string	标题
@@ -77,7 +77,23 @@ public class MissionBean {
     @SerializedName("pageSize")
     private int pageSize; //默认为10
 
-//列表
+    /**
+     * 订单状态
+     * 发布:
+     * 1 进行中 2 已完成 3 任务异常 4 未发布
+     * 领取:
+     * 1 进行中 2 已完成 3 任务异常
+     */
+    private int orderState;
+
+    //个人中心获取列表
+    public MissionBean(int createUserId, int pageNum, int orderState) {
+        this.createUserId = createUserId;
+        this.pageNum = pageNum;
+        this.orderState = orderState;
+    }
+
+    //列表
 //      "businessId": 168,
 //      "orderId": 988,
 //      "title": "擦玻璃",
@@ -122,16 +138,24 @@ public class MissionBean {
                 ", pageSize=" + pageSize +
                 '}';
     }
-    public MissionBean(String title, String type, String content, String money) {
-        this.title = title;
-        this.businessType = type;
-        this.describes = content;
-        this.tradeAmt = money;
+
+    //悬赏大厅获取时
+    public MissionBean(String businessType, String productType, String longitude, String latitude, String paymentType, String biddingType, String bondType, int pageNum, int pageSize) {
+        this.businessType = businessType;
+        this.productType = productType;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.paymentType = paymentType;
+        this.biddingType = biddingType;
+        this.bondType = bondType;
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
     }
 
     public int getBusinessId() {
         return businessId;
     }
+
 
     public void setBusinessId(int businessId) {
         this.businessId = businessId;
@@ -338,5 +362,17 @@ public class MissionBean {
 
     public void setBondType(String bondType) {
         this.bondType = bondType;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(int orderState) {
+        this.orderState = orderState;
     }
 }
