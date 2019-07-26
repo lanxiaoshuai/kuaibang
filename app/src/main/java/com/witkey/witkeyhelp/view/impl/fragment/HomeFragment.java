@@ -12,8 +12,10 @@ import android.widget.SimpleAdapter;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.presenter.IPresenter;
+import com.witkey.witkeyhelp.util.IntentUtil;
 import com.witkey.witkeyhelp.view.IHomeFragView;
 import com.witkey.witkeyhelp.view.impl.ConsultActivity;
+import com.witkey.witkeyhelp.view.impl.LostFoundActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +66,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragView, View.On
                     startActivity("3");
                 } else if (position == 1) {
                     //失物招领
-
+                    IntentUtil.startActivity(getActivity(), LostFoundActivity.class);
                 } else if (position == 2) {
                     //微通知
                 } else if (position == 3) {

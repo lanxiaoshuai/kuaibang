@@ -36,7 +36,6 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2019/7/9 跳转界面
                 Intent i = new Intent(context, MissionDetailActivity.class);
                 Log.d(TAG, "onClick: "+mission.getBusinessId());
                 i.putExtra("EXTRA_BUSINESS_ID", mission.getBusinessId());

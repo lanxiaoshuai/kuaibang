@@ -82,7 +82,12 @@ public abstract class BaseListActivity extends ToolbarBaseActivity {
     protected void getSuc() {
         DialogUtil.dismissProgress();
 //        removeOtherView();
-        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     /**
@@ -116,6 +121,11 @@ public abstract class BaseListActivity extends ToolbarBaseActivity {
     }
 
     protected boolean isUseSwipeRefreshLayout() {
+        return true;
+    }
+
+    @Override
+    protected boolean isLight() {
         return true;
     }
 }
