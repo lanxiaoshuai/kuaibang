@@ -28,7 +28,7 @@ public class MissionBean {
     //	是	int	用户ID
     @SerializedName("createUserId")
     private int createUserId;
-    //是	string	任务类型 1 信息咨询 2悬赏帮助 3紧急求助 4失物招领
+    //是	string	任务类型 1 信息咨询 2 悬赏帮助 3 紧急求助 4 失物招领
     @SerializedName("businessType")
     private String businessType;
     //	是	string	产品类型 1普通 2竞标

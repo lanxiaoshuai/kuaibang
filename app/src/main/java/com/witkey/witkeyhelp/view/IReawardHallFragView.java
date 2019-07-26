@@ -1,8 +1,6 @@
 package com.witkey.witkeyhelp.view;
 
-import com.witkey.witkeyhelp.bean.MissionBean;
-
-import java.util.List;
+import com.witkey.witkeyhelp.bean.MissionRequest;
 
 /**
  * @author lingxu
@@ -13,5 +11,5 @@ public interface IReawardHallFragView extends IView{
     /**
      * 获取任务列表
      */
-    void showMissionList(List<MissionBean> missions);
+    void showMissionList(MissionRequest missionRequest);
 }

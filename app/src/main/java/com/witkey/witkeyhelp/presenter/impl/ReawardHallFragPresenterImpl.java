@@ -1,14 +1,12 @@
 package com.witkey.witkeyhelp.presenter.impl;
 
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionFilter;
+import com.witkey.witkeyhelp.bean.MissionRequest;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.IReawardHallFragModel;
 import com.witkey.witkeyhelp.model.impl.ReawardHallFragModelImpl;
 import com.witkey.witkeyhelp.presenter.IReawardHallFragPresenter;
 import com.witkey.witkeyhelp.view.IReawardHallFragView;
-
-import java.util.List;
 
 public class ReawardHallFragPresenterImpl implements IReawardHallFragPresenter {
     private IReawardHallFragView view;
@@ -21,11 +19,11 @@ public class ReawardHallFragPresenterImpl implements IReawardHallFragPresenter {
     }
 
     @Override
-    public void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter,String searchKeyWord) {
-        model.getMissionList(chooseClassify, chooseOrder, filter,searchKeyWord, new IModel.AsyncCallback() {
+    public void getMissionList( MissionBean missionBean,String searchKeyWord) {
+        model.getMissionList(missionBean,searchKeyWord, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
-                view.showMissionList((List<MissionBean>) data);
+                view.showMissionList((MissionRequest) data);
             }
 
             @Override

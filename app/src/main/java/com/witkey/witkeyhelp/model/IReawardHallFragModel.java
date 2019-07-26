@@ -1,7 +1,7 @@
 package com.witkey.witkeyhelp.model;
 
-import com.witkey.witkeyhelp.bean.MissionFilter;
+import com.witkey.witkeyhelp.bean.MissionBean;
 
 public interface IReawardHallFragModel extends IModel{
-    void getMissionList(String chooseClassify, String chooseOrder, MissionFilter filter,String searchKeyWord,AsyncCallback callback);
+    void getMissionList(MissionBean missionBean, String searchKeyWord, AsyncCallback callback);
 }

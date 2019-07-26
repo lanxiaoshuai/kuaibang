@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.bean.MissionFilter;
+import com.witkey.witkeyhelp.bean.MissionBean;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
@@ -29,7 +29,7 @@ import java.util.Set;
  */
 public class MissionFilterDialog extends Dialog {
     private String TAG = "llx";
-    private MissionFilter missionFilter;
+    private MissionBean missionBean;
 
     private TagFlowLayout tfl_mission_filter;
     private TagFlowLayout tfl_mission_type;
@@ -43,8 +43,8 @@ public class MissionFilterDialog extends Dialog {
 
     private Button btn_commit;
 
-    private String[] filterData = {"信息咨询", "悬赏帮忙","紧急求助","失物招领"};
-    private String[] typeData = {"普通","竞标"};
+    private String[] filterData = {"信息咨询", "悬赏帮忙", "紧急求助", "失物招领"};
+    private String[] typeData = {"普通", "竞标"};
     private String[] isNeedBondData = {"是", "否"};
     private String[] isNeedBiddingData = {"是", "否"};
 
@@ -54,7 +54,7 @@ public class MissionFilterDialog extends Dialog {
     private View belowView;
 
     public interface ICommitOnclickListener {
-        void onCommit(MissionFilter missionFilter);
+        void onCommit(MissionBean missionBean);
     }
 
     public void setOnclickListener(ICommitOnclickListener onclickListener) {
@@ -62,10 +62,10 @@ public class MissionFilterDialog extends Dialog {
     }
 
 
-    public MissionFilterDialog(Context context, MissionFilter missionFilter, View belowView) {
+    public MissionFilterDialog(Context context, MissionBean missionBean, View belowView) {
         super(context, R.style.ShareDialog);
         this.context = context;
-        this.missionFilter = missionFilter;
+        this.missionBean = missionBean;
         this.belowView = belowView;
     }
 
@@ -103,7 +103,7 @@ public class MissionFilterDialog extends Dialog {
     }
 
     private void showData() {
-        if (missionFilter != null) {
+        if (missionBean != null) {
             //任务分类
             filterAdapter = new TagAdapter<String>(filterData) {
                 @Override
@@ -115,7 +115,12 @@ public class MissionFilterDialog extends Dialog {
                 }
             };
             tfl_mission_filter.setAdapter(filterAdapter);
-            setTagSelect(missionFilter.getMissionFilter(), filterAdapter, filterData);
+            String businessType = missionBean.getBusinessType();
+            if (businessType != null) {
+                int businessTypeNum = Integer.parseInt(businessType);
+                businessType = filterData[businessTypeNum - 1];
+            }
+            setTagSelect(businessType, filterAdapter, filterData);
             //任务类型
             typeAdapter = new TagAdapter<String>(typeData) {
                 @Override
@@ -127,7 +132,7 @@ public class MissionFilterDialog extends Dialog {
                 }
             };
             tfl_mission_type.setAdapter(typeAdapter);
-            setTagSelect(missionFilter.getMissionType(), typeAdapter, typeData);
+            setTagSelect(missionBean.getProductType(), typeAdapter, typeData);
             //是否有保证金
             isNeedBondAdapter = new TagAdapter<String>(isNeedBondData) {
                 @Override
@@ -139,8 +144,10 @@ public class MissionFilterDialog extends Dialog {
                 }
             };
             tfl_is_need_bond.setAdapter(isNeedBondAdapter);
-            setTagSelect(this.missionFilter.isNeedBond() ? "是" : "否", isNeedBondAdapter, isNeedBondData);
-        //是否需要竞标
+            if (this.missionBean.getBondType() != null) {
+                setTagSelect(Integer.parseInt(this.missionBean.getBondType()) == 1 ? "是" : "否", isNeedBondAdapter, isNeedBondData);
+            }
+            //是否需要竞标
             isNeedBiddingAdapter = new TagAdapter<String>(isNeedBiddingData) {
                 @Override
                 public View getView(FlowLayout parent, int position, String s) {
@@ -151,14 +158,23 @@ public class MissionFilterDialog extends Dialog {
                 }
             };
             tfl_is_need_bidding.setAdapter(isNeedBiddingAdapter);
-            setTagSelect(this.missionFilter.isNeedBond() ? "是" : "否", isNeedBiddingAdapter, isNeedBiddingData);
-
+            if (this.missionBean.getBiddingType() != null) {
+                setTagSelect(Integer.parseInt(this.missionBean.getBiddingType()) == 1 ? "是" : "否", isNeedBiddingAdapter, isNeedBiddingData);
+            }
             tfl_mission_filter.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
                 @Override
                 public void onSelected(Set<Integer> selectPosSet) {
                     if (!selectPosSet.isEmpty()) {
                         for (int i : selectPosSet) {
-                            missionFilter.setMissionFilter(filterData[i]);
+                            if (filterData[i].equals("信息咨询")) {
+                                missionBean.setBusinessType(1 + "");
+                            } else if (filterData[i].equals("悬赏帮忙")) {
+                                missionBean.setBusinessType(2 + "");
+                            } else if (filterData[i].equals("紧急求助")) {
+                                missionBean.setBusinessType(3 + "");
+                            } else if (filterData[i].equals("失物招领")) {
+                                missionBean.setBusinessType(4 + "");
+                            }
                         }
                     }
                 }
@@ -168,7 +184,7 @@ public class MissionFilterDialog extends Dialog {
                 public void onSelected(Set<Integer> selectPosSet) {
                     if (!selectPosSet.isEmpty()) {
                         for (int i : selectPosSet) {
-                            missionFilter.setMissionType(typeData[i]);
+                            missionBean.setProductType(typeData[i]);
                         }
                     }
                 }
@@ -178,17 +194,28 @@ public class MissionFilterDialog extends Dialog {
                 public void onSelected(Set<Integer> selectPosSet) {
                     if (!selectPosSet.isEmpty()) {
                         for (int i : selectPosSet) {
-                            missionFilter.setNeedBond(isNeedBondData[i].equals("是") ? true : false);
+                            missionBean.setBondType(isNeedBondData[i].equals("是") ? 1 + "" : 0 + "");
+                        }
+                    }
+                }
+            });
+            tfl_is_need_bidding.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+                @Override
+                public void onSelected(Set<Integer> selectPosSet) {
+                    if (!selectPosSet.isEmpty()) {
+                        for (int i : selectPosSet) {
+                            missionBean.setBiddingType(isNeedBiddingData[i].equals("是") ? 1 + "" : 0 + "");
                         }
                     }
                 }
             });
         }
+
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onclickListener.onCommit(missionFilter);
-                Log.d(TAG, "onClick: " + missionFilter.toString());
+                onclickListener.onCommit(missionBean);
+                Log.d(TAG, "onClick: " + missionBean.toString());
                 //关闭dialog
                 MissionFilterDialog.this.dismiss();
             }
@@ -232,7 +259,7 @@ public class MissionFilterDialog extends Dialog {
     @Override
     public void dismiss() {
         super.dismiss();
-        missionFilter = null;
+        missionBean = null;
     }
 
 }

@@ -16,7 +16,7 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
     public MissionRecyAdapter(Context context, List data) {
         super(context, data);
     }
-
+    private String[] filterData = {"信息咨询", "悬赏帮忙", "紧急求助", "失物招领"};
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         View view = View.inflate(context, R.layout.item_lv_mission, null);
@@ -26,7 +26,7 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
     @Override
     protected void onBindBiewHolder(RecyclerView.ViewHolder holder, int position) {
         final MissionBean mission = data.get(position);
-        ((ViewHolder) holder).tv_mission_type.setText(mission.getBusinessType());
+        ((ViewHolder) holder).tv_mission_type.setText(filterData[Integer.parseInt(mission.getBusinessType())-1]);
         ((ViewHolder) holder).tv_mission_title.setText(mission.getTitle());
         ((ViewHolder) holder).tv_mission_content.setText(mission.getDescribes());
         ((ViewHolder) holder).tv_mission_money.setText(mission.getTradeAmt());
