@@ -38,6 +38,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
     private int businessId;
     private int orderId;
     private MissionBean missionBean;
+    private User user;
 
     @Override
     protected IPresenter[] getPresenters() {
@@ -52,13 +53,19 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
     @Override
     protected void parseArgumentsFromIntent(Intent argIntent) {
-        businessId = getIntent().getIntExtra("EXTRA_BUSINESS_ID",0);
-        orderId = getIntent().getIntExtra("EXTRA_ORDER_ID",0);
+        businessId = getIntent().getIntExtra("EXTRA_BUSINESS_ID", 0);
+        orderId = getIntent().getIntExtra("EXTRA_ORDER_ID", 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        user = MyAPP.getInstance().getUser();
     }
 
     @Override
     protected void initViewExceptPresenter() {
-        presenter.getMissionDetail(businessId+"");
+        presenter.getMissionDetail(businessId + "");
     }
 
     @Override
@@ -102,20 +109,20 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             case R.id.tv_report:
                 break;
             case R.id.tv_commit:
-                User user= MyAPP.getInstance().getUser();
-                presenter.receipt(orderId,user.getUserId());
+
+                presenter.receipt(orderId, user.getUserId());
                 break;
         }
     }
 
     @Override
     public void showMission(MissionBean missionBean) {
-        if(missionBean!=null) {
-            this.missionBean=missionBean;
+        if (missionBean != null) {
+            this.missionBean = missionBean;
             tv_mission_type.setText(missionBean.getProductType() == null ? "" : Integer.parseInt(missionBean.getProductType()) == 1 ? "普通任务" : "竞标任务");
             tv_describe.setText(missionBean.getDescribes());
             tv_date.setText(missionBean.getEndDate());
-            tv_money.setText("￥:"+missionBean.getPrice());
+            tv_money.setText("￥:" + missionBean.getPrice());
             tv_bargainingType.setText(missionBean.getBiddingType() == null ? "" : Integer.parseInt(missionBean.getBiddingType()) == 1 ? "是" : "否");
             tv_contact.setText(missionBean.getContactsPhone());
         }

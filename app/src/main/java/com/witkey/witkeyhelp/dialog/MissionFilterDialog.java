@@ -31,22 +31,21 @@ public class MissionFilterDialog extends Dialog {
     private String TAG = "llx";
     private MissionBean missionBean;
 
-    private TagFlowLayout tfl_mission_filter;
     private TagFlowLayout tfl_mission_type;
     private TagFlowLayout tfl_is_need_bond;
-    private TagFlowLayout tfl_is_need_bidding;
+    private TagFlowLayout tfl_price_type;
 
     private TagAdapter filterAdapter;
     private TagAdapter typeAdapter;
     private TagAdapter isNeedBondAdapter;
-    private TagAdapter isNeedBiddingAdapter;
+    private TagAdapter priceTypeAdapter;
 
     private Button btn_commit;
 
     private String[] filterData = {"信息咨询", "悬赏帮忙", "紧急求助", "失物招领"};
     private String[] typeData = {"普通", "竞标"};
     private String[] isNeedBondData = {"是", "否"};
-    private String[] isNeedBiddingData = {"是", "否"};
+    private String[] priceTypeData = {"人命币", "钻石"};
 
     private Context context; //tagflowlayout需要context  getcontext不可以
 
@@ -105,22 +104,22 @@ public class MissionFilterDialog extends Dialog {
     private void showData() {
         if (missionBean != null) {
             //任务分类
-            filterAdapter = new TagAdapter<String>(filterData) {
-                @Override
-                public View getView(FlowLayout parent, int position, String str) {
-                    TextView tv = (TextView) LayoutInflater.from(
-                            getContext()).inflate(R.layout.item_tag_mission_filter, tfl_mission_filter, false);
-                    tv.setText(str);
-                    return tv;
-                }
-            };
-            tfl_mission_filter.setAdapter(filterAdapter);
-            String businessType = missionBean.getBusinessType();
-            if (businessType != null) {
-                int businessTypeNum = Integer.parseInt(businessType);
-                businessType = filterData[businessTypeNum - 1];
-            }
-            setTagSelect(businessType, filterAdapter, filterData);
+//            filterAdapter = new TagAdapter<String>(filterData) {
+//                @Override
+//                public View getView(FlowLayout parent, int position, String str) {
+//                    TextView tv = (TextView) LayoutInflater.from(
+//                            getContext()).inflate(R.layout.item_tag_mission_filter, tfl_mission_filter, false);
+//                    tv.setText(str);
+//                    return tv;
+//                }
+//            };
+//            tfl_mission_filter.setAdapter(filterAdapter);
+//            String businessType = missionBean.getBusinessType();
+//            if (businessType != null) {
+//                int businessTypeNum = Integer.parseInt(businessType);
+//                businessType = filterData[businessTypeNum - 1];
+//            }
+//            setTagSelect(businessType, filterAdapter, filterData);
             //任务类型
             typeAdapter = new TagAdapter<String>(typeData) {
                 @Override
@@ -148,37 +147,37 @@ public class MissionFilterDialog extends Dialog {
                 setTagSelect(Integer.parseInt(this.missionBean.getBondType()) == 1 ? "是" : "否", isNeedBondAdapter, isNeedBondData);
             }
             //是否需要竞标
-            isNeedBiddingAdapter = new TagAdapter<String>(isNeedBiddingData) {
+            priceTypeAdapter = new TagAdapter<String>(priceTypeData) {
                 @Override
                 public View getView(FlowLayout parent, int position, String s) {
                     TextView tv = (TextView) LayoutInflater.from(
-                            getContext()).inflate(R.layout.item_tag_mission_filter, tfl_is_need_bidding, false);
+                            getContext()).inflate(R.layout.item_tag_mission_filter, tfl_price_type, false);
                     tv.setText(s);
                     return tv;
                 }
             };
-            tfl_is_need_bidding.setAdapter(isNeedBiddingAdapter);
+            tfl_price_type.setAdapter(priceTypeAdapter);
             if (this.missionBean.getBiddingType() != null) {
-                setTagSelect(Integer.parseInt(this.missionBean.getBiddingType()) == 1 ? "是" : "否", isNeedBiddingAdapter, isNeedBiddingData);
+                setTagSelect(Integer.parseInt(this.missionBean.getPaymentType()) == 1 ? "人命币" : "钻石", priceTypeAdapter, priceTypeData);
             }
-            tfl_mission_filter.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-                @Override
-                public void onSelected(Set<Integer> selectPosSet) {
-                    if (!selectPosSet.isEmpty()) {
-                        for (int i : selectPosSet) {
-                            if (filterData[i].equals("信息咨询")) {
-                                missionBean.setBusinessType(1 + "");
-                            } else if (filterData[i].equals("悬赏帮忙")) {
-                                missionBean.setBusinessType(2 + "");
-                            } else if (filterData[i].equals("紧急求助")) {
-                                missionBean.setBusinessType(3 + "");
-                            } else if (filterData[i].equals("失物招领")) {
-                                missionBean.setBusinessType(4 + "");
-                            }
-                        }
-                    }
-                }
-            });
+//            tfl_mission_filter.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+//                @Override
+//                public void onSelected(Set<Integer> selectPosSet) {
+//                    if (!selectPosSet.isEmpty()) {
+//                        for (int i : selectPosSet) {
+//                            if (filterData[i].equals("信息咨询")) {
+//                                missionBean.setBusinessType(1 + "");
+//                            } else if (filterData[i].equals("悬赏帮忙")) {
+//                                missionBean.setBusinessType(2 + "");
+//                            } else if (filterData[i].equals("紧急求助")) {
+//                                missionBean.setBusinessType(3 + "");
+//                            } else if (filterData[i].equals("失物招领")) {
+//                                missionBean.setBusinessType(4 + "");
+//                            }
+//                        }
+//                    }
+//                }
+//            });
             tfl_mission_type.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
                 @Override
                 public void onSelected(Set<Integer> selectPosSet) {
@@ -199,12 +198,12 @@ public class MissionFilterDialog extends Dialog {
                     }
                 }
             });
-            tfl_is_need_bidding.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            tfl_price_type.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
                 @Override
                 public void onSelected(Set<Integer> selectPosSet) {
                     if (!selectPosSet.isEmpty()) {
                         for (int i : selectPosSet) {
-                            missionBean.setBiddingType(isNeedBiddingData[i].equals("是") ? 1 + "" : 0 + "");
+                            missionBean.setPaymentType(priceTypeData[i].equals("人命币") ? 1 + "" : 2 + "");
                         }
                     }
                 }
@@ -243,17 +242,17 @@ public class MissionFilterDialog extends Dialog {
 
 
     private void initView() {
-        tfl_mission_filter = findViewById(R.id.tfl_mission_filter);
+//        tfl_mission_filter = findViewById(R.id.tfl_mission_filter);
         tfl_mission_type = findViewById(R.id.tfl_mission_type);
         tfl_is_need_bond = findViewById(R.id.tfl_is_need_bond);
-        tfl_is_need_bidding = findViewById(R.id.tfl_is_need_bidding);
+        tfl_price_type = findViewById(R.id.tfl_price_type);
         btn_commit = findViewById(R.id.btn_commit);
 
         //设置单选
-        tfl_mission_filter.setMaxSelectCount(1);
+//        tfl_mission_filter.setMaxSelectCount(1);
         tfl_mission_type.setMaxSelectCount(1);
         tfl_is_need_bond.setMaxSelectCount(1);
-        tfl_is_need_bidding.setMaxSelectCount(1);
+        tfl_price_type.setMaxSelectCount(1);
     }
 
     @Override

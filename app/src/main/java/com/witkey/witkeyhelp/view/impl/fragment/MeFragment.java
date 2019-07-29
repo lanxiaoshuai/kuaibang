@@ -79,9 +79,6 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
     @Override
     protected void initViewExceptPresenter() {
         setIncludeTitle("个人中心");
-        user = MyAPP.getInstance().getUser();
-        show(user);
-        presenter.getAcount(user.getUserId());
     }
 
     private void show(User user) {
@@ -92,6 +89,17 @@ public class MeFragment extends BaseFragment implements IMeFragView, View.OnClic
             tv_name.setText(user.getUserName());
             tv_ID.setText("ID:" + user.getUserId());
 
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //可能会去登录界面
+        user = MyAPP.getInstance().getUser();
+        if (user != null) {
+            show(user);
+            presenter.getAcount(user.getUserId());
         }
     }
 

@@ -252,13 +252,18 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
         btn_open_more.setVisibility(View.VISIBLE);
         //任务数量spin显示
         spin_mission_num.attachDataSource(Arrays.asList(mission_nums));
-        //准备user数据
-        user = MyAPP.getInstance().getUser();
         //rb设置
         rg_money_type.check(R.id.rb_RMB);
         rg_isBargaining.check(R.id.rb_isBargaining_false);
         rg_isNeedBidding.check(R.id.rb_isNeedBidding_false);
         rg_isNeedBond.check(R.id.rb_isNeedBond_false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //准备user数据
+        user = MyAPP.getInstance().getUser();
     }
 
     @Override

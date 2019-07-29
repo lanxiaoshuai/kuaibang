@@ -86,8 +86,8 @@ public class Error implements IModel {
     public static void showError(String error, Context context) {
         if ("登陆超时".equals(error)) {
             Intent i = new Intent(context, LoginActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
         } else {
             ToastUtils.showShort(context, error, 2);

@@ -14,6 +14,7 @@ import com.witkey.witkeyhelp.Contacts.Contacts;
 import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.model.api.Api;
 import com.witkey.witkeyhelp.util.CrashHandler;
+import com.witkey.witkeyhelp.util.Error;
 import com.witkey.witkeyhelp.util.Exclude;
 import com.witkey.witkeyhelp.util.SharedPreferencesUtil;
 import com.witkey.witkeyhelp.util.retrofit.StringConverterFactory;
@@ -178,6 +179,13 @@ public class MyAPP extends Application {
     }
 
     public User getUser() {
+        if(user==null){
+            Error.showError("登陆超时", getInstance());
+            return null;
+        }else if(user.getUserId()==0){
+            Error.showError("登陆超时", getInstance());
+            return null;
+        }
         return user;
     }
 

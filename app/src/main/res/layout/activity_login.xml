@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="记住密码"
+                android:visibility="gone"
                 android:textColor="#797979" />
 
             <TextView

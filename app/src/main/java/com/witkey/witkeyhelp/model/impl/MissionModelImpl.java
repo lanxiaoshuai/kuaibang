@@ -17,11 +17,10 @@ public class MissionModelImpl implements IMissionModel {
                 missionBean.getPageNum() + "",
                 missionBean.getPageSize() + "",
                 missionBean.getBusinessType(),
-                missionBean.getPaymentType(),
+                missionBean.getProductType(),
                 missionBean.getLongitude(),
                 missionBean.getLatitude(),
                 missionBean.getPaymentType(),
-                missionBean.getBiddingType(),
                 missionBean.getBondType()
         ).enqueue(new Callback(callback, "获取列表失败") {
             @Override

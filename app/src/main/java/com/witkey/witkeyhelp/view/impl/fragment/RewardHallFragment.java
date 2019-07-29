@@ -35,8 +35,9 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     private TextView tv_filter;
     private EditText et_search;
 
-    private String[] classifyData = {"线上任务", "线下任务", "人命币", "钻石"};
-    private String[] orderData = {"任务价格", "截止时间", "按照距离"};
+//    private String[] classifyData = {"线上任务", "线下任务", "人命币", "钻石"};
+    private String[] classifyData = {"信息咨询", "悬赏帮忙", "紧急求助"};
+    private String[] orderData = {"任务价格", "发布时间", "按照距离"};
 
     private IReawardHallFragPresenter presenter;
     private boolean isLoading = false;
@@ -78,10 +79,12 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
             @Override
             public void onItemSelected(NiceSpinner parent, View view, int position, long id) {
 //                chooseClassify = classifyData[position];
-                if (classifyData[position].equals("人命币")) {
-                    missionBean.setPaymentType(1 + "");
-                } else if (classifyData[position].equals("钻石")) {
-                    missionBean.setPaymentType(2 + "");
+                if (classifyData[position].equals("信息咨询")) {
+                    missionBean.setBusinessType(1 + "");
+                } else if (classifyData[position].equals("悬赏帮忙")) {
+                    missionBean.setBusinessType(2 + "");
+                }else if (classifyData[position].equals("紧急求助")) {
+                    missionBean.setBusinessType(3 + "");
                 }
                 allGet();
             }
@@ -100,10 +103,9 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
                 missionFilterDialog.setOnclickListener(new MissionFilterDialog.ICommitOnclickListener() {
                     @Override
                     public void onCommit(MissionBean missionFilter) {
-                        missionBean.setBusinessType(missionFilter.getBusinessType());
                         missionBean.setProductType(missionFilter.getProductType());
                         missionBean.setBondType(missionFilter.getBondType());
-                        missionBean.setBiddingType(missionFilter.getBiddingType());
+                        missionBean.setPaymentType(missionFilter.getPaymentType());
                         allGet();
                     }
                 });

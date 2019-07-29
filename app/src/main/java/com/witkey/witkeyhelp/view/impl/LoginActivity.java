@@ -1,18 +1,14 @@
 package com.witkey.witkeyhelp.view.impl;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.LoginRequest;
 import com.witkey.witkeyhelp.presenter.ILoginPresenter;
@@ -20,12 +16,9 @@ import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.LoginPresenterImpl;
 import com.witkey.witkeyhelp.util.CountDownUtil;
 import com.witkey.witkeyhelp.util.FormatUtil;
-import com.witkey.witkeyhelp.util.SharedPreferencesUtil;
 import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.ILoginView;
 import com.witkey.witkeyhelp.view.impl.base.InitPresenterBaseActivity;
-
-import java.util.List;
 
 
 public class LoginActivity extends InitPresenterBaseActivity implements View.OnClickListener, ILoginView {
@@ -35,7 +28,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
 
     private TextView bt_code;
 
-    private CheckBox cb_rm_pass;
+//    private CheckBox cb_rm_pass; //记住密码不要
     private TextView tv_forget_pass;
 
 
@@ -46,7 +39,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     private TextView tv_change_state;
 
     private boolean isPass = true; //是否为密码登录
-    private boolean isSave = true; //默认记住密码
+//    private boolean isSave = true; //默认记住密码
 
     private ILoginPresenter presenter;
 
@@ -79,15 +72,20 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
                     etPass.setHint("请输入验证码");
                     isPass = false;
                     tv_change_state.setText("密码登录");
-                    cb_rm_pass.setChecked(false);
-                    cb_rm_pass.setEnabled(false);
+//                    cb_rm_pass.setChecked(false);
+//                    cb_rm_pass.setEnabled(false);
+//                    cb_rm_pass.setVisibility(View.GONE);
+                    tv_forget_pass.setVisibility(View.GONE);
+
                 } else {
                     bt_code.setVisibility(View.GONE);
                     isPass = true;
                     etPass.setHint("请输入密码");
                     tv_change_state.setText("验证码登录");
-                    cb_rm_pass.setEnabled(true);
-                    cb_rm_pass.setChecked(true);
+//                    cb_rm_pass.setEnabled(true);
+//                    cb_rm_pass.setChecked(true);
+//                    cb_rm_pass.setVisibility(View.VISIBLE);
+                    tv_forget_pass.setVisibility(View.VISIBLE);
                 }
                 etPass.setText("");
             }
@@ -112,31 +110,24 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
             }
         });
         //记住密码操作
-        cb_rm_pass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                登录成功是否保存密码
-                isSave = isChecked;
-            }
-        });
+//        cb_rm_pass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+////                登录成功是否保存密码
+//                isSave = isChecked;
+//            }
+//        });
         tv_forget_pass.setOnClickListener(this);
         iv_login_qq.setOnClickListener(this);
         iv_login_wechat.setOnClickListener(this);
-        //关闭在此之前的activity
-        List<Activity> activityList = MyAPP.getInstance().getActivityList();
-        for (Activity activity : activityList) {
-            if (!activity.equals(this)) {
-                activity.finish();
-            }
-        }
     }
 
 
     @Override
     protected void initViewExceptPresenter() {
         //显示已保存的用户名跟密码
-        etName.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("name"));
-        etPass.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("pass"));
+//        etName.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("name"));
+//        etPass.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("pass"));
     }
 
     @Override
@@ -146,7 +137,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
         etPass = (EditText) findViewById(R.id.et_pass);
         bt_code = (TextView) findViewById(R.id.bt_code);
         bt_login = (Button) findViewById(R.id.bt_login);
-        cb_rm_pass = findViewById(R.id.cb_rm_pass);
+//        cb_rm_pass = findViewById(R.id.cb_rm_pass);
         tv_forget_pass = findViewById(R.id.tv_forget_pass);
         iv_login_qq = findViewById(R.id.iv_login_qq);
         iv_login_wechat = findViewById(R.id.iv_login_wechat);
@@ -238,21 +229,13 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
     @Override
     public void passSuccess() {
         Toast("登录成功", 1);
-        SharedPreferencesUtil.saveNamePass(getApplicationContext(), etName.getText().toString().trim(), etPass.getText().toString().trim());
+//        SharedPreferencesUtil.saveNamePass(getApplicationContext(), etName.getText().toString().trim(), etPass.getText().toString().trim());
         finish();
         isIntent();
     }
 
     private void isIntent() {
-//        int type = MyAPP.getInstance().getBusinessType();
-//        if (type == 4) {
-//            intentClass(DrMainActivity.class);
-//        } else if (type == 1 || type == 2 || type == 3) {
-//            intentClass(MarketMainActivity.class);
-//        } else if (type == 5 || type == 6 || type == 7) {
-//            intentClass(NewMediaMainActivity.class);
-//        }
-        intentClass(MainActivity.class);
+//        intentClass(MainActivity.class);
     }
 
     /**

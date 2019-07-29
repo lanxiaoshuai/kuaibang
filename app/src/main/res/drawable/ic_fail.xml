@@ -8,13 +8,13 @@
     <group>
         <group>
             <path
-                android:fillColor="#F44336"
+                android:fillColor="#ffffff"
                 android:pathData="M22,44A22,22,0,1,1,44,22,22,22,0,0,1,22,44ZM22,2A20,20,0,1,0,42,22,20,20,0,0,0,22,2Z" />
             <path
-                android:fillColor="#F44336"
+                android:fillColor="#ffffff"
                 android:pathData="M30.78,32.43a1,1,0,0,1-.71-.29L12.52,14.58a1,1,0,0,1,1.41-1.41L31.48,30.72a1,1,0,0,1-.71,1.71Z" />
             <path
-                android:fillColor="#F44336"
+                android:fillColor="#ffffff"
                 android:pathData="M13.22,32.43a1,1,0,0,1-.71-1.71L30.07,13.17a1,1,0,0,1,1.41,1.41L13.93,32.13A1,1,0,0,1,13.22,32.43Z" />
         </group>
     </group>

@@ -9,20 +9,6 @@
     android:paddingRight="8dp"
     android:paddingBottom="15dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="任务分类"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dia_mission_filter_title" />
-
-    <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/tfl_mission_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,12 +46,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="是否需要竞标"
+        android:text="悬赏金额类型"
         android:textColor="@color/black"
         android:textSize="@dimen/dia_mission_filter_title" />
 
     <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/tfl_is_need_bidding"
+        android:id="@+id/tfl_price_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"

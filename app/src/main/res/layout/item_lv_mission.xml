@@ -7,8 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
         android:background="@color/white"
         android:padding="8dp">
@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_red_stroke"
+                android:ellipsize="end"
                 android:padding="4dp"
                 android:text="紧急求助"
                 android:textColor="@color/item_mission_red" />
@@ -34,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:maxLines="1"
                 android:text="任务名称" />
         </LinearLayout>
 
@@ -43,6 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll"
             android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:text="测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容" />
 
         <TextView

@@ -134,7 +134,7 @@ public interface Api {
             @Query("longitude") String longitude,
             @Query("latitude") String latitude,
             @Query("paymentType") String paymentType,
-            @Query("biddingType") String biddingType,
+//            @Query("biddingType") String biddingType,
             @Query("bondType") String bondType
     );
 

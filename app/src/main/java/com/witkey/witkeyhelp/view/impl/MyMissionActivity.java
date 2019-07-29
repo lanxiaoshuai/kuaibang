@@ -34,11 +34,18 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     private MissionBean missionBean;
     private boolean isRelease; //是否为发布任务
     private boolean isLoading;
+    private User user;
 
     @Override
     protected void parseArgumentsFromIntent(Intent argIntent) {
         super.parseArgumentsFromIntent(argIntent);
         isRelease = argIntent.getBooleanExtra("EXTRA_IS_RELEASE", false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        user = MyAPP.getInstance().getUser();
     }
 
     @Override
@@ -185,7 +192,7 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
             findViewById(R.id.view).setVisibility(View.GONE);
         }
         findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
-        User user = MyAPP.getInstance().getUser();
+
         missionBean = new MissionBean(user.getUserId(), page, 1);
         getData();
     }

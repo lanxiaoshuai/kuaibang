@@ -6,9 +6,9 @@
     android:layout_gravity="center"
     android:fitsSystemWindows="false"
     android:paddingLeft="20dp"
-    android:paddingTop="20dp"
-    android:paddingRight="20dp"
-    android:paddingBottom="8dp">
+    android:paddingRight="20dp"    android:paddingBottom="8dp"
+    android:background="@drawable/shape_bg_half_black"    android:paddingTop="8dp"
+    >
 
     <ImageView
         android:id="@+id/iv_hint"
@@ -27,6 +27,7 @@
         android:layout_gravity="center"
         android:fitsSystemWindows="false"
         android:gravity="center"
+        android:textColor="@color/white"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:textSize="15sp" />
