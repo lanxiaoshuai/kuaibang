@@ -94,7 +94,7 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="8dp"
-                android:text="任务详情"
+                android:text="失物介绍"
                 android:textColor="@color/colorPrimary" />
 
             <View
@@ -122,20 +122,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="任务简述"
+                        android:text="[内容详情]"
                         android:textColor="#000"
                         android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/tv_mission_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:background="@drawable/shape_red_stroke"
-                        android:padding="4dp"
-                        android:text="普通任务"
-                        android:textColor="#ff0000" />
+
                 </RelativeLayout>
 
                 <TextView
@@ -146,49 +137,6 @@
                     android:layout_marginBottom="5dp"
                     android:text="sadfasdfa " />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="[任务时间]"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="[任务金额]"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="$:444" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="[是否可以议价]"
-                    android:textColor="#000"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tv_bargainingType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="$:444" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -246,7 +194,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:textSize="16sp"
-            android:text="立 即 接 单"
+            android:text="立 即 联 系"
             android:textColor="@color/white" />
     </LinearLayout>
 </RelativeLayout>

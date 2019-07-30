@@ -39,12 +39,12 @@
             android:name=".view.impl.ConsultActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".view.impl.LoginActivity" />
+        <activity android:name=".view.impl.LostFoundDetailActivity" />
         <activity
             android:name=".view.impl.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

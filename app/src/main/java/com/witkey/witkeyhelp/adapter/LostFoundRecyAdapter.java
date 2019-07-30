@@ -1,6 +1,7 @@
 package com.witkey.witkeyhelp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.LostFoundBean;
+import com.witkey.witkeyhelp.view.impl.LostFoundDetailActivity;
 
 import java.util.List;
 
@@ -34,11 +36,9 @@ public class LostFoundRecyAdapter extends BaseRecyAdapter<LostFoundBean> {
             @Override
             public void onClick(View v) {
                 // TODO: 2019/7/9 跳转界面
-//                Intent i = new Intent(context, MissionDetailActivity.class);
-//                Log.d(TAG, "onClick: "+lostFoundBean.getBusinessId());
-//                i.putExtra("EXTRA_BUSINESS_ID", lostFoundBean.getBusinessId());
-//                i.putExtra("EXTRA_ORDER_ID", lostFoundBean.getOrderId());
-//                context.startActivity(i);
+                Intent i = new Intent(context, LostFoundDetailActivity.class);
+                i.putExtra("EXTRA_LOSTFOUND_ID", lostFoundBean.getId());
+                context.startActivity(i);
             }
         });
     }

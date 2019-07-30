@@ -108,14 +108,6 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
 
     @Override
     protected void initWidget() {
-        int businessTypeNum=Integer.parseInt(businessType);
-        if(businessTypeNum==1) {
-            setIncludeTitle("信息咨询");
-        }else if(businessTypeNum==2){
-            setIncludeTitle("悬赏帮助");
-        }else if(businessTypeNum==3){
-            setIncludeTitle("紧急求助");
-        }
         tv_title_content = findViewById(R.id.tv_title_content);
         et_content = findViewById(R.id.et_content);
         iv_pic = findViewById(R.id.iv_pic);
@@ -149,6 +141,17 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
         rb_isNeedBond_false = findViewById(R.id.rb_isNeedBond_false);
         btn_save = findViewById(R.id.btn_save);
         btn_publish = findViewById(R.id.btn_publish);
+        int businessTypeNum=Integer.parseInt(businessType);
+        if(businessTypeNum==1) {
+            setIncludeTitle("信息咨询");
+            tv_title_content.setText("咨询内容");
+        }else if(businessTypeNum==2){
+            setIncludeTitle("悬赏帮助");
+            tv_title_content.setText("帮助内容");
+        }else if(businessTypeNum==3){
+            setIncludeTitle("紧急求助");
+            tv_title_content.setText("求助内容");
+        }
         checkPermissions();
     }
 

@@ -6,6 +6,17 @@ public class LostFoundBean {
     private String content;
     private String date;
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    private String contact;
+    private int id;
+
     @Override
     public String toString() {
         return "LostFoundBean{" +
@@ -13,8 +24,18 @@ public class LostFoundBean {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
+                ", id=" + id +
                 '}';
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public String getImgUrl() {
         return imgUrl;
@@ -51,7 +72,7 @@ public class LostFoundBean {
     public LostFoundBean() {
     }
 
-    public LostFoundBean( String title, String content, String date) {
+    public LostFoundBean(String title, String content, String date) {
         this.title = title;
         this.content = content;
         this.date = date;
