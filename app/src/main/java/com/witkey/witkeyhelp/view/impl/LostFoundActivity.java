@@ -7,7 +7,7 @@ import android.view.View;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.LostFoundRecyAdapter;
 import com.witkey.witkeyhelp.bean.LostFoundBean;
-import com.witkey.witkeyhelp.bean.LostFoundRequest;
+import com.witkey.witkeyhelp.bean.LostFoundResponse;
 import com.witkey.witkeyhelp.presenter.ILostFoundPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.LostFoundPresenterImpl;
@@ -24,7 +24,7 @@ import java.util.List;
 public class LostFoundActivity extends BaseListActivity implements ILostFoundView {
 
     private List<LostFoundBean> lostFoundList;
-    private LostFoundRequest lostFoundRequest;
+    private LostFoundResponse lostFoundRequest;
     private int page = 1;
 
     private ILostFoundPresenter presenter;
@@ -128,7 +128,7 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     }
 
     @Override
-    public void showLostFoundList(LostFoundRequest lostFoundRequest) {
+    public void showLostFoundList(LostFoundResponse lostFoundRequest) {
         getSuc();
         this.lostFoundRequest = lostFoundRequest;
         if (this.lostFoundRequest != null) {

@@ -9,7 +9,7 @@ import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionRequest;
+import com.witkey.witkeyhelp.bean.MissionResponse;
 import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.presenter.IMyMissionPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
@@ -26,7 +26,7 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     private RadioButton rb3;
     private RadioButton rb4;
     private List<MissionBean> missionList;
-    private MissionRequest missionRequest;
+    private MissionResponse missionResponse;
     private int page = 1;
 
     private IMyMissionPresenter presenter;
@@ -51,9 +51,9 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     @Override
     protected void onLoadMore() {
         if (!isLoading) {
-            if (missionRequest != null) {
-                int totalPage = missionRequest.getTotal() / 10;
-                if (missionRequest.getTotal() % 10 != 0) {
+            if (missionResponse != null) {
+                int totalPage = missionResponse.getTotal() / 10;
+                if (missionResponse.getTotal() % 10 != 0) {
                     totalPage += 1;
                 }
                 if (totalPage > page) {
@@ -150,15 +150,15 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     }
 
     @Override
-    public void showMissionList(MissionRequest missionRequest) {
+    public void showMissionList(MissionResponse missionResponse) {
         getSuc();
-        this.missionRequest = missionRequest;
-        if (missionRequest != null) {
+        this.missionResponse = missionResponse;
+        if (missionResponse != null) {
             if (isLoading) {
-                missionList.addAll(missionRequest.getRows());
+                missionList.addAll(missionResponse.getRows());
                 isLoading = false;
             } else {
-                missionList = missionRequest.getRows();
+                missionList = missionResponse.getRows();
             }
             showAdapter();
         }

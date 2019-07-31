@@ -3,7 +3,7 @@ package com.witkey.witkeyhelp.model.impl;
 import android.util.Log;
 
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionRequest;
+import com.witkey.witkeyhelp.bean.MissionResponse;
 import com.witkey.witkeyhelp.model.IMissionModel;
 import com.witkey.witkeyhelp.model.util.Callback;
 import com.witkey.witkeyhelp.util.JSONUtil;
@@ -26,9 +26,9 @@ public class MissionModelImpl implements IMissionModel {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MissionModelImpl-getMissionList: " + body);
-                MissionRequest missionRequest = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionRequest.class);
-                Log.d(TAG, "MissionModelImpl-getMissionList: " + missionRequest);
-                callback.onSuccess(missionRequest);
+                MissionResponse missionResponse = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionResponse.class);
+                Log.d(TAG, "MissionModelImpl-getMissionList: " + missionResponse);
+                callback.onSuccess(missionResponse);
             }
         });
     }
@@ -99,9 +99,9 @@ public class MissionModelImpl implements IMissionModel {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MissionModelImpl-getReleaseMissionList: " + body);
-                MissionRequest missionRequest = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionRequest.class);
-                Log.d(TAG, "MissionModelImpl-getReleaseMissionList: " + missionRequest);
-                callback.onSuccess(missionRequest);
+                MissionResponse missionResponse = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionResponse.class);
+                Log.d(TAG, "MissionModelImpl-getReleaseMissionList: " + missionResponse);
+                callback.onSuccess(missionResponse);
             }
         });
     }
@@ -130,9 +130,9 @@ public class MissionModelImpl implements IMissionModel {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MissionModelImpl-getReceiveMissionList: " + body);
-                MissionRequest missionRequest = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionRequest.class);
-                Log.d(TAG, "MissionModelImpl-getReceiveMissionList: " + missionRequest);
-                callback.onSuccess(missionRequest);
+                MissionResponse missionResponse = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionResponse.class);
+                Log.d(TAG, "MissionModelImpl-getReceiveMissionList: " + missionResponse);
+                callback.onSuccess(missionResponse);
             }
         });
     }

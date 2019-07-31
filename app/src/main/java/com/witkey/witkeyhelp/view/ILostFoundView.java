@@ -1,7 +1,7 @@
 package com.witkey.witkeyhelp.view;
 
-import com.witkey.witkeyhelp.bean.LostFoundRequest;
+import com.witkey.witkeyhelp.bean.LostFoundResponse;
 
 public interface ILostFoundView extends IView{
-    void showLostFoundList(LostFoundRequest lostFoundRequest);
+    void showLostFoundList(LostFoundResponse lostFoundRequest);
 }

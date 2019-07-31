@@ -55,6 +55,20 @@ public interface Api {
     );
 
     /**
+     * 发送验证码
+     *
+     * @param phone 手机号
+     * @param code  验证码
+     * @return
+     */
+    @POST("apiuser/sendMsg")
+    @FormUrlEncoded
+    Call<String> sendMsg(
+            @Field("phone") String phone,
+            @Field("code") String code
+    );
+
+    /**
      * 获取用户信息
      *
      * @return

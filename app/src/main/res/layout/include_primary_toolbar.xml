@@ -16,7 +16,6 @@
         android:onClick="goBack"
         android:paddingLeft="@dimen/toolbar_padding_left"
         android:paddingTop="@dimen/toolbar_padding_top"
-        android:visibility="gone"
         android:paddingRight="@dimen/toolbar_padding_right"
         android:paddingBottom="@dimen/toolbar_padding_bottom">
 

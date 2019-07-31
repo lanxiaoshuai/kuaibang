@@ -73,10 +73,10 @@ public abstract class BaseFragment extends Fragment implements IView {
         if (parent != null) {
             parent.removeView(rootView);
         }
-//        View view = rootView.findViewById(R.id.tvBack);
-//        if (view != null) {
-//            view.setVisibility(View.GONE);
-//        }
+        View view = rootView.findViewById(R.id.tvBack);
+        if (view != null) {
+            view.setVisibility(View.GONE);
+        }
         //实现控件
         initWidget();
         initEvent();

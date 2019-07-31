@@ -2,11 +2,13 @@ package com.witkey.witkeyhelp.view.impl;
 
 import android.content.Intent;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
@@ -20,15 +22,19 @@ import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.ILoginView;
 import com.witkey.witkeyhelp.view.impl.base.InitPresenterBaseActivity;
 
+import java.util.Random;
+
 
 public class LoginActivity extends InitPresenterBaseActivity implements View.OnClickListener, ILoginView {
     private EditText etName;
     private EditText etPass;
+    private EditText etCode;
+    private RelativeLayout rl_code;
 
 
     private TextView bt_code;
 
-//    private CheckBox cb_rm_pass; //记住密码不要
+    //    private CheckBox cb_rm_pass; //记住密码不要
     private TextView tv_forget_pass;
 
 
@@ -42,6 +48,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
 //    private boolean isSave = true; //默认记住密码
 
     private ILoginPresenter presenter;
+    private String verifyCode; //生成的验证码
 
     @Override
     protected int getLayoutResId() {
@@ -68,26 +75,24 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
             @Override
             public void onClick(View v) {
                 if (isPass == true) {
-                    bt_code.setVisibility(View.VISIBLE);
-                    etPass.setHint("请输入验证码");
                     isPass = false;
+                    etName.setHint("请输入手机号");
+                    etName.setInputType(InputType.TYPE_CLASS_PHONE);
                     tv_change_state.setText("密码登录");
-//                    cb_rm_pass.setChecked(false);
-//                    cb_rm_pass.setEnabled(false);
-//                    cb_rm_pass.setVisibility(View.GONE);
                     tv_forget_pass.setVisibility(View.GONE);
-
+                    bt_login.setText("注 册");
+                    rl_code.setVisibility(View.VISIBLE);
                 } else {
-                    bt_code.setVisibility(View.GONE);
                     isPass = true;
-                    etPass.setHint("请输入密码");
+                    etName.setHint("请输入账号/手机号/邮箱");
+                    etName.setInputType(InputType.TYPE_CLASS_TEXT);
                     tv_change_state.setText("验证码登录");
-//                    cb_rm_pass.setEnabled(true);
-//                    cb_rm_pass.setChecked(true);
-//                    cb_rm_pass.setVisibility(View.VISIBLE);
                     tv_forget_pass.setVisibility(View.VISIBLE);
+                    bt_login.setText("登 录");
+                    rl_code.setVisibility(View.GONE);
                 }
                 etPass.setText("");
+                etCode.setText("");
             }
         });
         bt_code.setOnClickListener(this);
@@ -107,6 +112,7 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
             @Override
             public void afterTextChanged(Editable s) {
                 etPass.setText("");
+                etCode.setText("");
             }
         });
         //记住密码操作
@@ -135,6 +141,8 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
         tv_change_state = (TextView) findViewById(R.id.tv_change_state);
         etName = (EditText) findViewById(R.id.et_name);
         etPass = (EditText) findViewById(R.id.et_pass);
+        etCode = (EditText) findViewById(R.id.et_code);
+        rl_code = (RelativeLayout) findViewById(R.id.rl_code);
         bt_code = (TextView) findViewById(R.id.bt_code);
         bt_login = (Button) findViewById(R.id.bt_login);
 //        cb_rm_pass = findViewById(R.id.cb_rm_pass);
@@ -153,16 +161,25 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
                 if (isPass) {
                     if (FormatUtil.isPassword(pass)) {
                         startGetData(false);
-                        presenter.Login(new LoginRequest(phone, pass));
+                        presenter.Login(new LoginRequest(phone, pass, isPass));
                     } else {
                         Toast("请输入6位以上的数字+字母", 3);
                     }
                 } else {
+                    String code = etCode.getText().toString().trim();
                     //验证码登录
                     if (FormatUtil.isMobileNO(phone)) {
-                        if (FormatUtil.isFourNumber(pass)) {
-                            startGetData(false);
-                            presenter.Login(new LoginRequest(phone, pass));
+                        if (FormatUtil.isFourNumber(code)) {
+                            if (FormatUtil.isPassword(pass)) {
+                                if (code.equals(verifyCode)) {
+                                    startGetData(false);
+                                    presenter.Login(new LoginRequest(phone, pass, isPass));
+                                } else {
+                                    Toast("验证码错误", 3);
+                                }
+                            } else {
+                                Toast("请输入6位以上的数字+字母的密码", 3);
+                            }
                         } else {
                             Toast("请输入验证码", 3);
                         }
@@ -175,7 +192,8 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
                 //获取验证码
                 if (FormatUtil.isMobileNO(phone)) {
                     startGetData(true);
-                    presenter.GetCode(new LoginRequest());
+                    verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
+                    presenter.GetCode(new LoginRequest(phone, verifyCode));
                 } else {
                     Toast("请输入正确的手机号", 3);
                 }

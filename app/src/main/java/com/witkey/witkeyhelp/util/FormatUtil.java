@@ -208,7 +208,7 @@ public class FormatUtil {
      * 判断是否为6位数字
      */
     public static boolean isFourNumber(String source) {
-        if (!TextUtils.isEmpty(source) && source.length() ==4) {
+        if (!TextUtils.isEmpty(source) && source.length() ==6) {
             return true;
         }
         return false;

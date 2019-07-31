@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionRequest;
+import com.witkey.witkeyhelp.bean.MissionResponse;
 import com.witkey.witkeyhelp.dialog.MissionFilterDialog;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.IReawardHallFragPresenter;
@@ -48,7 +48,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     private MissionBean chooseMissionBean;
 
     //获取的任务列表数据
-    private MissionRequest missionRequest;
+    private MissionResponse missionResponse;
     private List<MissionBean> missionList;
 
     //高级筛选dialog
@@ -137,9 +137,9 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     @Override
     protected void onLoadMore() {
         if (!isLoading) {
-            if (missionRequest != null) {
-                int totalPage = missionRequest.getTotal() / 10;
-                if (missionRequest.getTotal() % 10 != 0) {
+            if (missionResponse != null) {
+                int totalPage = missionResponse.getTotal() / 10;
+                if (missionResponse.getTotal() % 10 != 0) {
                     totalPage += 1;
                 }
                 if (totalPage > pageNum) {
@@ -230,15 +230,15 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     }
 
     @Override
-    public void showMissionList(MissionRequest missionRequest) {
+    public void showMissionList(MissionResponse missionResponse) {
         getSuc();
-        this.missionRequest = missionRequest;
-        if (missionRequest != null) {
+        this.missionResponse = missionResponse;
+        if (missionResponse != null) {
             if (isLoading) {
-                missionList.addAll(missionRequest.getRows());
+                missionList.addAll(missionResponse.getRows());
                 isLoading = false;
             } else {
-                missionList = missionRequest.getRows();
+                missionList = missionResponse.getRows();
             }
             showAdapter();
         }

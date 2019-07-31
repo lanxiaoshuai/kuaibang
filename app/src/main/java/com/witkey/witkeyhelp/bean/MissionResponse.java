@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @date 2019/7/26 11:52
  * @description 悬赏大厅列表获取
  */
-public class MissionRequest {
+public class MissionResponse {
     @SerializedName("total")
     private int total;
     @SerializedName("rows")
@@ -39,10 +39,10 @@ public class MissionRequest {
         this.rows = rows;
     }
 
-    public MissionRequest() {
+    public MissionResponse() {
     }
 
-    public MissionRequest(int total, ArrayList<MissionBean> rows) {
+    public MissionResponse(int total, ArrayList<MissionBean> rows) {
         this.total = total;
         this.rows = rows;
     }

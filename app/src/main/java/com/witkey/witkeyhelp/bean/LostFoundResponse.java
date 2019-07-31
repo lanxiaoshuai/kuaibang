@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @date 2019/7/26 11:52
  * @description 失物招领列表获取
  */
-public class LostFoundRequest {
+public class LostFoundResponse {
     @SerializedName("total")
     private int total;
     @SerializedName("rows")
@@ -39,10 +39,10 @@ public class LostFoundRequest {
         this.rows = rows;
     }
 
-    public LostFoundRequest() {
+    public LostFoundResponse() {
     }
 
-    public LostFoundRequest(int total, ArrayList<LostFoundBean> rows) {
+    public LostFoundResponse(int total, ArrayList<LostFoundBean> rows) {
         this.total = total;
         this.rows = rows;
     }
