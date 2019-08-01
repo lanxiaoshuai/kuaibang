@@ -11,6 +11,11 @@ import com.witkey.witkeyhelp.presenter.impl.LostFoundDetailPresenterImpl;
 import com.witkey.witkeyhelp.view.ILostFoundDetailView;
 import com.witkey.witkeyhelp.view.impl.base.InitPresenterBaseActivity;
 
+/**
+ * @author lingxu
+ * @date 2019/8/1 10:22
+ * @description 失物招领详情
+ */
 public class LostFoundDetailActivity extends InitPresenterBaseActivity implements View.OnClickListener, ILostFoundDetailView {
     private TextView tv_describe;
     private TextView tv_contact;

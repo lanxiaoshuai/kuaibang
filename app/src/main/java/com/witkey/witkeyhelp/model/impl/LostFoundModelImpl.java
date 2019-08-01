@@ -27,4 +27,9 @@ public class LostFoundModelImpl implements com.witkey.witkeyhelp.model.ILostFoun
         LostFoundBean lostFoundBean = new LostFoundBean("title", "content", "2019-07-09 15:54:15");
         callback.onSuccess(lostFoundBean);
     }
+
+    @Override
+    public void addLostFound(LostFoundBean lostFoundBean, AsyncCallback callback) {
+        callback.onSuccess("");
+    }
 }

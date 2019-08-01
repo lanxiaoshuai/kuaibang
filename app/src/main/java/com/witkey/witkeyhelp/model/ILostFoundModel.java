@@ -7,4 +7,5 @@ public interface ILostFoundModel extends IModel{
 
     void getLostFoundDetail(int id, AsyncCallback callback);
 
+    void addLostFound(LostFoundBean lostFoundBean, AsyncCallback callback);
 }

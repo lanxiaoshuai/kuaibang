@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    tools:context=".view.impl.AddLostFoundActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_add_lost"
+        android:layout_below="@+id/include">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_pic_defalut"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="48dp"
+                    android:src="@mipmap/ic_lost_found_add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="24dp"
+                    android:text="支持jpg/png格式文件不超过3M"
+                    android:textColor="#72777D" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_show_add_pic"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_add_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_primary_solid"
+                android:padding="8dp"
+                android:text="添加任务图片"
+                android:textColor="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_title_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableLeft="@drawable/ic_primary_ver_line"
+                    android:drawablePadding="5dp"
+                    android:text="失物概括"
+                    android:textColor="@color/colorPrimary" />
+
+                <EditText
+                    android:id="@+id/et_describe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title_title"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/shape_gray_stroke"
+                    android:gravity="top|left"
+                    android:hint="描述您所拾到的物品"
+                    android:minLines="2"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/white"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_title_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableLeft="@drawable/ic_primary_ver_line"
+                    android:drawablePadding="5dp"
+                    android:text="联系方式"
+                    android:textColor="@color/colorPrimary" />
+
+                <EditText
+                    android:id="@+id/et_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title_contact"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/shape_gray_stroke"
+                    android:gravity="top|left"
+                    android:hint="输入您的联系方式"
+                    android:minLines="3"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_contact"
+                    android:hint="非必填项默认威客帮app聊天进行沟通"
+                    android:paddingTop="5dp"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_title_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:drawableLeft="@drawable/ic_primary_ver_line"
+                    android:drawablePadding="5dp"
+                    android:text="温馨提示"
+                    android:textColor="@color/colorPrimary" />
+
+                <EditText
+                    android:id="@+id/et_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title_hint"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/shape_gray_stroke"
+                    android:gravity="top|left"
+                    android:hint="请添加您的提示信息"
+                    android:minLines="2"
+                    android:padding="8dp"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_add_lost"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="确认添加"
+        android:textColor="@color/white" />
+</RelativeLayout>

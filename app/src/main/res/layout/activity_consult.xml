@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_bg"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:background="@color/gray_bg">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,7 +12,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
@@ -42,6 +40,8 @@
                     android:layout_below="@+id/tv_title_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/shape_gray_stroke"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:padding="5dp">
 
                     <EditText
@@ -132,6 +132,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_title_money"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:background="@drawable/shape_gray_stroke">
 
                     <EditText
@@ -187,7 +189,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
