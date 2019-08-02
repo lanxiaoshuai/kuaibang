@@ -16,6 +16,7 @@ import com.witkey.witkeyhelp.util.IntentUtil;
 import com.witkey.witkeyhelp.view.IHomeFragView;
 import com.witkey.witkeyhelp.view.impl.ConsultActivity;
 import com.witkey.witkeyhelp.view.impl.LostFoundActivity;
+import com.witkey.witkeyhelp.view.impl.MicroNotificationActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,6 +70,7 @@ public class HomeFragment extends BaseFragment implements IHomeFragView, View.On
                     IntentUtil.startActivity(getActivity(), LostFoundActivity.class);
                 } else if (position == 2) {
                     //微通知
+                    IntentUtil.startActivity(getActivity(), MicroNotificationActivity.class);
                 } else if (position == 3) {
                     //钻石通知
                 }

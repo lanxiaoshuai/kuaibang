@@ -5,15 +5,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.adapter.LostFoundRecyAdapter;
-import com.witkey.witkeyhelp.bean.LostFoundBean;
-import com.witkey.witkeyhelp.bean.LostFoundResponse;
-import com.witkey.witkeyhelp.presenter.ILostFoundPresenter;
+import com.witkey.witkeyhelp.adapter.MicroNotificationRecyAdapter;
+import com.witkey.witkeyhelp.bean.MicroNotificationBean;
+import com.witkey.witkeyhelp.bean.MicroNotificationResponse;
 import com.witkey.witkeyhelp.presenter.IPresenter;
-import com.witkey.witkeyhelp.presenter.impl.LostFoundPresenterImpl;
-import com.witkey.witkeyhelp.util.IntentUtil;
+import com.witkey.witkeyhelp.presenter.impl.IMicroNotificationPresenter;
+import com.witkey.witkeyhelp.presenter.impl.MicroNotificationPresenterImpl;
 import com.witkey.witkeyhelp.util.callback.ITextViewCallback;
-import com.witkey.witkeyhelp.view.ILostFoundView;
+import com.witkey.witkeyhelp.view.IMicroNotificationView;
 import com.witkey.witkeyhelp.view.impl.base.BaseListActivity;
 
 import java.util.List;
@@ -21,17 +20,15 @@ import java.util.List;
 /**
  * @author lingxu
  * @date 2019/7/26 18:45
- * @description 失误招领list
+ * @description 微通知list
  */
-public class LostFoundActivity extends BaseListActivity implements ILostFoundView {
+public class MicroNotificationActivity extends BaseListActivity implements IMicroNotificationView {
 
-    private List<LostFoundBean> lostFoundList;
-    private LostFoundResponse lostFoundRequest;
+    private List<MicroNotificationBean> microNotificationList;
+    private MicroNotificationResponse microNotificationResponse;
     private int page = 1;
 
-    private ILostFoundPresenter presenter;
-    private int state;//类型
-    private LostFoundBean missionBean;
+    private IMicroNotificationPresenter presenter;
     private boolean isLoading;
 
     @Override
@@ -42,9 +39,9 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     @Override
     protected void onLoadMore() {
         if (!isLoading) {
-            if (lostFoundRequest != null) {
-                int totalPage = lostFoundRequest.getTotal() / 10;
-                if (lostFoundRequest.getTotal() % 10 != 0) {
+            if (microNotificationResponse != null) {
+                int totalPage = microNotificationResponse.getTotal() / 10;
+                if (microNotificationResponse.getTotal() % 10 != 0) {
                     totalPage += 1;
                 }
                 if (totalPage > page) {
@@ -62,9 +59,9 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     }
 
     private void getData() {
-        if (lostFoundList != null) {
-            lostFoundList.clear();
-            lostFoundList = null;
+        if (microNotificationList != null) {
+            microNotificationList.clear();
+            microNotificationList = null;
         }
         if (adapter != null) {
             adapter = null;
@@ -74,7 +71,7 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     }
 
     private void allGet() {
-        presenter.getLostFoundList(missionBean);
+        presenter.getMicroNotificationList();
     }
 
     @Override
@@ -84,7 +81,7 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
 
     @Override
     protected IPresenter[] getPresenters() {
-        presenter = new LostFoundPresenterImpl();
+        presenter = new MicroNotificationPresenterImpl();
         return new IPresenter[]{presenter};
     }
 
@@ -111,10 +108,10 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
 
     private void showAdapter() {
         if (adapter == null) {
-            adapter = new LostFoundRecyAdapter(mActivity, lostFoundList);
+            adapter = new MicroNotificationRecyAdapter(mActivity, microNotificationList);
             recyclerView.setAdapter(adapter);
         } else {
-            ((LostFoundRecyAdapter) adapter).setData(lostFoundList);
+            ((MicroNotificationRecyAdapter) adapter).setData(microNotificationList);
             adapter.notifyDataSetChanged();
         }
     }
@@ -122,11 +119,11 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     @Override
     protected void initViewExceptPresenter() {
         super.initViewExceptPresenter();
-        setIncludeTitle("失物招领");
+        setIncludeTitle("微通知");
         setShowConfirm("新增", new ITextViewCallback() {
             @Override
             public void onClick() {
-                IntentUtil.startActivity(mActivity, AddLostFoundActivity.class);
+//                IntentUtil.startActivity(mActivity, AddMicroNotificationActivity.class);
             }
         });
         findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
@@ -134,19 +131,19 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     }
 
     @Override
-    public void showLostFoundList(LostFoundResponse lostFoundRequest) {
+    public void showMicroNootificationList(MicroNotificationResponse microNotificationResponse) {
         getSuc();
-        this.lostFoundRequest = lostFoundRequest;
-        if (this.lostFoundRequest != null) {
+        this.microNotificationResponse = microNotificationResponse;
+        if (this.microNotificationResponse != null) {
             if (isLoading) {
-                lostFoundList.addAll(lostFoundRequest.getRows());
+                microNotificationList.addAll(microNotificationResponse.getRows());
                 isLoading = false;
             } else {
-                lostFoundList = lostFoundRequest.getRows();
+                microNotificationList = microNotificationResponse.getRows();
             }
             showAdapter();
         }
-        Log.d(TAG, "showLostFoundList: " + this.lostFoundRequest.toString());
+        Log.d(TAG, "showMicroNotificationList: " + this.microNotificationResponse.toString());
     }
 
     @Override
