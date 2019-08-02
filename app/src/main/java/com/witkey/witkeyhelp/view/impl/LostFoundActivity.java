@@ -11,6 +11,8 @@ import com.witkey.witkeyhelp.bean.LostFoundResponse;
 import com.witkey.witkeyhelp.presenter.ILostFoundPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.LostFoundPresenterImpl;
+import com.witkey.witkeyhelp.util.IntentUtil;
+import com.witkey.witkeyhelp.util.callback.ITextViewCallback;
 import com.witkey.witkeyhelp.view.ILostFoundView;
 import com.witkey.witkeyhelp.view.impl.base.BaseListActivity;
 
@@ -19,7 +21,7 @@ import java.util.List;
 /**
  * @author lingxu
  * @date 2019/7/26 18:45
- * @description 失误招领
+ * @description 失误招领list
  */
 public class LostFoundActivity extends BaseListActivity implements ILostFoundView {
 
@@ -74,7 +76,7 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     }
 
     private void allGet() {
-            presenter.getLostFoundList(missionBean);
+        presenter.getLostFoundList(missionBean);
     }
 
     @Override
@@ -123,6 +125,12 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
     protected void initViewExceptPresenter() {
         super.initViewExceptPresenter();
         setIncludeTitle("失物招领");
+        setShowConfirm("新增", new ITextViewCallback() {
+            @Override
+            public void onClick() {
+                IntentUtil.startActivity(mActivity, AddLostFoundActivity.class);
+            }
+        });
         findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
         getData();
     }
@@ -140,8 +148,9 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
             }
             showAdapter();
         }
-        Log.d(TAG, "showLostFoundList: "+this.lostFoundRequest.toString());
+        Log.d(TAG, "showLostFoundList: " + this.lostFoundRequest.toString());
     }
+
     @Override
     protected boolean isLight() {
         return true;
