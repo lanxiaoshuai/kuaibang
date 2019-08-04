@@ -11,6 +11,7 @@ import com.witkey.witkeyhelp.bean.MicroNotificationResponse;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.IMicroNotificationPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MicroNotificationPresenterImpl;
+import com.witkey.witkeyhelp.util.IntentUtil;
 import com.witkey.witkeyhelp.util.callback.ITextViewCallback;
 import com.witkey.witkeyhelp.view.IMicroNotificationView;
 import com.witkey.witkeyhelp.view.impl.base.BaseListActivity;
@@ -123,7 +124,7 @@ public class MicroNotificationActivity extends BaseListActivity implements IMicr
         setShowConfirm("新增", new ITextViewCallback() {
             @Override
             public void onClick() {
-//                IntentUtil.startActivity(mActivity, AddMicroNotificationActivity.class);
+                IntentUtil.startActivity(mActivity, AddMicroNotificationActivity.class);
             }
         });
         findViewById(R.id.tvBack).setVisibility(View.VISIBLE);

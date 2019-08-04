@@ -37,6 +37,7 @@
         <activity android:name=".view.impl.MyMissionActivity" />
         <activity android:name=".view.impl.LostFoundActivity" />
         <activity android:name=".view.impl.MissionDetailActivity" />
+        <activity android:name=".view.impl.AddMicroNotificationActivity" />
         <activity
             android:name=".view.impl.ConsultActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />

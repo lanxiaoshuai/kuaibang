@@ -21,4 +21,9 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
         MicroNotificationResponse microNotificationResponse = new MicroNotificationResponse(9, rows);
         callback.onSuccess(microNotificationResponse);
     }
+
+    @Override
+    public void addMicroNotification(MicroNotificationBean microNotificationBean, AsyncCallback asyncCallback) {
+        asyncCallback.onSuccess("");
+    }
 }
