@@ -11,17 +11,12 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.Contacts.Contacts;
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.bean.LostFoundBean;
 import com.witkey.witkeyhelp.bean.MicroNotificationBean;
-import com.witkey.witkeyhelp.presenter.IAddLostFoundPresenter;
 import com.witkey.witkeyhelp.presenter.IAddMicroNotificationPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
-import com.witkey.witkeyhelp.presenter.impl.AddLostFoundPresenterImpl;
 import com.witkey.witkeyhelp.presenter.impl.AddMicroNotificationPresenterImpl;
 import com.witkey.witkeyhelp.util.CalendarUtil;
-import com.witkey.witkeyhelp.util.FormatUtil;
 import com.witkey.witkeyhelp.util.ImgUtil;
-import com.witkey.witkeyhelp.view.IAddLostFoundView;
 import com.witkey.witkeyhelp.view.IAddMicroNotificationView;
 
 import java.util.HashMap;
@@ -68,8 +63,8 @@ public class AddMicroNotificationActivity extends PermissionActivity implements 
         rl_pic_defalut = findViewById(R.id.rl_pic_defalut);
         tv_add_pic = findViewById(R.id.tv_add_pic);
         iv_show_add_pic = findViewById(R.id.iv_show_add_pic);
-        et_name = findViewById(R.id.et_describe);
-        et_describe = findViewById(R.id.et_hint);
+        et_name = findViewById(R.id.et_name);
+        et_describe = findViewById(R.id.et_describe);
         tv_add_lost = findViewById(R.id.tv_add_lost);
     }
 

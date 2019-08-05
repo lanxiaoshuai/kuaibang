@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.MicroNotificationBean;
-import com.witkey.witkeyhelp.view.impl.LostFoundDetailActivity;
+import com.witkey.witkeyhelp.view.impl.MicroNotificationDetailActivity;
 
 import java.util.List;
 
@@ -36,8 +36,8 @@ public class MicroNotificationRecyAdapter extends BaseRecyAdapter<MicroNotificat
             @Override
             public void onClick(View v) {
                 // TODO: 2019/7/9 跳转界面
-                Intent i = new Intent(context, LostFoundDetailActivity.class);
-                i.putExtra("EXTRA_LOSTFOUND_ID", microNotificationBean.getId());
+                Intent i = new Intent(context, MicroNotificationDetailActivity.class);
+                i.putExtra("EXTRA_MICRO_NOTIFICATION_BEAN", microNotificationBean);
                 context.startActivity(i);
             }
         });

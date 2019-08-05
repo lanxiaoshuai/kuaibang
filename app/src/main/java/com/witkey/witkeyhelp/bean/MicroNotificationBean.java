@@ -1,6 +1,8 @@
 package com.witkey.witkeyhelp.bean;
 
-public class MicroNotificationBean {
+import java.io.Serializable;
+
+public class MicroNotificationBean implements Serializable {
     private String title;
     private String content;
     private String date;

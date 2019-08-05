@@ -1,5 +1,7 @@
 package com.witkey.witkeyhelp.model.impl;
 
+import com.witkey.witkeyhelp.bean.Message;
+import com.witkey.witkeyhelp.bean.MessageResponse;
 import com.witkey.witkeyhelp.bean.MicroNotificationBean;
 import com.witkey.witkeyhelp.bean.MicroNotificationResponse;
 
@@ -25,5 +27,17 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
     @Override
     public void addMicroNotification(MicroNotificationBean microNotificationBean, AsyncCallback asyncCallback) {
         asyncCallback.onSuccess("");
+    }
+
+    @Override
+    public void getMicroNotificationDetail(boolean isCheck, AsyncCallback callback) {
+        ArrayList<Message> messages = new ArrayList<>();
+        messages.add(new Message("我是title", "我是content我是content我是content我是content我是content", "2019-05-28 15:15:15"));
+        messages.add(new Message("我是title", "我是content我是content我是content我是content我是content", "2019-05-28 15:15:15"));
+        messages.add(new Message("我是title", "我是content我是content我是content我是content我是content", "2019-05-28 15:15:15"));
+        messages.add(new Message("我是title", "我是content我是content我是content我是content我是content", "2019-05-28 15:15:15"));
+        messages.add(new Message("我是title", "我是content我是content我是content我是content我是content", "2019-05-28 15:15:15"));
+        callback.onSuccess(new MessageResponse(5, messages));
+
     }
 }
