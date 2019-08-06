@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.LoginRequest;
 import com.witkey.witkeyhelp.presenter.ILoginPresenter;
@@ -134,6 +135,10 @@ public class LoginActivity extends InitPresenterBaseActivity implements View.OnC
         //显示已保存的用户名跟密码
 //        etName.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("name"));
 //        etPass.setText((String) SharedPreferencesUtil.getNamePass(getApplicationContext()).get("pass"));
+        if (!MyAPP.ISRELEASE) {
+            etName.setText("15333003834");
+            etPass.setText("111111a");
+        }
     }
 
     @Override

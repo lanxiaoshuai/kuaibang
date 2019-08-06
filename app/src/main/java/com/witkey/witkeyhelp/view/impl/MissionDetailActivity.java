@@ -5,10 +5,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.dialog.ReceiptSucDia;
 import com.witkey.witkeyhelp.presenter.IMissionDetailPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
@@ -38,7 +36,6 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
     private int businessId;
     private int orderId;
     private MissionBean missionBean;
-    private User user;
 
     @Override
     protected IPresenter[] getPresenters() {
@@ -58,9 +55,8 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        user = MyAPP.getInstance().getUser();
+    protected boolean isGetUser() {
+        return true;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class User {
 
 
     @Override
-    public String  toString() {
+    public String toString() {
         return "User{" +
                 "userId='" + userId + '\'' +
                 ", userName='" + userName + '\'' +
@@ -107,6 +107,12 @@ public class User {
         this.userName = userName;
         this.userType = userType;
         this.headUrl = headUrl;
+        this.realName = realName;
+    }
+
+    public User(int userId, String userName, String realName) {
+        this.userId = userId;
+        this.userName = userName;
         this.realName = realName;
     }
 }

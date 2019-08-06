@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MicroNotificationRecyAdapter;
-import com.witkey.witkeyhelp.bean.MicroNotificationBean;
 import com.witkey.witkeyhelp.bean.MicroNotificationResponse;
+import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.IMicroNotificationPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MicroNotificationPresenterImpl;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class MicroNotificationActivity extends BaseListActivity implements IMicroNotificationView {
 
-    private List<MicroNotificationBean> microNotificationList;
+    private List<MicroNotifyManagerBean> microNotificationList;
     private MicroNotificationResponse microNotificationResponse;
     private int page = 1;
 
@@ -71,8 +71,13 @@ public class MicroNotificationActivity extends BaseListActivity implements IMicr
         allGet();
     }
 
+    @Override
+    protected boolean isGetUser() {
+        return true;
+    }
+
     private void allGet() {
-        presenter.getMicroNotificationList();
+        presenter.getMicroNotificationList(user.getUserId());
     }
 
     @Override
@@ -127,8 +132,15 @@ public class MicroNotificationActivity extends BaseListActivity implements IMicr
                 IntentUtil.startActivity(mActivity, AddMicroNotificationActivity.class);
             }
         });
-        findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
-        getData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: 2019/8/6  问题 ,不加载
+        if (user != null) {
+            getData();
+        }
     }
 
     @Override

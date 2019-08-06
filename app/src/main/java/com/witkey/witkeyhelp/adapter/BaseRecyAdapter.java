@@ -71,6 +71,8 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     }
 
 
+
+
     static class EmptyViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_nodata;
 

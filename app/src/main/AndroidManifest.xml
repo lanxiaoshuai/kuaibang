@@ -32,9 +32,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.impl.MicroNotificationDetailActivity"/>
-        <activity android:name=".view.impl.MicroNotificationActivity"/>
-        <activity android:name=".view.impl.AddLostFoundActivity"/>
+        <activity android:name=".view.impl.MicroNotifyManagerActivity" />
+        <activity android:name=".view.impl.MicroNotificationDetailActivity" />
+        <activity android:name=".view.impl.MicroNotificationActivity" />
+        <activity android:name=".view.impl.AddLostFoundActivity" />
         <activity android:name=".view.impl.MyMissionActivity" />
         <activity android:name=".view.impl.LostFoundActivity" />
         <activity android:name=".view.impl.MissionDetailActivity" />

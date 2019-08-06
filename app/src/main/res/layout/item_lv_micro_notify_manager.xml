@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="4dp"
+    android:background="@drawable/shape_gray_stroke"
+    android:paddingLeft="8dp"
+    android:paddingTop="4dp"
+    android:button="@null"
+    android:paddingRight="8dp"
+    android:paddingBottom="4dp"
+    android:textColor="@drawable/selector_b2p_text_color">
+
+</CheckBox>

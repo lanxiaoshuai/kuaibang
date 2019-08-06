@@ -11,8 +11,8 @@ public class MicroNotificationDetailPresenterImpl implements com.witkey.witkeyhe
     private IMicroNotificationModel model;
 
     @Override
-    public void getMicroNotificationDetail(boolean isCheck) {
-        model.getMicroNotificationDetail(isCheck ,new IModel.AsyncCallback() {
+    public void getMicroNotificationDetail(int createUserId,boolean isCheck) {
+        model.getMicroNotificationDetail(createUserId,isCheck ,new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
                 view.showMicroNotificationDetail((MessageResponse) data);

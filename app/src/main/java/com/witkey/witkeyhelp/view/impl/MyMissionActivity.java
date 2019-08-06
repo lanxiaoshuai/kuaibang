@@ -5,12 +5,10 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.MissionBean;
 import com.witkey.witkeyhelp.bean.MissionResponse;
-import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.presenter.IMyMissionPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MyMissionPresenterImpl;
@@ -34,7 +32,6 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     private MissionBean missionBean;
     private boolean isRelease; //是否为发布任务
     private boolean isLoading;
-    private User user;
 
     @Override
     protected void parseArgumentsFromIntent(Intent argIntent) {
@@ -43,10 +40,10 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        user = MyAPP.getInstance().getUser();
+    protected boolean isGetUser() {
+        return true;
     }
+
 
     @Override
     protected void onLoadMore() {

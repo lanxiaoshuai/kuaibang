@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.dialog.InternetDia;
 import com.witkey.witkeyhelp.services.ReceiveMsgService;
 import com.witkey.witkeyhelp.util.CalendarUtil;
@@ -38,7 +39,6 @@ import com.witkey.witkeyhelp.util.ToastUtils;
 import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.IView;
 import com.witkey.witkeyhelp.util.Error;
-
 
 
 /**
@@ -61,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
      */
     private ViewGroup fwRootLayout;
 
+    protected User user; //判断是否登录
 
     /////////////////////////////////////////////////
     //联网操作
@@ -79,10 +80,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         //使用svg图片
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
-
-//    protected int monthOfYear;
-//    protected int dayOfMonth;
-//    protected int year;
 
     protected abstract void onCreateActivity();
 
@@ -130,11 +127,25 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        if (isGetUser()) {
+            user = MyAPP.getInstance().getUser();
+        }
         //Activity操作
         onCreateActivity();
         //如果为绑定,即绑定
         bind();
     }
+
+    /**
+     * 是否需要user信息
+     * @return
+     *  false 不需要
+     *  true 需要
+     */
+    protected boolean isGetUser() {
+        return false;
+    }
+
 
     /**
      * 设置字体不随着手机系统设置而变化
@@ -148,6 +159,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         return res;
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     /**
      * Android点击EditText文本框之外任何地方隐藏键盘的解决办法
      */
@@ -486,7 +498,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     tv.setText(setTimeShow(year, monthOfYear, dayOfMonth));
                 }
-            }, CalendarUtil.getTime()[0],  CalendarUtil.getTime()[1],  CalendarUtil.getTime()[2]);
+            }, CalendarUtil.getTime()[0], CalendarUtil.getTime()[1], CalendarUtil.getTime()[2]);
         }
         datePickerDialog.show();
         return datePickerDialog;

@@ -250,6 +250,53 @@ public interface Api {
     Call<String> getAcount(
             @Path("userId") String userId
     );
+    ///////////   微通知
+
+    /**
+     * 查询我创建的群列表
+     *
+     * @param userId 当前用户id
+     * @return
+     */
+    @GET("catalogLive/list")
+    Call<String> getMicroNotificationList(
+            @Query("createUserId") int userId
+    );
+
+    /**
+     * 查询已读消息列表接口
+     *
+     * @param userId 当前用户id
+     * @return
+     */
+    @GET("message/readList")
+    Call<String> getMicroNotifyMessageCheckList(
+            @Query("userId") int userId
+    );
+
+    /**
+     * 查询未读消息列表接口
+     *
+     * @param userId 当前用户id
+     * @return
+     */
+    @GET("message/unreadList")
+    Call<String> getMicroNotifyMessageUnCheckList(
+            @Query("userId") int userId
+    );
+
+    /**
+     * 查询群目录
+     *
+     * @param createUserId 当前用户id
+     * @param parentId     第一级目录parentId传0，查询二、三级目录parentId传对应上一级的catalogId的值
+     * @return
+     */
+    @GET("catalogLive/listHigh")
+    Call<String> getMicroNotifyManagerList(
+            @Query("createUserId") int createUserId,
+            @Query("parentId") int parentId
+    );
     //todo 模板
 
     //用户

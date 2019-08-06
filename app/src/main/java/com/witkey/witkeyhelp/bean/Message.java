@@ -1,5 +1,7 @@
 package com.witkey.witkeyhelp.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author lingxu
  * @date 2019/7/11 14:34
@@ -7,18 +9,64 @@ package com.witkey.witkeyhelp.bean;
  */
 public class Message {
     private String title;
-    private String content;
     private String date;
     private String avatar;
+
+    @SerializedName("realName")
+    private String realName;
+    @SerializedName("content")
+    private String content;
+    @SerializedName("createTime")
+    private String createTime;
+    /*
+     "searchValue": null,
+     "createBy": null,
+     "createTime": "2019-06-05 16:27:57",
+     "updateBy": null,
+     "updateTime": null,
+     "remark": null,
+     "params": {},
+     "id": 112,
+     "title": null,
+     "content": "有新的服务发布,请注意查收4",
+     "createUserName": null,
+     "createUserId": null,
+     "remarks": null,
+     "delFlag": null,
+     "msgId": null,
+     "receiver": null,
+     "mesType": null,
+     "catalogId": null,
+     "realName": "测试用户",
+     "headUrl": null
+     */
 
     @Override
     public String toString() {
         return "Message{" +
                 "title='" + title + '\'' +
-                ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", realName='" + realName + '\'' +
+                ", content='" + content + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getAvatar() {

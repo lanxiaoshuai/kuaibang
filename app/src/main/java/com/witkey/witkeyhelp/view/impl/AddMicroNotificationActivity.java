@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.witkey.witkeyhelp.Contacts.Contacts;
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.bean.MicroNotificationBean;
+import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
 import com.witkey.witkeyhelp.presenter.IAddMicroNotificationPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.AddMicroNotificationPresenterImpl;
@@ -102,7 +102,7 @@ public class AddMicroNotificationActivity extends PermissionActivity implements 
                 String describe = et_describe.getText().toString().trim();
                 if (!name.isEmpty()) {
                     if (!describe.isEmpty()) {
-                        presenter.addMicroNotification(new MicroNotificationBean(name, describe, CalendarUtil.getTodayString()));
+                        presenter.addMicroNotification(new MicroNotifyManagerBean(name, describe, CalendarUtil.getTodayString()));
                     } else {
                         Toast("描述不可为空", 2);
                     }

@@ -9,11 +9,22 @@ import android.support.v7.widget.RecyclerView;
  */
 
 public class InitRecyUtil {
+
+
     public static LinearLayoutManager initListRecy(Context context, RecyclerView recyclerView, int recydividerHeightDP) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new
                 SpaceItemDecoration(0, UIUtils.dip2px(recydividerHeightDP)));
+        return layoutManager;
+    }
+
+    public static LinearLayoutManager initHorListRecy(Context context, RecyclerView recyclerView, int recydividerHeightDP) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
+        // TODO: 2019/8/6 横间隔问题
+        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.addItemDecoration(new
+//                SpaceItemDecoration(0, UIUtils.dip2px(recydividerHeightDP)));
         return layoutManager;
     }
 }

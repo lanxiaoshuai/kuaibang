@@ -8,7 +8,7 @@ public class MicroNotificationResponse {
     @SerializedName("total")
     private int total;
     @SerializedName("rows")
-    private ArrayList<MicroNotificationBean> rows;
+    private ArrayList<MicroNotifyManagerBean> rows;
 
     @Override
     public String toString() {
@@ -26,15 +26,15 @@ public class MicroNotificationResponse {
         this.total = total;
     }
 
-    public ArrayList<MicroNotificationBean> getRows() {
+    public ArrayList<MicroNotifyManagerBean> getRows() {
         return rows;
     }
 
-    public void setRows(ArrayList<MicroNotificationBean> rows) {
+    public void setRows(ArrayList<MicroNotifyManagerBean> rows) {
         this.rows = rows;
     }
 
-    public MicroNotificationResponse(int total, ArrayList<MicroNotificationBean> rows) {
+    public MicroNotificationResponse(int total, ArrayList<MicroNotifyManagerBean> rows) {
         this.total = total;
         this.rows = rows;
     }

@@ -1,6 +1,6 @@
 package com.witkey.witkeyhelp.presenter.impl;
 
-import com.witkey.witkeyhelp.bean.MicroNotificationBean;
+import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
 import com.witkey.witkeyhelp.model.IMicroNotificationModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.MicroNotificationModelImpl;
@@ -11,7 +11,7 @@ public class AddMicroNotificationPresenterImpl implements com.witkey.witkeyhelp.
     private IMicroNotificationModel model;
 
     @Override
-    public void addMicroNotification(MicroNotificationBean microNotificationBean) {
+    public void addMicroNotification(MicroNotifyManagerBean microNotificationBean) {
         model.addMicroNotification(microNotificationBean, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {

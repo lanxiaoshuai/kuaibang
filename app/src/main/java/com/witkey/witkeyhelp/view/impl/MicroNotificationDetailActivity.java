@@ -11,10 +11,11 @@ import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MessageRecyAdapter;
 import com.witkey.witkeyhelp.bean.Message;
 import com.witkey.witkeyhelp.bean.MessageResponse;
-import com.witkey.witkeyhelp.bean.MicroNotificationBean;
+import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
 import com.witkey.witkeyhelp.presenter.IMicroNotificationDetailPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MicroNotificationDetailPresenterImpl;
+import com.witkey.witkeyhelp.util.IntentUtil;
 import com.witkey.witkeyhelp.util.callback.ITextViewCallback;
 import com.witkey.witkeyhelp.view.IMicroNotificationDetailView;
 import com.witkey.witkeyhelp.view.impl.base.BaseListActivity;
@@ -43,13 +44,13 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
     private RadioGroup rg_choose;
     private RadioButton rb_check;
     private RadioButton rb_uncheck;
-    private MicroNotificationBean microNotificationBean;
+    private MicroNotifyManagerBean microNotificationBean;
     private boolean isCheck;
 
     @Override
     protected void parseArgumentsFromIntent(Intent argIntent) {
         super.parseArgumentsFromIntent(argIntent);
-        microNotificationBean = (MicroNotificationBean) argIntent.getSerializableExtra("EXTRA_MICRO_NOTIFICATION_BEAN");
+        microNotificationBean = (MicroNotifyManagerBean) argIntent.getSerializableExtra("EXTRA_MICRO_NOTIFICATION_BEAN");
     }
 
     @Override
@@ -87,7 +88,12 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
     }
 
     private void allGet() {
-        presenter.getMicroNotificationDetail(isCheck);
+        presenter.getMicroNotificationDetail(user.getUserId(),isCheck);
+    }
+
+    @Override
+    protected boolean isGetUser() {
+        return true;
     }
 
     @Override
@@ -117,7 +123,7 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
         tv_btn_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2019/8/5 跳转管理页面
+                IntentUtil.startActivity(mActivity,MicroNotifyManagerActivity.class);
             }
         });
         rg_choose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -168,9 +174,9 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
             }
         });
 //        iv_avatar
-        tv_title.setText(microNotificationBean.getTitle());
-        tv_content.setText(microNotificationBean.getContent());
-        tv_date.setText(microNotificationBean.getDate());
+        tv_title.setText(microNotificationBean.getName());
+        tv_content.setText(microNotificationBean.getGroupRemark());
+        tv_date.setText(microNotificationBean.getCreateDate());
         getData();
     }
 

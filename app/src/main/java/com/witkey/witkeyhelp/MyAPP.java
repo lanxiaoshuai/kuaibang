@@ -186,6 +186,9 @@ public class MyAPP extends Application {
             Error.showError("登陆超时", getInstance());
             return null;
         }
+//        if (user == null) {
+//            return new User(190, "15333003834", "测试用户");
+//        }
         return user;
     }
 

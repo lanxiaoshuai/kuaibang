@@ -9,16 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.bean.MicroNotificationBean;
+import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
 import com.witkey.witkeyhelp.view.impl.MicroNotificationDetailActivity;
 
 import java.util.List;
 
-public class MicroNotificationRecyAdapter extends BaseRecyAdapter<MicroNotificationBean> {
+public class MicroNotificationRecyAdapter extends BaseRecyAdapter<MicroNotifyManagerBean> {
 
     public MicroNotificationRecyAdapter(Context context, List data) {
         super(context, data);
     }
+
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
         View view = View.inflate(context, R.layout.item_lv_lost_found, null);
@@ -27,11 +28,11 @@ public class MicroNotificationRecyAdapter extends BaseRecyAdapter<MicroNotificat
 
     @Override
     protected void onBindBiewHolder(RecyclerView.ViewHolder holder, int position) {
-        final MicroNotificationBean microNotificationBean = data.get(position);
+        final MicroNotifyManagerBean microNotificationBean = data.get(position);
 //        ((ViewHolder) holder).iv_avatar.setText(lostFoundBean.get);
-        ((ViewHolder) holder).tv_title.setText(microNotificationBean.getTitle());
-        ((ViewHolder) holder).tv_content.setText(microNotificationBean.getContent());
-        ((ViewHolder) holder).tv_date.setText(microNotificationBean.getDate());
+        ((ViewHolder) holder).tv_title.setText(microNotificationBean.getName());
+        ((ViewHolder) holder).tv_content.setText(microNotificationBean.getGroupRemark());
+        ((ViewHolder) holder).tv_date.setText(microNotificationBean.getCreateDate());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +43,7 @@ public class MicroNotificationRecyAdapter extends BaseRecyAdapter<MicroNotificat
             }
         });
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView iv_avatar;
         private TextView tv_title;

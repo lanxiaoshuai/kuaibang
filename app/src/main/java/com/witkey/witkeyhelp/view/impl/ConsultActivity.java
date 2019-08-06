@@ -15,10 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.Contacts.Contacts;
-import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.dialog.ConsultHintDialog;
 import com.witkey.witkeyhelp.presenter.IConsultPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
@@ -104,7 +102,6 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
 
     private String businessType; //任务类型
 
-    private User user;
 
     @Override
     protected void initWidget() {
@@ -263,11 +260,10 @@ public class ConsultActivity extends PermissionActivity implements View.OnClickL
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        //准备user数据
-        user = MyAPP.getInstance().getUser();
+    protected boolean isGetUser() {
+        return true;
     }
+
 
     @Override
     public void onClick(View v) {

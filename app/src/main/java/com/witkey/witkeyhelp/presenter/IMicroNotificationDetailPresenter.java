@@ -4,6 +4,6 @@ import com.witkey.witkeyhelp.view.IMicroNotificationDetailView;
 
 public interface IMicroNotificationDetailPresenter extends IPresenter<IMicroNotificationDetailView>{
 
-    void getMicroNotificationDetail(boolean isCheck);
+    void getMicroNotificationDetail(int createUserId,boolean isCheck);
 
 }

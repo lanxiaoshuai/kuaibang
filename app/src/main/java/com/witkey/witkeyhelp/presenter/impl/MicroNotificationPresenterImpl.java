@@ -11,8 +11,8 @@ public class MicroNotificationPresenterImpl implements IMicroNotificationPresent
     private IMicroNotificationModel model;
 
     @Override
-    public void getMicroNotificationList() {
-        model.getMicroNotificationList(new IModel.AsyncCallback() {
+    public void getMicroNotificationList(int createUserId) {
+        model.getMicroNotificationList(createUserId,new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
                 view.showMicroNootificationList((MicroNotificationResponse) data);

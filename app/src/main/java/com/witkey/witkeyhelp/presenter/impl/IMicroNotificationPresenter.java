@@ -4,5 +4,5 @@ import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.view.IMicroNotificationView;
 
 public interface IMicroNotificationPresenter extends IPresenter<IMicroNotificationView> {
-    void getMicroNotificationList();
+    void getMicroNotificationList(int createUserId);
 }

@@ -154,7 +154,7 @@ public abstract class BaseFragment extends Fragment implements IView {
         }
 //        toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        if (toolbar != null) {
-//            toolbar.setTitle(title);
+//            toolbar.setName(title);
 //            ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        }
     }
