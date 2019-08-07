@@ -63,7 +63,13 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
     @Override
     public void getMicroNotifyManagerList(int createUserId, int parentId, final AsyncCallback callback) {
         Log.d(TAG, "MicroNotificationModelImpl-getMicroNotifyManagerList: createUserId=" + createUserId + ",parentId=" + parentId);
-        api.getMicroNotifyManagerList(createUserId, parentId).enqueue(new Callback(callback, "获取列表失败") {
+        Call<String> microNotifyManagerList;
+        if(parentId==0) {
+            microNotifyManagerList = api.getMicroNotifyManagerList(createUserId, parentId);
+       }else{
+         microNotifyManagerList = api.getMicroNotifyManagerListOther(createUserId, parentId);
+       }
+        microNotifyManagerList.enqueue(new Callback(callback, "获取列表失败") {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MicroNotificationModelImpl-getMicroNotifyManagerList: " + body);
@@ -73,5 +79,6 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
                 callback.onSuccess(microNotifyManagerBeans);
             }
         });
+
     }
 }

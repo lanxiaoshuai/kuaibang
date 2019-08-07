@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_child"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="12dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:id="@+id/tv_child_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:drawablePadding="8dp"
+            android:text="21354215"
+            android:textColor="#303030"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_child_title"
+            android:layout_alignLeft="@+id/tv_child_title"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingRight="8dp"
+            android:text="213/5"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_btn_manage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_remark"
+            android:layout_alignParentRight="true"
+            android:layout_margin="6dp"
+            android:background="@drawable/shape_primary_solid"
+            android:padding="6dp"
+            android:text="去管理"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</RelativeLayout>

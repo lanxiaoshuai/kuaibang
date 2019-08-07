@@ -3,6 +3,7 @@ package com.witkey.witkeyhelp.bean;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class MicroNotifyManagerBean implements Serializable {
     @SerializedName("catalogId")
@@ -19,6 +20,8 @@ public class MicroNotifyManagerBean implements Serializable {
     private String groupRemark;   //群简介
     @SerializedName("groupImage")
     private String groupImage;   //群头像
+    @SerializedName("catalogLive")
+    private ArrayList<MicroNotifyManagerBean> catalogLive;
 
     @Override
     public String toString() {
@@ -30,7 +33,16 @@ public class MicroNotifyManagerBean implements Serializable {
                 ", createDate='" + createDate + '\'' +
                 ", groupRemark='" + groupRemark + '\'' +
                 ", groupImage='" + groupImage + '\'' +
+                ", catalogLive=" + catalogLive +
                 '}';
+    }
+
+    public ArrayList<MicroNotifyManagerBean> getManagerBeanList() {
+        return catalogLive;
+    }
+
+    public void setManagerBeanList(ArrayList<MicroNotifyManagerBean> managerBeanList) {
+        this.catalogLive = managerBeanList;
     }
 
     public MicroNotifyManagerBean(int catalogId, String name, int parentId, String createUserId, String createDate, String groupRemark, String groupImage) {

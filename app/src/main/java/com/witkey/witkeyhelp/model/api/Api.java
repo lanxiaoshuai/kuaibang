@@ -297,6 +297,19 @@ public interface Api {
             @Query("createUserId") int createUserId,
             @Query("parentId") int parentId
     );
+
+    /**
+     * 查询第二、三级群目录
+     *
+     * @param createUserId 当前用户id
+     * @param parentId     第一级目录parentId传0，查询二、三级目录parentId传对应上一级的catalogId的值
+     * @return
+     */
+    @GET("catalogLive/listOther")
+    Call<String> getMicroNotifyManagerListOther(
+            @Query("createUserId") int createUserId,
+            @Query("parentId") int parentId
+    );
     //todo 模板
 
     //用户

@@ -42,4 +42,6 @@ dependencies {
     compile files('libs/jsonplugin-0.34.jar')
     //SpinKitView 缓存插件
     implementation 'com.github.ybq:Android-SpinKit:1.0.1'
+    //二级列表
+    implementation 'com.drawthink:expandable-recyclerview:0.0.3'
 }

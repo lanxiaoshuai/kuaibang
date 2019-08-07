@@ -3,10 +3,11 @@ package com.witkey.witkeyhelp.view.impl;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.adapter.BaseRecyAdapter;
+import com.witkey.witkeyhelp.adapter.MicroNotifyManagerBottomRecyAdapter;
 import com.witkey.witkeyhelp.adapter.MicroNotifyManagerTopRecyAdapter;
 import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
 import com.witkey.witkeyhelp.presenter.IMicroNotifyManagerPresenter;
@@ -20,6 +21,8 @@ import com.witkey.witkeyhelp.view.impl.base.BaseListActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import drawthink.expandablerecyclerview.bean.RecyclerViewData;
+
 /**
  * @author lingxu
  * @date 2019/7/26 18:45
@@ -29,11 +32,13 @@ public class MicroNotifyManagerActivity extends BaseListActivity implements IMic
     private RecyclerView hor_recyclerView;
     private LinearLayoutManager layoutManager;
     private List<MicroNotifyManagerBean> topMicroNotifyManagerList;
-    protected BaseRecyAdapter topAdapter;
+
+    private List<RecyclerViewData> datas;
     private List<MicroNotifyManagerBean> bottomMicroNotifyManagerList;
+    private MicroNotifyManagerBottomRecyAdapter bottomRecyAdapter;
 
     private IMicroNotifyManagerPresenter presenter;
-    private boolean isLoading;
+
 
     private boolean isTopData = true;
     private int currentCatalogId;
@@ -64,7 +69,7 @@ public class MicroNotifyManagerActivity extends BaseListActivity implements IMic
     protected void initViewExceptPresenter() {
         super.initViewExceptPresenter();
         if (layoutManager == null) {
-            layoutManager = InitRecyUtil.initHorListRecy(mActivity, hor_recyclerView,3);
+            layoutManager = InitRecyUtil.initHorListRecy(mActivity, hor_recyclerView, 3);
         }
         setIncludeTitle("微通知");
         setShowConfirm("发送", new ITextViewCallback() {
@@ -80,9 +85,9 @@ public class MicroNotifyManagerActivity extends BaseListActivity implements IMic
     @Override
     protected void onResume() {
         super.onResume();
-        if(user!=null){
+        if (user != null) {
             getData();
-        }else{
+        } else {
             getSuc();
         }
     }
@@ -121,36 +126,50 @@ public class MicroNotifyManagerActivity extends BaseListActivity implements IMic
             showUpAdapter();
         } else {
             this.bottomMicroNotifyManagerList = microNotifyManagerBeans;
+                if (datas != null) {
+                    datas = null;
+                }
+                datas = new ArrayList<>();
+                for (MicroNotifyManagerBean bean : bottomMicroNotifyManagerList) {
+
+                    datas.add(new RecyclerViewData<MicroNotifyManagerBean, MicroNotifyManagerBean>(bean, bean.getManagerBeanList(), false));
+                }
             showBottomAdapter();
+            Log.d(TAG, "showMicroNotifyManager: " + bottomMicroNotifyManagerList.toString());
         }
     }
 
     private void showBottomAdapter() {
-//        if (adapter == null) {
-//            adapter = new MicroNotifyManagerRecyAdapter(mActivity, bottomMicroNotifyManagerList);
-//            recyclerView.setAdapter(adapter);
-//        } else {
-//            ((MicroNotifyManagerRecyAdapter) adapter).setData(bottomMicroNotifyManagerList);
-//            adapter.notifyDataSetChanged();
-//        }
+        if (bottomRecyAdapter == null) {
+            bottomRecyAdapter = new MicroNotifyManagerBottomRecyAdapter(mActivity, datas);
+            recyclerView.setAdapter(bottomRecyAdapter);
+        } else {
+            bottomRecyAdapter.setAllDatas(datas);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void showUpAdapter() {
-        if (topAdapter == null) {
-            topAdapter = new MicroNotifyManagerTopRecyAdapter(mActivity, topMicroNotifyManagerList);
-            hor_recyclerView.setAdapter(topAdapter);
-            ((MicroNotifyManagerTopRecyAdapter) topAdapter).setCurrentCatalogid(topMicroNotifyManagerList.get(0).getCatalogId());
-            ((MicroNotifyManagerTopRecyAdapter) topAdapter).setCheckListener(new MicroNotifyManagerTopRecyAdapter.CheckListener() {
+        if (adapter == null) {
+            adapter = new MicroNotifyManagerTopRecyAdapter(mActivity, topMicroNotifyManagerList);
+            hor_recyclerView.setAdapter(adapter);
+            ((MicroNotifyManagerTopRecyAdapter) adapter).setCurrentCatalogid(topMicroNotifyManagerList.get(0).getCatalogId());
+            setCurrentcatalogId(topMicroNotifyManagerList.get(0).getCatalogId());
+            ((MicroNotifyManagerTopRecyAdapter) adapter).setCheckListener(new MicroNotifyManagerTopRecyAdapter.CheckListener() {
                 @Override
                 public void onCheck(int catalogId) {
-                    currentCatalogId = catalogId;
-                    getData();
+                    setCurrentcatalogId(catalogId);
                 }
             });
         } else {
-            ((MicroNotifyManagerTopRecyAdapter) topAdapter).setData(topMicroNotifyManagerList);
-            topAdapter.notifyDataSetChanged();
+            ((MicroNotifyManagerTopRecyAdapter) adapter).setData(topMicroNotifyManagerList);
+            adapter.notifyDataSetChanged();
         }
+    }
+
+    private void setCurrentcatalogId(int catalogId2) {
+        currentCatalogId = catalogId2;
+        getData();
     }
 
     @Override
