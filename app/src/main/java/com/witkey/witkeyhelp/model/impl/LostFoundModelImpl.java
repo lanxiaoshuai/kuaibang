@@ -1,7 +1,7 @@
 package com.witkey.witkeyhelp.model.impl;
 
 import com.witkey.witkeyhelp.bean.LostFoundBean;
-import com.witkey.witkeyhelp.bean.LostFoundResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class LostFoundModelImpl implements com.witkey.witkeyhelp.model.ILostFoun
         rows.add(new LostFoundBean("title", "content", "2019-07-09 15:54:15"));
         rows.add(new LostFoundBean("title", "content", "2019-07-09 15:54:15"));
         rows.add(new LostFoundBean("title", "content", "2019-07-09 15:54:15"));
-        LostFoundResponse lostFoundRequest = new LostFoundResponse(9, rows);
+        PagingResponse lostFoundRequest = new PagingResponse(9, rows);
         callback.onSuccess(lostFoundRequest);
     }
 

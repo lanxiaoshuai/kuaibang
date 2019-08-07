@@ -10,4 +10,6 @@ public interface IMicroNotificationModel extends IModel{
     void getMicroNotificationDetail(int createUserId,boolean isCheck, AsyncCallback callback);
 
     void getMicroNotifyManagerList(int createUserId, int parentId, AsyncCallback callback);
+
+    void getGroupMember(int catalog_id, int page, AsyncCallback callback);
 }

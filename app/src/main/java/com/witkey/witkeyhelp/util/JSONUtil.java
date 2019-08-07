@@ -2,12 +2,15 @@ package com.witkey.witkeyhelp.util;
 
 import android.net.Uri;
 
+import com.google.gson.Gson;
 import com.witkey.witkeyhelp.MyAPP;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -56,6 +59,10 @@ public class JSONUtil {
     }
 
 
+    public static <T> PagingResponse<T> fromJsonObjectList(Gson gson, String reader, Class<T> clazz) {
+        Type type = new ParameterizedTypeImpl(PagingResponse.class, new Class[]{clazz});
+        return gson.fromJson(reader, type);
+    }
     //update date: 2019/7/12 13:28
     //author:lingxu
     // 原分页

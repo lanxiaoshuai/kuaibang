@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MicroNotificationRecyAdapter;
-import com.witkey.witkeyhelp.bean.MicroNotificationResponse;
 import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.IMicroNotificationPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MicroNotificationPresenterImpl;
@@ -25,7 +25,7 @@ import java.util.List;
 public class MicroNotificationActivity extends BaseListActivity implements IMicroNotificationView {
 
     private List<MicroNotifyManagerBean> microNotificationList;
-    private MicroNotificationResponse microNotificationResponse;
+    private PagingResponse microNotificationResponse;
     private int page = 1;
 
     private IMicroNotificationPresenter presenter;
@@ -149,7 +149,7 @@ public class MicroNotificationActivity extends BaseListActivity implements IMicr
     }
 
     @Override
-    public void showMicroNootificationList(MicroNotificationResponse microNotificationResponse) {
+    public void showMicroNootificationList(PagingResponse microNotificationResponse) {
         getSuc();
         this.microNotificationResponse = microNotificationResponse;
         if (this.microNotificationResponse != null) {

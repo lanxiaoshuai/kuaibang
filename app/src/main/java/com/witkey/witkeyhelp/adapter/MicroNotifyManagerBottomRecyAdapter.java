@@ -1,6 +1,7 @@
 package com.witkey.witkeyhelp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.viewHolder.CatalogParentViewHolder;
 import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
+import com.witkey.witkeyhelp.view.impl.MicroNotifyGroupDetailActivity;
 
 import java.util.List;
 
@@ -54,13 +56,15 @@ public class MicroNotifyManagerBottomRecyAdapter extends BaseRecyclerViewAdapter
     }
 
     @Override
-    public void onBindChildpHolder(CatalogParentViewHolder holder, int groupPos, int childPos, int position, MicroNotifyManagerBean childData) {
+    public void onBindChildpHolder(CatalogParentViewHolder holder, int groupPos, int childPos, int position, final MicroNotifyManagerBean childData) {
         holder.tv_child_title.setText(childData.getName());
         holder.tv_remark.setText(childData.getGroupRemark());
         holder.tv_btn_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 2019/8/7 群详情界面
+                Intent intent=new Intent(ctx, MicroNotifyGroupDetailActivity.class);
+                intent.putExtra("EXTRA_CATALOG_ID",childData.getCatalogId());
+                ctx.startActivity(intent);
             }
         });
     }

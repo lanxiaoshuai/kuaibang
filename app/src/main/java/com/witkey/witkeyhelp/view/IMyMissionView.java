@@ -1,7 +1,7 @@
 package com.witkey.witkeyhelp.view;
 
-import com.witkey.witkeyhelp.bean.MissionResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 
 public interface IMyMissionView extends IView{
-    void showMissionList(MissionResponse missionResponse);
+    void showMissionList(PagingResponse missionResponse);
 }

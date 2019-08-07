@@ -5,8 +5,9 @@ import android.util.Log;
 import com.google.gson.reflect.TypeToken;
 import com.witkey.witkeyhelp.bean.Message;
 import com.witkey.witkeyhelp.bean.MessageResponse;
-import com.witkey.witkeyhelp.bean.MicroNotificationResponse;
+import com.witkey.witkeyhelp.bean.MicroNotifyGroupMember;
 import com.witkey.witkeyhelp.bean.MicroNotifyManagerBean;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.model.util.Callback;
 import com.witkey.witkeyhelp.util.JSONUtil;
 
@@ -23,7 +24,8 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MicroNotificationModelImpl-getMicroNotificationList:" + body);
-                MicroNotificationResponse microNotificationResponse=gson.fromJson(JSONUtil.getValueToString(body, "returnObject"),MicroNotificationResponse.class);
+                PagingResponse microNotificationResponse = JSONUtil.fromJsonObjectList(gson, JSONUtil.getValueToString(body, "returnObject"), MicroNotifyManagerBean.class);
+                ;
                 callback.onSuccess(microNotificationResponse);
             }
         });
@@ -64,11 +66,11 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
     public void getMicroNotifyManagerList(int createUserId, int parentId, final AsyncCallback callback) {
         Log.d(TAG, "MicroNotificationModelImpl-getMicroNotifyManagerList: createUserId=" + createUserId + ",parentId=" + parentId);
         Call<String> microNotifyManagerList;
-        if(parentId==0) {
+        if (parentId == 0) {
             microNotifyManagerList = api.getMicroNotifyManagerList(createUserId, parentId);
-       }else{
-         microNotifyManagerList = api.getMicroNotifyManagerListOther(createUserId, parentId);
-       }
+        } else {
+            microNotifyManagerList = api.getMicroNotifyManagerListOther(createUserId, parentId);
+        }
         microNotifyManagerList.enqueue(new Callback(callback, "获取列表失败") {
             @Override
             public void getSuc(String body) {
@@ -80,5 +82,18 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
             }
         });
 
+    }
+
+    @Override
+    public void getGroupMember(int catalog_id, final int page, final AsyncCallback callback) {
+        Log.d(TAG, "MicroNotificationModelImpl-getGroupMember: catalog_id="+catalog_id+",page="+page);
+        api.getGroupMember(catalog_id, 10, page).enqueue(new Callback(callback,"获取群成员信息失败") {
+            @Override
+            public void getSuc(String body) {
+                Log.d(TAG, "MicroNotificationModelImpl-getGroupMember: "+body);
+                PagingResponse pagingResponse = JSONUtil.fromJsonObjectList(gson,JSONUtil.getValueToString(body, "returnObject"), MicroNotifyGroupMember.class);
+                callback.onSuccess(pagingResponse);
+            }
+        });
     }
 }

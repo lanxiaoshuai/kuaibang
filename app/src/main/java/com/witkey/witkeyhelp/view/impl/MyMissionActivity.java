@@ -8,7 +8,7 @@ import android.widget.RadioGroup;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.presenter.IMyMissionPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.MyMissionPresenterImpl;
@@ -24,7 +24,7 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     private RadioButton rb3;
     private RadioButton rb4;
     private List<MissionBean> missionList;
-    private MissionResponse missionResponse;
+    private PagingResponse missionResponse;
     private int page = 1;
 
     private IMyMissionPresenter presenter;
@@ -147,7 +147,7 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
     }
 
     @Override
-    public void showMissionList(MissionResponse missionResponse) {
+    public void showMissionList(PagingResponse missionResponse) {
         getSuc();
         this.missionResponse = missionResponse;
         if (missionResponse != null) {

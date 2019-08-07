@@ -310,6 +310,21 @@ public interface Api {
             @Query("createUserId") int createUserId,
             @Query("parentId") int parentId
     );
+
+    /**
+     * 群成员关联列表
+     *
+     * @param catalogId 当前选择群id
+     * @param pageNum   第几页
+     * @param pageSize  每页多少条
+     * @return
+     */
+    @GET("catalogLive/listOther")
+    Call<String> getGroupMember(
+            @Query("catalogId") int catalogId,
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize
+    );
     //todo 模板
 
     //用户

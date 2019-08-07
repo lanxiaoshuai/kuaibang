@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MissionRecyAdapter;
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.dialog.MissionFilterDialog;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.IReawardHallFragPresenter;
@@ -48,7 +48,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     private MissionBean chooseMissionBean;
 
     //获取的任务列表数据
-    private MissionResponse missionResponse;
+    private PagingResponse missionResponse;
     private List<MissionBean> missionList;
 
     //高级筛选dialog
@@ -230,7 +230,7 @@ public class RewardHallFragment extends BaseListFragment implements IReawardHall
     }
 
     @Override
-    public void showMissionList(MissionResponse missionResponse) {
+    public void showMissionList(PagingResponse missionResponse) {
         getSuc();
         this.missionResponse = missionResponse;
         if (missionResponse != null) {

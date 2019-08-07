@@ -4,18 +4,18 @@ import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.model.IMicroNotificationModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.MicroNotificationModelImpl;
-import com.witkey.witkeyhelp.view.IMicroNotificationView;
+import com.witkey.witkeyhelp.view.IMicroNotifyGroupDetailView;
 
-public class MicroNotificationPresenterImpl implements IMicroNotificationPresenter {
-    private IMicroNotificationView view;
+public class MicroNotifyGroupDetailPresenterImpl implements IMicroNotifyGroupDetailPresenter {
     private IMicroNotificationModel model;
+    private IMicroNotifyGroupDetailView view;
 
     @Override
-    public void getMicroNotificationList(int createUserId) {
-        model.getMicroNotificationList(createUserId,new IModel.AsyncCallback() {
+    public void getGroupMember(int catalog_id, int page) {
+        model.getGroupMember(catalog_id, page, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
-                view.showMicroNootificationList((PagingResponse) data);
+                view.showGroupMember((PagingResponse) data);
             }
 
             @Override
@@ -26,7 +26,7 @@ public class MicroNotificationPresenterImpl implements IMicroNotificationPresent
     }
 
     @Override
-    public void init(IMicroNotificationView view) {
+    public void init(IMicroNotifyGroupDetailView view) {
         this.view = view;
         this.model = new MicroNotificationModelImpl();
     }

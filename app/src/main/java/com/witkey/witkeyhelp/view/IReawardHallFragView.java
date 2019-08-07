@@ -1,6 +1,6 @@
 package com.witkey.witkeyhelp.view;
 
-import com.witkey.witkeyhelp.bean.MissionResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 
 /**
  * @author lingxu
@@ -11,5 +11,5 @@ public interface IReawardHallFragView extends IView{
     /**
      * 获取任务列表
      */
-    void showMissionList(MissionResponse missionResponse);
+    void showMissionList(PagingResponse missionResponse);
 }

@@ -2,12 +2,11 @@ package com.witkey.witkeyhelp.view.impl;
 
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.LostFoundRecyAdapter;
 import com.witkey.witkeyhelp.bean.LostFoundBean;
-import com.witkey.witkeyhelp.bean.LostFoundResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.presenter.ILostFoundPresenter;
 import com.witkey.witkeyhelp.presenter.IPresenter;
 import com.witkey.witkeyhelp.presenter.impl.LostFoundPresenterImpl;
@@ -24,9 +23,8 @@ import java.util.List;
  * @description 失误招领list
  */
 public class LostFoundActivity extends BaseListActivity implements ILostFoundView {
-
     private List<LostFoundBean> lostFoundList;
-    private LostFoundResponse lostFoundRequest;
+    private PagingResponse<LostFoundBean> lostFoundRequest;
     private int page = 1;
 
     private ILostFoundPresenter presenter;
@@ -129,12 +127,11 @@ public class LostFoundActivity extends BaseListActivity implements ILostFoundVie
                 IntentUtil.startActivity(mActivity, AddLostFoundActivity.class);
             }
         });
-        findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
         getData();
     }
 
     @Override
-    public void showLostFoundList(LostFoundResponse lostFoundRequest) {
+    public void showLostFoundList(PagingResponse lostFoundRequest) {
         getSuc();
         this.lostFoundRequest = lostFoundRequest;
         if (this.lostFoundRequest != null) {

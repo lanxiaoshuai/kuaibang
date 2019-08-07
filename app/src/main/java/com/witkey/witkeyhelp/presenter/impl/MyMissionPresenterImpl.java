@@ -1,7 +1,7 @@
 package com.witkey.witkeyhelp.presenter.impl;
 
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.model.IMissionModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.MissionModelImpl;
@@ -16,7 +16,7 @@ public class MyMissionPresenterImpl implements com.witkey.witkeyhelp.presenter.I
         model.getReleaseMissionList(missionBean, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
-                view.showMissionList((MissionResponse) data);
+                view.showMissionList((PagingResponse) data);
             }
 
             @Override
@@ -31,7 +31,7 @@ public class MyMissionPresenterImpl implements com.witkey.witkeyhelp.presenter.I
         model.getReceiveMissionList(missionBean, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
-                view.showMissionList((MissionResponse) data);
+                view.showMissionList((PagingResponse) data);
             }
 
             @Override

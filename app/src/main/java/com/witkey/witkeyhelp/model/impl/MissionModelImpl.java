@@ -3,7 +3,7 @@ package com.witkey.witkeyhelp.model.impl;
 import android.util.Log;
 
 import com.witkey.witkeyhelp.bean.MissionBean;
-import com.witkey.witkeyhelp.bean.MissionResponse;
+import com.witkey.witkeyhelp.bean.PagingResponse;
 import com.witkey.witkeyhelp.model.IMissionModel;
 import com.witkey.witkeyhelp.model.util.Callback;
 import com.witkey.witkeyhelp.util.JSONUtil;
@@ -26,7 +26,7 @@ public class MissionModelImpl implements IMissionModel {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MissionModelImpl-getMissionList: " + body);
-                MissionResponse missionResponse = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionResponse.class);
+                PagingResponse missionResponse = JSONUtil.fromJsonObjectList(gson,JSONUtil.getValueToString(body, "returnObject"),MissionBean.class);
                 Log.d(TAG, "MissionModelImpl-getMissionList: " + missionResponse);
                 callback.onSuccess(missionResponse);
             }
@@ -99,7 +99,7 @@ public class MissionModelImpl implements IMissionModel {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MissionModelImpl-getReleaseMissionList: " + body);
-                MissionResponse missionResponse = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionResponse.class);
+                PagingResponse missionResponse = JSONUtil.fromJsonObjectList(gson,JSONUtil.getValueToString(body, "returnObject"),MissionBean.class);
                 Log.d(TAG, "MissionModelImpl-getReleaseMissionList: " + missionResponse);
                 callback.onSuccess(missionResponse);
             }
@@ -130,7 +130,7 @@ public class MissionModelImpl implements IMissionModel {
             @Override
             public void getSuc(String body) {
                 Log.d(TAG, "MissionModelImpl-getReceiveMissionList: " + body);
-                MissionResponse missionResponse = gson.fromJson(JSONUtil.getValueToString(body, "returnObject"), MissionResponse.class);
+                PagingResponse missionResponse = JSONUtil.fromJsonObjectList(gson,JSONUtil.getValueToString(body, "returnObject"),MissionBean.class);
                 Log.d(TAG, "MissionModelImpl-getReceiveMissionList: " + missionResponse);
                 callback.onSuccess(missionResponse);
             }

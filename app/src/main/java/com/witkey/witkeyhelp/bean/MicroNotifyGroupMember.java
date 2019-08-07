@@ -17,10 +17,32 @@ public class MicroNotifyGroupMember {
     private String type;
     @SerializedName("realName")
     private String realName;
+    @SerializedName("remark")
+    private String remark;
     @SerializedName("headUrl")
     private String headUrl;
 
     public MicroNotifyGroupMember() {
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "MicroNotifyGroupMember{" +
+                "catalogId=" + catalogId +
+                ", userId=" + userId +
+                ", type='" + type + '\'' +
+                ", realName='" + realName + '\'' +
+                ", remark='" + remark + '\'' +
+                ", headUrl='" + headUrl + '\'' +
+                '}';
     }
 
     public int getCatalogId() {
@@ -61,17 +83,6 @@ public class MicroNotifyGroupMember {
 
     public void setHeadUrl(String headUrl) {
         this.headUrl = headUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "MicroNotifyGroupMember{" +
-                "catalogId=" + catalogId +
-                ", userId=" + userId +
-                ", type='" + type + '\'' +
-                ", realName='" + realName + '\'' +
-                ", headUrl='" + headUrl + '\'' +
-                '}';
     }
 
     public MicroNotifyGroupMember(int catalogId, int userId, String type, String realName, String headUrl) {
