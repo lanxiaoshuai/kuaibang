@@ -127,9 +127,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (isGetUser()) {
-            user = MyAPP.getInstance().getUser();
-        }
         //Activity操作
         onCreateActivity();
         //如果为绑定,即绑定
@@ -146,6 +143,13 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         return false;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isGetUser()) {
+            user = MyAPP.getInstance().getUser();
+        }
+    }
 
     /**
      * 设置字体不随着手机系统设置而变化

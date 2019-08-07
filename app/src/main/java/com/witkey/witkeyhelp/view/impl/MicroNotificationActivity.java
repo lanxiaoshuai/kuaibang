@@ -2,7 +2,6 @@ package com.witkey.witkeyhelp.view.impl;
 
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.MicroNotificationRecyAdapter;
@@ -76,6 +75,7 @@ public class MicroNotificationActivity extends BaseListActivity implements IMicr
         return true;
     }
 
+
     private void allGet() {
         presenter.getMicroNotificationList(user.getUserId());
     }
@@ -137,9 +137,14 @@ public class MicroNotificationActivity extends BaseListActivity implements IMicr
     @Override
     protected void onResume() {
         super.onResume();
-        // TODO: 2019/8/6  问题 ,不加载
+        /**
+         * oncreate 只获取一次,onresume放拿user操作,跟获取数据操作
+         */
         if (user != null) {
             getData();
+        }else{
+            //停止加载
+            getSuc();
         }
     }
 

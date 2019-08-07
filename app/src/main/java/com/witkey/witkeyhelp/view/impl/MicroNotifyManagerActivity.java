@@ -64,7 +64,7 @@ public class MicroNotifyManagerActivity extends BaseListActivity implements IMic
     protected void initViewExceptPresenter() {
         super.initViewExceptPresenter();
         if (layoutManager == null) {
-            layoutManager = InitRecyUtil.initHorListRecy(mActivity, hor_recyclerView,10);
+            layoutManager = InitRecyUtil.initHorListRecy(mActivity, hor_recyclerView,3);
         }
         setIncludeTitle("微通知");
         setShowConfirm("发送", new ITextViewCallback() {
@@ -75,7 +75,16 @@ public class MicroNotifyManagerActivity extends BaseListActivity implements IMic
             }
         });
         findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
-        getData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(user!=null){
+            getData();
+        }else{
+            getSuc();
+        }
     }
 
     private void getData() {

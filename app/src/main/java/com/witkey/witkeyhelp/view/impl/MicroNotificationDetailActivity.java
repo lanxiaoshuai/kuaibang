@@ -88,7 +88,7 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
     }
 
     private void allGet() {
-        presenter.getMicroNotificationDetail(user.getUserId(),isCheck);
+        presenter.getMicroNotificationDetail(user.getUserId(), isCheck);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
         tv_btn_manage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentUtil.startActivity(mActivity,MicroNotifyManagerActivity.class);
+                IntentUtil.startActivity(mActivity, MicroNotifyManagerActivity.class);
             }
         });
         rg_choose.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -177,7 +177,17 @@ public class MicroNotificationDetailActivity extends BaseListActivity implements
         tv_title.setText(microNotificationBean.getName());
         tv_content.setText(microNotificationBean.getGroupRemark());
         tv_date.setText(microNotificationBean.getCreateDate());
-        getData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (user != null) {
+            getData();
+        } else {
+            //停止加载
+            getSuc();
+        }
     }
 
     @Override

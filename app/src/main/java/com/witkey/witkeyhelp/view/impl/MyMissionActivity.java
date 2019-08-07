@@ -189,8 +189,18 @@ public class MyMissionActivity extends BaseListActivity implements IMyMissionVie
             findViewById(R.id.view).setVisibility(View.GONE);
         }
         findViewById(R.id.tvBack).setVisibility(View.VISIBLE);
+    }
 
-        missionBean = new MissionBean(user.getUserId(), page, 1);
-        getData();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (user != null) {
+            missionBean = new MissionBean(user.getUserId(), page, 1);
+            getData();
+        } else {
+            //停止加载
+            getSuc();
+        }
     }
 }
+

@@ -20,11 +20,10 @@ public class InitRecyUtil {
     }
 
     public static LinearLayoutManager initHorListRecy(Context context, RecyclerView recyclerView, int recydividerHeightDP) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-        // TODO: 2019/8/6 横间隔问题
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(new
-//                SpaceItemDecoration(0, UIUtils.dip2px(recydividerHeightDP)));
+        recyclerView.addItemDecoration(new
+                SpaceItemDecoration(UIUtils.dip2px(recydividerHeightDP), 0));
         return layoutManager;
     }
 }

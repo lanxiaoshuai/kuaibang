@@ -105,7 +105,6 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             case R.id.tv_report:
                 break;
             case R.id.tv_commit:
-
                 presenter.receipt(orderId, user.getUserId());
                 break;
         }
