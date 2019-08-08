@@ -57,7 +57,7 @@
                     android:id="@+id/tv_mission_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="任务名称" />
+                    android:text="群主" />
 
                 <TextView
                     android:id="@+id/tv_mission_content"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/ll"
                     android:layout_marginTop="10dp"
-                    android:text="测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容" />
+                    android:text="我是群主" />
 
             </LinearLayout>
         </RelativeLayout>

@@ -92,6 +92,7 @@ public class MicroNotificationModelImpl implements com.witkey.witkeyhelp.model.I
             public void getSuc(String body) {
                 Log.d(TAG, "MicroNotificationModelImpl-getGroupMember: "+body);
                 PagingResponse pagingResponse = JSONUtil.fromJsonObjectList(gson,JSONUtil.getValueToString(body, "returnObject"), MicroNotifyGroupMember.class);
+                Log.d(TAG, "getSuc: "+pagingResponse);
                 callback.onSuccess(pagingResponse);
             }
         });

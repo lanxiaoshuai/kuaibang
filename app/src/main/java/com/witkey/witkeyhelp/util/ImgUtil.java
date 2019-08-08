@@ -58,13 +58,15 @@ import static com.witkey.witkeyhelp.Contacts.Contacts.imgPath;
 public class ImgUtil {
 
     public static void loadImg(Context context, String avatar, ImageView ivImg) {
-        try {
-            Glide.with(context).load(avatar)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)//None明显会慢
-                    .skipMemoryCache(true)
-                    .into(ivImg);
-        } catch (Exception e) {
-            ExceptionUtil.CatchException(e);
+        if (avatar != null) {
+            try {
+                Glide.with(context).load(avatar)
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)//None明显会慢
+                        .skipMemoryCache(true)
+                        .into(ivImg);
+            } catch (Exception e) {
+                ExceptionUtil.CatchException(e);
+            }
         }
     }
 

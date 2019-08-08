@@ -319,7 +319,7 @@ public interface Api {
      * @param pageSize  每页多少条
      * @return
      */
-    @GET("catalogLive/listOther")
+    @GET("catalogUser/list")
     Call<String> getGroupMember(
             @Query("catalogId") int catalogId,
             @Query("pageNum") int pageNum,

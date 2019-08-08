@@ -149,9 +149,11 @@ public class MicroNotifyGroupDetailActivity extends BaseListActivity implements 
             } else {
                 groupMemberList = groupMemberListResponse.getRows();
             }
-            showBoss();
-            showManagerAdapter();
-            showAdapter();
+            if (groupMemberListResponse.getTotal() != 0) {
+                showBoss();
+                showManagerAdapter();
+                showAdapter();
+            }
         }
     }
 
