@@ -1,21 +1,47 @@
 package com.witkey.witkeyhelp.view.impl.fragment;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
+import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.presenter.IPresenter;
+import com.witkey.witkeyhelp.util.DialogCreator;
+import com.witkey.witkeyhelp.util.FileHelper;
+import com.witkey.witkeyhelp.util.SharePreferenceManager;
+import com.witkey.witkeyhelp.util.SpUtils;
+import com.witkey.witkeyhelp.util.ToastUtils;
 import com.witkey.witkeyhelp.view.IView;
+import com.witkey.witkeyhelp.view.impl.LoginActivity;
 
+import com.witkey.witkeyhelp.view.impl.base.BaseMessageToActivity;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.event.LoginStateChangeEvent;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
 
 
 public abstract class BaseFragment extends Fragment implements IView {
@@ -66,6 +92,7 @@ public abstract class BaseFragment extends Fragment implements IView {
     public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = setRootView();
         //避免重复加载
+
         if (rootView == null) {
             rootView = inflater.inflate(getContentView(), container, false);
         }
@@ -82,11 +109,74 @@ public abstract class BaseFragment extends Fragment implements IView {
         initEvent();
         addPresenters();
         onInitPresenters();
-
         initViewExceptPresenter();
         return rootView;
     }
 
+    protected float mDensity;
+    protected int mDensityDpi;
+    protected int mWidth;
+    protected int mHeight;
+    protected float mRatio;
+    protected int mAvatarSize;
+    private Context mContext;
+    private boolean mVisiable = false;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+
+//        JMessageClient.registerEventReceiver(this);
+        DisplayMetrics dm = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        mDensity = dm.density;
+        mDensityDpi = dm.densityDpi;
+        mWidth = dm.widthPixels;
+        mHeight = dm.heightPixels;
+        mRatio = Math.min((float) mWidth / 720, (float) mHeight / 1280);
+        mAvatarSize = (int) (50 * mDensity);
+    }
+    private boolean mFirstInit = true;
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume----" + this.toString());
+        super.onResume();
+        //若首次初始化,默认可见并开启友盟统计
+        if (mFirstInit) {
+            mVisiable = true;
+            mFirstInit = false;
+            MobclickAgent.onPageStart(getClass().getSimpleName());
+            return;
+        }
+
+        //若当前界面可见,调用友盟开启跳转统计
+        if (mVisiable) {
+            MobclickAgent.onPageStart(getClass().getSimpleName());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "onPause----" + this.toString());
+        super.onPause();
+        //若当前界面可见,调用友盟结束跳转统计
+        if (mVisiable) {
+            MobclickAgent.onPageEnd("MainScreen");
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            mVisiable = true;
+            MobclickAgent.onPageStart(getClass().getSimpleName());
+        } else {
+            mVisiable = false;
+            MobclickAgent.onPageEnd(getClass().getSimpleName());
+        }
+    }
     //上传数据
 //    private RequestBean bean;
 //
@@ -159,7 +249,102 @@ public abstract class BaseFragment extends Fragment implements IView {
 //        }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private Dialog dialog;
+
+//    @Override
+//    public void onDestroy() {
+//
+//        if (dialog != null) {
+//            dialog.dismiss();
+//        }
+//
+//        super.onDestroy();
+//    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        JMessageClient.unRegisterEventReceiver(this);
+        EventBus.getDefault().unregister(this);
+    }
+
+
+//    public void onEventMainThread(LoginStateChangeEvent event) {
+//        Log.e("tag", "136236");
+//        final LoginStateChangeEvent.Reason reason = event.getReason();
+//        Log.e("tag", reason.toString());
+//        UserInfo myInfo = event.getMyInfo();
+//        if (myInfo != null) {
+//            String path;
+//            File avatar = myInfo.getAvatarFile();
+//            if (avatar != null && avatar.exists()) {
+//                path = avatar.getAbsolutePath();
+//            } else {
+//                path = FileHelper.getUserAvatarPath(myInfo.getUserName());
+//            }
+//            SharePreferenceManager.setCachedUsername(myInfo.getUserName());
+//            SharePreferenceManager.setCachedAvatarPath(path);
+//            JMessageClient.logout();
+//        }
+//        switch (reason) {
+//            case user_logout:
+//                View.OnClickListener listener = new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        switch (v.getId()) {
+//                            case R.id.jmui_cancel_btn:
+//                                dialog.dismiss();
+//                                JMessageClient.logout();
+//                                MyAPP.getInstance().exit();
+//                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                                intent.putExtra("type", "0");
+//                                startActivity(intent);
+//                                SpUtils.putObject(getActivity(), "LOGIN", null);
+//                                getActivity().finish();
+//                                break;
+//
+//
+//                            case R.id.jmui_commit_btn:
+//                                User user = SpUtils.getObject(getActivity(), "LOGIN");
+//                                JMessageClient.login(user.getUserName(), "123456", new BasicCallback() {
+//                                    @Override
+//                                    public void gotResult(int responseCode, String responseMessage) {
+//                                        if (responseCode == 0) {
+//                                            ToastUtils.showTestShort(getContext(), "登录成功");
+//                                            dialog.dismiss();
+//                                        } else {
+//                                            ToastUtils.showTestShort(getContext(), "登录失败，请重新登录");
+//                                            JMessageClient.logout();
+//                                            MyAPP.getInstance().exit();
+//                                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                                            intent.putExtra("type", "0");
+//                                            startActivity(intent);
+//                                            SpUtils.putObject(getActivity(), "LOGIN", null);
+//
+//                                            getActivity().finish();
+//                                        }
+//                                    }
+//                                });
+//                                dialog.dismiss();
+//                                break;
+//                        }
+//                    }
+//                };
+//                dialog = DialogCreator.createLogoutStatusDialog(getActivity(), "您的账号在其他设备上登陆", listener);
+//                dialog.getWindow().setLayout((int) (0.8 * mWidth), WindowManager.LayoutParams.WRAP_CONTENT);
+//                dialog.setCanceledOnTouchOutside(false);
+//                dialog.setCancelable(false);
+//                dialog.show();
+////                break;
+//            case user_password_change:
+//                Intent intent = new Intent(mContext, LoginActivity.class);
+//                startActivity(intent);
+//                break;
+//        }
+//    }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * ReplaceView: 覆盖上errorView

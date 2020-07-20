@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.witkey.witkeyhelp">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.witkey.witkeyhelp"
+
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 在sdcard中创建/删除文件的权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" /> <!-- 网络访问 -->
+
+
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+   tools:ignore="ProtectedPermissions">
+
+    </uses-permission> <!-- 网络访问 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 改变网络状态改变网络状态如是否能联网 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -22,39 +28,503 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.Package.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions"></uses-permission>
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!-- 推送定位 -->
+    <permission
+        android:name="com.witkey.witkeyhelp.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+    <!-- Required -->
+    <uses-permission android:name="com.witkey.witkeyhelp.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在 6.0 系统上的层叠窗口权限 -->
+
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
 
     <application
+
+
         android:name=".MyAPP"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:appComponentFactory="cs"
+        android:icon="@mipmap/applicationicon"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/applicationicon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.impl.MicroNotifyGroupDetailActivity"></activity>
-        <activity android:name=".view.impl.MicroNotifyManagerActivity" />
-        <activity android:name=".view.impl.MicroNotificationDetailActivity" />
-        <activity android:name=".view.impl.MicroNotificationActivity" />
-        <activity android:name=".view.impl.AddLostFoundActivity" />
-        <activity android:name=".view.impl.MyMissionActivity" />
-        <activity android:name=".view.impl.LostFoundActivity" />
-        <activity android:name=".view.impl.MissionDetailActivity" />
-        <activity android:name=".view.impl.AddMicroNotificationActivity" />
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".view.impl.MicroNotifyGroupDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.MicroNotifyManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.MicroNotificationDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.MicroNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.AddLostFoundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ReleaseMissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ReceiveMissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.LostFoundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityShare"
+
+            android:screenOrientation="portrait"
+            android:theme="@style/DefaultCityPickerTheme" />
+        <activity
+            android:name=".view.impl.MissionDetailActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity
+            android:name=".view.impl.AddMicroNotificationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.impl.CollectionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.impl.ConsultActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".view.impl.LoginActivity" />
-        <activity android:name=".view.impl.LostFoundDetailActivity" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".view.impl.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.LostFoundDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.impl.MainActivity"
-            android:label="@string/app_name">
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="pagc4425" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.impl.ActivityBootPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.PhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.TaskAccomplished"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.FriendInvitationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityCreditScore"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityResultsWithdrawals"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityReleaseDiamonds"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".view.impl.ActivityDiamondsDetails"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.impl.ActivityDiamond"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivitySelfAdvertisement"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.NoviceHelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.NoviceHelpDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.NoviceImageDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".widget.imagepicker.ImageGridActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImagePickerTheme" />
+        <activity
+            android:name=".view.impl.ImagePreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImagePickerThemeFullScreen" />
+        <activity
+            android:name=".view.impl.DragActivity"
+
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.CreateCircleActivity"
+
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.impl.CircleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityListCicle"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainSPTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".services.XService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":pushcore">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".services.MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.witkey.witkeyhelp" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".services.PushService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.witkey.witkeyhelp" />
+            </intent-filter>
+        </receiver>
+
+        <!--<receiver-->
+        <!--android:name="cn.jpush.im.android.helpers.IMReceiver"-->
+        <!--android:enabled="true"-->
+        <!--android:exported="false">-->
+        <!--<intent-filter android:priority="1000">-->
+        <!--<action android:name="cn.jpush.im.android.action.IM_RESPONSE" />-->
+        <!--<action android:name="cn.jpush.im.android.action.NOTIFICATION_CLICK_PROXY" />-->
+
+        <!--<category android:name="${applicationId}" />-->
+        <!--</intent-filter>-->
+        <!--</receiver>-->
+        <provider
+            android:name="cn.jpush.android.service.DataProvider"
+            android:authorities="com.witkey.witkeyhelp.DataProvider"
+            android:exported="false" />
+        <!--<provider-->
+        <!--android:name="android.support.v4.content.FileProvider"-->
+        <!--android:authorities="com.witkey.witkeyhelp.fileprovider"-->
+        <!--android:exported="false"-->
+        <!--android:grantUriPermissions="true">-->
+        <!---->
+        <!--</provider>-->
+        <!--微信支付-->
+        <service android:name=".services.DownloadServise" />
+        <!--<service-->
+        <!--android:name=".services.ReceiveMsgService"-->
+        <!--android:label="NetworkConnection">-->
+        <!--<intent-filter>-->
+        <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />-->
+        <!--<action android:name="android.intent.action.USER_PRESENT" />-->
+        <!--</intent-filter>-->
+        <!--</service>-->
+
+        <meta-data
+            android:name="com.shareinstall.APP_KEY"
+            android:value="FEBK6BEEFFAKBR" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="2d9125e93bcb2c7fcadcdc5be314e4fd">
+
+        </meta-data>
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5e4e300f895ccad1dd000146" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+
+        <service android:name="com.amap.api.location.APSService"></service>
+
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+
+            android:theme="@style/wx_theme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx77ff4c8528dac183" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            　　
+            <intent-filter>
+                　　　　
+                <action android:name="android.intent.action.VIEW" />
+                　　　　
+                <category android:name="android.intent.category.DEFAULT" />
+                　　　　
+                <category android:name="android.intent.category.BROWSABLE" />
+                　　　　
+                <data android:scheme="101844785" />
+                　　
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
+        <activity
+            android:name=".view.impl.ChatActivity"
+
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".view.impl.FullImageActivity"
+
+            android:screenOrientation="portrait"
+            android:theme="@style/Transparent" />
+        <!--android:configChanges="orientation|keyboardHidden|navigation|screenSize"-->
+        <!--android:windowSoftInputMode="stateHidden|adjustPan"-->
+        <activity
+            android:name=".view.impl.ProblemFeedbackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <activity
+            android:name=".widget.pickerimage.PickImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".widget.pickerimage.PickerAlbumPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".widget.pickerimage.PickerAlbumActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".widget.takevideo.CameraActivity"
+
+            />
+        <activity
+            android:name=".view.impl.ForwardMsgActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.BrowserViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.SystemMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityNewsDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityNews"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.impl.ActivityBillDetails"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.impl.ActivityAddBankCard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".view.impl.ActivityCashWithdrawal"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".view.impl.ActivityBond"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityMarginRecharge"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".view.impl.ActivityBalance"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.Zhifu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityPayment"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.impl.DiamondDeductionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.UserInfoNameActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".view.impl.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.CommonProblemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.HomeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="pagc4425" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.impl.ActivityPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivitySecurityCheck"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityResetPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.ActivityLostFound"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.AcitivityReleaseFound"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".view.impl.ActivityLostFoundDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.UsetInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.TextActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.SearchCirclesActivity"
+
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".view.impl.ActivityMyPost"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.MyReplyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.impl.MyHelpActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.witkey.witkeyhelp.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
     </application>
 
 </manifest>

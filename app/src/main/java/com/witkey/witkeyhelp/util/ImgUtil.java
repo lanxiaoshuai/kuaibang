@@ -1,10 +1,13 @@
 package com.witkey.witkeyhelp.util;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,12 +21,16 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.DrawableRes;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,6 +45,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.adapter.ChoosePicAdapter;
 import com.witkey.witkeyhelp.bean.Tag;
+import com.witkey.witkeyhelp.constant.Constants;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,40 +65,40 @@ import static com.witkey.witkeyhelp.Contacts.Contacts.imgPath;
  */
 public class ImgUtil {
 
-    public static void loadImg(Context context, String avatar, ImageView ivImg) {
-        if (avatar != null) {
-            try {
-                Glide.with(context).load(avatar)
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)//None明显会慢
-                        .skipMemoryCache(true)
-                        .into(ivImg);
-            } catch (Exception e) {
-                ExceptionUtil.CatchException(e);
-            }
-        }
-    }
+//    public static void loadImg(Context context, String avatar, ImageView ivImg) {
+//        if (avatar != null) {
+//            try {
+//                Glide.with(context).load(avatar)
+//                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)//None明显会慢
+//                        .skipMemoryCache(true)
+//                        .into(ivImg);
+//            } catch (Exception e) {
+//                ExceptionUtil.CatchException(e);
+//            }
+//        }
+//    }
 
     public static void loadImgNoCache(Context context, String avatar, ImageView ivImg) {
         try {
             Glide.with(context).load(avatar)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)//None明显会慢
-                    .skipMemoryCache(true)
+//                       .diskCacheStrategy(DiskCacheStrategy.NONE)//None明显会慢
+//                    .skipMemoryCache(true)
                     .into(ivImg);
         } catch (Exception e) {
             ExceptionUtil.CatchException(e);
         }
     }
 
-    public static void loadImg(Context context, String avatar, ImageView ivImg, int errorId) {
-        try {
-            Glide.with(context).load(avatar).error(errorId)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .skipMemoryCache(true)
-                    .into(ivImg);
-        } catch (Exception e) {
-            ExceptionUtil.CatchException(e);
-        }
-    }
+//    public static void loadImg(Context context, String avatar, ImageView ivImg, int errorId) {
+//        try {
+//            Glide.with(context).load(avatar).error(errorId)
+//                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+//                    .skipMemoryCache(true)
+//                    .into(ivImg);
+//        } catch (Exception e) {
+//            ExceptionUtil.CatchException(e);
+//        }
+//    }
 
     /**
      * 从矢量图SVG获取位图bitmap
@@ -264,7 +272,24 @@ public class ImgUtil {
         intent.putExtra("noFaceDetection", true); // no face detection
         IntentUtil.startActivityForResult(((Activity) context), intent, requestCode);
     }
+    /**
+     * 按正方形裁切图片
+     */
+    public static Bitmap ImageCrop(Bitmap bitmap) {
+        if(bitmap == null)
+            return null;
+        int w = bitmap.getWidth(); // 得到图片的宽，高
+        int h = bitmap.getHeight();
 
+        int wh = w > h ? h : w;// 裁切后所取的正方形区域边长
+
+        int retX = w > h ? (w - h) / 2 : 0;//基于原图，取正方形左上角x坐标
+        int retY = w > h ? 0 : (h - w) / 2;
+
+        //下面这句是关键
+        Bitmap bit = Bitmap.createBitmap(bitmap, retX, retY, wh, wh, null, false);
+        return bit;
+    }
 
     /**
      * 异步在工作线程中执行图片模糊化处理
@@ -466,6 +491,7 @@ public class ImgUtil {
      * @param errorResId 有占位图id
      *                   无占位图传0
      */
+    @SuppressLint("StaticFieldLeak")
     public static void loadBitmap(final Context context, final String path,
                                   final int width, final int height, final int errorResId, final BitmapCallback callback) {
         // 先去文件中找找 看看有没有下载过
@@ -606,6 +632,15 @@ public class ImgUtil {
         textView.setCompoundDrawables(drawable, null, drawable, null);
     }
 
+    /**
+     * 代码设置 setDrawableLeftAndRight
+     * 上
+     */
+    public static void setDrawableTop(Context context, int resId, TextView textView) {
+        Drawable drawable = context.getResources().getDrawable(resId);
+        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());//必须设置图片大小，否则不显示
+        textView.setCompoundDrawables(null, drawable, null, null);
+    }
 
     /**
      * 选择拍照还是选择的回调
@@ -628,6 +663,7 @@ public class ImgUtil {
         List<Tag> tags = new ArrayList<>();
 //        tags.add(new Tag(1, "拍照", R.drawable.ic_choose_camera));
         tags.add(new Tag(2, "选择图片", R.drawable.ic_choose_pick_pic));
+        tags.add(new Tag(1, "拍照上传", R.drawable.ic_choose_pick_pic));
         ChoosePicAdapter adapter = new ChoosePicAdapter(context, tags);
         lv.setAdapter(adapter);
         adapter.setListener(new ChoosePicAdapter.OnClickListener() {
@@ -635,19 +671,77 @@ public class ImgUtil {
             public void onClick(Tag tag) {
                 chooseChannelDialog.dismiss();
                 if (tag.getId() == 1) {
-                    ChoosePic.pick(startCamera(((Activity) context), code, tag.getId(), imgName));
+                    //    ChoosePic.pick(startCamera(((Activity) context), code, tag.getId(), imgName));
+                    //startActionFile(((Activity) context));
+                    autoObtainCameraPermission((AppCompatActivity) context);
                 } else {
                     Intent intent = new Intent(Intent.ACTION_PICK, null);
                     intent.setDataAndType(
                             MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                     ((Activity) context).startActivityForResult(intent, code);
-                    ChoosePic.pick(null);
+
+//
+//                    Intent intent = new Intent(Intent.ACTION_PICK,
+//                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    ((Activity) context)  startActivityForResult(intent, code);
+//                    ChoosePic.pick(null);
                 }
             }
         });
         chooseChannelDialog.setContentView(lv);
         chooseChannelDialog.show();
     }
+
+
+    private static final int MY_PERMISSIONS_REQUEST_CAMERACODE = 0xa8;
+    public static File fileUri;
+
+    private static Uri imageUri;
+    private static final int CODE_TAKE_PHOTO = 0x111;
+
+    public static void autoObtainCameraPermission(Activity mActivity) {
+
+        if (ContextCompat.checkSelfPermission(mActivity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.CAMERA)) {
+                Toast.makeText(mActivity, "您已拒绝过一次", Toast.LENGTH_SHORT).show();
+            }
+            ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_CAMERACODE);
+        } else {//有权限直接调用系统相机拍照
+
+            fileUri = new File(Environment.getExternalStorageDirectory().getPath() + File.separator + System.currentTimeMillis() + ".jpg");
+
+            imageUri = Uri.fromFile(fileUri);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                imageUri = FileProvider.getUriForFile(mActivity, Constants.AUTHORITY, fileUri);//通过FileProvider创建一个content类型的Uri
+            PhotoUtils.takePicture((AppCompatActivity) mActivity, imageUri, CODE_TAKE_PHOTO);
+        }
+    }
+
+    private static final int MSG_TAKE_PHOTO = 1;
+    private static String mFilePath;
+    private static String mFileName;
+    private static String mContentType = "application/pdf";//打开pdf
+    private static String mPDFPath;
+
+    public static void startActionFile(Activity activity) {
+
+        FileUtils.init();
+        mFilePath = FileUtils.getFileDir() + File.separator;
+        File path = new File(mFilePath);
+
+        if (!path.exists()) {
+            path.mkdirs();
+        }
+        try {
+            FileUtils.startActionCapture(activity, path, 2);
+        } catch (ActivityNotFoundException e) {
+            Log.e("TAG", e.getMessage());
+        }
+
+    }
+
 
     private static void addPic(Context context, int code) {
         Intent intent = new Intent(Intent.ACTION_PICK, null);
@@ -674,14 +768,23 @@ public class ImgUtil {
             }
 //            File outDir = Environment
 //                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            Log.e("TAG", imgPath);
+
             File outDir = new File(imgPath);
             if (!outDir.exists()) {
                 outDir.mkdirs();
             }
+
+
             File outFile = new File(outDir, imgName);
+
+
+            Uri uri = getUriForFile(activity, outFile);
+
             // 把文件地址转换成Uri格式
-            Uri uri = Uri.fromFile(outFile);
-            Log.d("llx", "getAbsolutePath=" + outFile.getAbsolutePath());
+            //    Uri uri = Uri.fromFile(outFile);
+
+
             // 设置系统相机拍摄照片完成后图片文件的存放地址
             intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
             // 此值在最低质量最小文件尺寸时是0，在最高质量最大文件尺寸时是１
@@ -692,6 +795,19 @@ public class ImgUtil {
             Toast.makeText(activity, "请确认已经插入SD卡", Toast.LENGTH_LONG).show();
             return null;
         }
+    }
+
+    public static Uri getUriForFile(Context context, File file) {
+        if (context == null || file == null) {
+            throw new NullPointerException();
+        }
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context.getApplicationContext(), "com.witkey.witkeyhelp.fileprovider", file);
+        } else {
+            uri = Uri.fromFile(file);
+        }
+        return uri;
     }
 
     /**

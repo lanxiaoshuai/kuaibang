@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:onClick="goBack"
         android:paddingLeft="@dimen/toolbar_padding_left"
-        android:paddingTop="@dimen/toolbar_padding_top"
+        android:paddingTop="33dp"
         android:paddingRight="@dimen/toolbar_padding_right"
         android:paddingBottom="@dimen/toolbar_padding_bottom">
 
@@ -24,7 +24,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_back_icon"
+            app:srcCompat="@mipmap/ic_back_icon"
             tools:targetApi="lollipop" />
     </RelativeLayout>
 
@@ -38,7 +38,11 @@
         android:paddingTop="@dimen/toolbar_padding_top"
         android:paddingBottom="@dimen/toolbar_padding_bottom"
         android:textColor="@color/bar_titie_white"
-        android:textSize="@dimen/include_title_text_size" />
+        android:textSize="@dimen/include_title_text_size"
+        android:maxLines="1"
+        android:maxEms="10"
+        android:ellipsize="end"
+        android:textStyle="bold"/>
 
 
     <Button
@@ -60,5 +64,11 @@
         android:textSize="@dimen/tv_bar_size"
         android:visibility="gone"
         tools:targetApi="lollipop" />
-
+ <View
+    android:layout_marginTop="8dp"
+    android:layout_below="@+id/include_title"
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="#EEEEEE"
+  />
 </RelativeLayout>

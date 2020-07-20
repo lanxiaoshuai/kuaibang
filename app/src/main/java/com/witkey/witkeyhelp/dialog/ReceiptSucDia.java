@@ -1,15 +1,21 @@
 package com.witkey.witkeyhelp.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
-import com.witkey.witkeyhelp.view.impl.MyMissionActivity;
+
+
+import com.witkey.witkeyhelp.view.impl.MyHelpActivity;
+import com.witkey.witkeyhelp.view.impl.ReleaseMissionActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -18,10 +24,11 @@ import com.witkey.witkeyhelp.view.impl.MyMissionActivity;
  * @description 接单成功dia
  */
 public class ReceiptSucDia extends Dialog {
-    private Context context;
+    private Activity context;
     private TextView tvOpen;
+    private ImageView cancel_les;
 
-    public ReceiptSucDia(Context context) {
+    public ReceiptSucDia(Activity context) {
         super(context, R.style.ShareDialog);
         this.context = context;
     }
@@ -34,26 +41,34 @@ public class ReceiptSucDia extends Dialog {
         setContentView(dialogview);
         setViews(dialogview);
         setListener();
-
         // 设置触摸对话框意外的地方取消对话框
         setCanceledOnTouchOutside(true);
     }
-
 
     private void setListener() {
         tvOpen.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, MyMissionActivity.class);
-                i.putExtra("EXTRA_IS_RELEASE", false);
+                Intent i = new Intent(context, MyHelpActivity.class);
+//                i.putExtra("EXTRA_IS_RELEASE", false);
                 context.startActivity(i);
+                dismiss();
+            }
+        });
+        cancel_les.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dismiss();
+
             }
         });
     }
 
     private void setViews(View v) {
         tvOpen = (TextView) v.findViewById(R.id.tvOpen);
+        cancel_les = findViewById(R.id.cancel_les);
     }
 
     @Override

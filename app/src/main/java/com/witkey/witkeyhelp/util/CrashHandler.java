@@ -8,7 +8,8 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.witkey.witkeyhelp.MyAPP;
-import com.witkey.witkeyhelp.view.impl.MainActivity;
+import com.witkey.witkeyhelp.view.impl.HomeActivity;
+
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
@@ -49,7 +50,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         // 实现重启功能
 
         // 程序已经崩溃,起一个新栈 Intent.FLAG_ACTIVITY_NEW_TASK
-        Intent intent = new Intent(app, MainActivity.class);
+        Intent intent = new Intent(app, HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(app, 100,// 请求码
                 intent,// 会放到新栈中
                 Intent.FLAG_ACTIVITY_NEW_TASK);

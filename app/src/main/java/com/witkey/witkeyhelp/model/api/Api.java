@@ -1,14 +1,22 @@
 package com.witkey.witkeyhelp.model.api;
 
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -51,21 +59,25 @@ public interface Api {
     @FormUrlEncoded
     Call<String> register(
             @Field("userName") String username,
-            @Field("password") String password
+            @Field("password") String password,
+            @Field("isInvitationCode") String isInvitationCode,
+            @Field("smsCode") String smsCode,
+            @Field("locationName") String locationName,
+            @Field("deviceNumber") String deviceNumber
+
     );
 
     /**
      * 发送验证码
      *
      * @param phone 手机号
-     * @param code  验证码
      * @return
      */
     @POST("apiuser/sendMsg")
     @FormUrlEncoded
     Call<String> sendMsg(
-            @Field("phone") String phone,
-            @Field("code") String code
+            @Field("phone") String phone
+
     );
 
     /**
@@ -130,7 +142,9 @@ public interface Api {
      *
      * @return
      */
-    @GET("apiorder/taskList")
+    // apiorder/taskList
+    @POST("api/v2/business/list")
+    @FormUrlEncoded
     Call<String> getTaskList(
 //            pageNum	是	int	第几页
 //            pageSize	是	int	每页多少条
@@ -141,15 +155,16 @@ public interface Api {
 //            paymentType	否	string	付款方式 1人民币 2钻石
 //            biddingType	否	string	是否需要竞标 0否 1是
 //            bondType	否	string	是否需要保证金 0否 1是
-            @Query("pageNum") String pageNum,
-            @Query("pageSize") String pageSize,
-            @Query("businessType") String businessType,
-            @Query("productType") String productType,
-            @Query("longitude") String longitude,
-            @Query("latitude") String latitude,
-            @Query("paymentType") String paymentType,
-//            @Query("biddingType") String biddingType,
-            @Query("bondType") String bondType
+            @Field("pageNum") String pageNum,
+            @Field("pageSize") String pageSize,
+            @Field("businessType") String businessType,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("paymentType") String paymentType,
+            @Field("bondType") String bondType,
+            @Field("mflag") String mflag,
+            @Field("circleId") String circleId,
+            @Field("createUserId") int createUserId
     );
 
     /**
@@ -157,9 +172,21 @@ public interface Api {
      *
      * @return
      */
-    @GET("apibusiness/find/{businessId}")
+    @GET("apibusiness/findBusiness")
+    Call<String> getMissionOrder(
+            @Query("businessId") String businessId,
+            @Query("userId") int userId
+    );
+
+    /**
+     * 订单 任务详情
+     *
+     * @return
+     */
+    @GET("apiorder/findBusiness")
     Call<String> getMissionDetail(
-            @Path("businessId") String businessId
+            @Query("orderId") int orderId,
+            @Query("userId") int userId
     );
 
     /**
@@ -170,8 +197,8 @@ public interface Api {
     @POST("apiorder/receipt")
     @FormUrlEncoded
     Call<String> receipt(
-            @Field("orderId") String orderId,
-            @Field("userId") String receiver
+            @Field("businessId") String orderId,
+            @Field("receiver") String receiver
     );
 
     /**
@@ -209,7 +236,7 @@ public interface Api {
             @Query("createUserId") String createUserId,
             @Query("pageNum") String pageNum,
             @Query("pageSize") String pageSize,
-            @Query("businessState") String businessState
+            @Query("orderState") String orderState
     );
 
     /**
@@ -231,7 +258,8 @@ public interface Api {
      *
      * @return
      */
-    @GET("apiorder/receiveList")
+    //apiorder/receiveList
+    @GET("api/v2/order/receiveList")
     Call<String> getReceiveList(
 //            pageNum	    是	int	第几页
 //            pageSize	    是	int	每页多少条
@@ -404,4 +432,574 @@ public interface Api {
 
     @POST("approvals/{id}/finish")
     Call<String> editLeave(@Path("id") int id, @Body RequestBody requestBody);
+
+
+    //收藏
+    @POST("apicollections/add")
+    @FormUrlEncoded
+//    @GET("apicollections/add")
+    Call<String> olleEction(@Field("bsId") String bsId,       //订单ID（orderId）
+                            @Field("userId") String userId); ///用户ID
+
+
+    //收藏列表
+    @GET("apiorder/rollectionList")
+    Call<String> collectionList(@Query("pageNum") int pageNum,       //第几页
+                                @Query("pageSize") int pageSize,   //每页多少条
+                                @Query("userId") int userId); ///用户ID
+
+
+    //收藏
+    @POST("apicollections/exit")
+    @FormUrlEncoded
+//    @GET("apicollections/add")
+    Call<String> cancelColleEction(@Field("bsId") String bsId,       //订单ID（orderId）
+                                   @Field("userId") String userId); ///用户ID
+
+    //图片上传
+    // @Part() List<MultipartBody.Part> parts
+    //@Part MultipartBody.Part parts
+
+    @Headers({"base_url:one"})//添加注解，更换baseUrl
+    @Multipart
+    @POST("community-admin/fileupload/upload")
+    Call<String> upLoadImg(@Part() List<MultipartBody.Part> parts); ///用户ID
+
+    //添加银行卡
+    @POST("apiUserBank/add")
+    @FormUrlEncoded
+    Call<String> addBankCard(@Field("uId") String uId,
+                             @Field("bankId") String bankId,
+                             @Field("realName") String realName,
+                             @Field("cardNo") String cardNo,
+                             @Field("cardBank") String cardBank); ///用户ID
+
+    // 获取银行卡列表
+    @GET("apiUserBank/getUserBankList")
+    Call<String> apiUserBankGetUserBankList(@Query("userId") String userId);
+
+    // 删除
+    @GET("apiUserBank/unbind")
+    Call<String> cancelBankCard(@Query("id") String userId);
+
+    //接单人取消任务
+    @POST("apiorder/receiver/cancel")
+    @FormUrlEncoded
+    Call<String> taskRelievingCollection(@Field("receiver") String receiver,
+                                         @Field("orderId") String orderId,
+                                         @Field("reason") String reason);
+
+    //悬赏者取消任务
+    @POST("apiorder/issuer/cancel")
+    @FormUrlEncoded
+    Call<String> rewardGiverwithdrawsTask(@Field("userId") String receiver,
+                                          @Field("businessId") String businessId,
+                                          @Field("reason") String remark,
+                                          @Field("type") int type,
+                                          @Field("orderId") String orderId
+    );
+
+    //接单者提交任务
+    @POST("apiorder/subOrder")
+    @FormUrlEncoded
+    Call<String> confirmsReceiveOrder(@Field("orderId") String orderId);
+
+    //悬赏者确认任务
+    @POST("apiorder/confirmOrder")
+    @FormUrlEncoded
+    //  @FormUrlEncoded
+    Call<String> rewardConfirmationTask(@Field("orderId") int orderId,
+                                        @Field("type") int type
+    );
+
+    //统一下单
+    @POST("apiwxpay/wxAppletPay")
+    @FormUrlEncoded
+    Call<String> wxAppletPay(@Field("body") String body,
+                             @Field("price") String price,
+                             @Field("ip") String ip,
+                             @Field("attachMap") String attachMap
+    );
+
+    //查询微信支付结果
+    @POST("apiwxpay/result")
+    @FormUrlEncoded
+    Call<String> apiwxpayresult(@Field("outTradeNo") String outTradeNo);
+
+    //举报  反馈
+    @POST("apireport/add")
+    @FormUrlEncoded
+    Call<String> feedback(@Field("content") String content,
+                          @Field("userId") int userId,
+                          @Field("imgUrl") String imgUrl,
+                          @Field("type") int type,
+                          @Field("businessId") Integer businessId,
+                          @Field("orderId") int orderId
+    );
+
+    //举报  反馈
+    @POST("apiorder/isUser/reportOrder")
+    @FormUrlEncoded
+    Call<String> reportOrder(@Field("content") String content,
+                             @Field("userId") int userId,
+                             @Field("orderId") int orderId,
+                             @Field("imgUrl") String imgUrl,
+                             @Field("type") int type
+
+
+    );
+
+
+    //提现
+    @POST("apiwithDraw/add")
+    @FormUrlEncoded
+    Call<String> cashWithdrawal(@Field("userId") int userId,
+                                @Field("amount") double amount,
+                                @Field("ubankId") String ubankId,
+                                @Field("type") int type,
+                                @Field("openId") String openId);
+
+    //系统消息
+    @POST("api/messageBox/list")
+    @FormUrlEncoded
+    Call<String> SystemsMessage(@Field("pageNum") int pageNum,
+
+                                @Field("pageSize") int paegsize,
+                                @Field("userId") int userId
+
+
+    );
+
+    //是否使用钻石抵扣平台费
+    @POST("apiuser/deduction")
+    @FormUrlEncoded
+    Call<String> getDiamondDeduction(@Field("userId") int userId,
+                                     @Field("deduction") int deduction);
+
+    //账单
+    @POST("api/AccountFlow/list")
+    @FormUrlEncoded
+    Call<String> accountFlow(@Field("pageNum") int pageNum,
+                             @Field("pageSize") int pageSize,
+                             @Field("userId") int userId,
+                             @Field("amountType") int amountType);
+
+    //修改个人信息
+    @POST("apiuser/edit")
+    @FormUrlEncoded
+    Call<String> updateUserInfo(@Field("userId") int userId,
+                                @Field("realName") String realName,
+                                @Field("headUrl") String headUrl,
+                                @Field("sex") String sex,
+                                @Field("pSignature") String pSignature);
+
+    //修改密码
+    @POST("apiuser/forgetPwd")
+    @FormUrlEncoded
+    Call<String> hangePassword(
+            @Field("userName") String userName,
+            @Field("password") String password,
+            @Field("smsCode") String smsCode);
+
+
+    //解除任务原因
+    @POST("api/reason/reasonList")
+    @FormUrlEncoded
+    Call<String> reasonList(
+            @Field("type") int type);
+
+
+    //接单人解除任务
+    @POST("apiorder/isUser/confirmCancel")
+    @FormUrlEncoded
+    Call<String> orderCancel(
+            @Field("orderId") String orderId
+
+    );
+
+    //信誉分
+    @POST("api/reputNum/list")
+    @FormUrlEncoded
+    Call<String> reputNumlist(
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize,
+            @Field("userId") int usreId
+
+    );
+
+    //发布失误招领
+    @POST("api/lostAricle/add")
+    @FormUrlEncoded
+    Call<String> lostAricleAdd(
+            @Field("createUserId") int createUserId,
+            @Field("describes") String describes,
+            @Field("contactsPhone") String contactsPhone,
+            @Field("imgUrl") String imgUrl,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("placeName") String placeName
+
+    );
+
+    //获得失误招领列表
+    @POST("api/lostAricle/list")
+    @FormUrlEncoded
+    Call<String> lostAriclelist(
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize,
+            @Field("createUserId") String createUserId,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude
+
+    );
+
+    //获得失误招领详情
+    @POST("api/lostAricle/selectById")
+    @FormUrlEncoded
+    Call<String> lostAricleSelectById(
+            @Field("id") int id
+    );
+
+    //确认完成认领
+    @POST("api/lostAricle/confirm")
+    @FormUrlEncoded
+    Call<String> lostAricleConfirm(
+            @Field("id") int id
+
+
+    );
+
+    //举报
+    @POST("api/lostAricle/report")
+    @FormUrlEncoded
+    Call<String> lostAricleReport(
+            @Field("lostId") int lostId,
+            @Field("content") String content,
+            @Field("imgUrl") String imgUrl
+
+    );
+
+    //广告列表
+    @POST("api/advertising/list")
+    @FormUrlEncoded
+    Call<String> advertisinglist(
+            @Field("userId") int userId,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("pageNum") String pageNum,
+            @Field("pageSize") String pageSize,
+            @Field("province") String province,
+            @Field("town") String town
+    );
+
+    //广告详情
+    @POST("api/advertising/selectById")
+    @FormUrlEncoded
+    Call<String> advertisingSelectById(
+            @Field("id") int id,
+            @Field("userId") int userId
+
+    );
+
+    //发布广告
+    @POST("api/advertising/add")
+    @FormUrlEncoded
+    Call<String> advertisingAdd(
+            @Field("createUserId") int createUserId,
+            @Field("amountType") String amountType,
+            @Field("content") String content,
+            @Field("title") String title,
+            @Field("imgUrl") String imgUrl,
+            @Field("putNum") String putNum,
+            @Field("putArea") String putArea,
+            @Field("placeName") String placeName,
+            @Field("putScope") String putScope,
+            @Field("putBalance") double putBalance,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude,
+            @Field("putLocation") String putLocation,
+            @Field("type") int type
+
+
+    );
+
+    //广告情详
+    @POST("api/advertising/Mylist")
+    @FormUrlEncoded
+    Call<String> advertisingMylist(
+            @Field("createUserId") int createUserId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+
+    );
+
+    //领取赏金
+    @POST("api/advertising/getReward")
+    @FormUrlEncoded
+    Call<String> advertisingGetReward(
+            @Field("adverId") int adverId,
+            @Field("userId") int userId
+
+    );
+
+    //推荐悬赏
+    @POST("apibusiness/recommend")
+    @FormUrlEncoded
+    Call<String> apibusinessRecommend(
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize,
+            @Field("longitude") String longitude,
+            @Field("latitude") String latitude
+
+    );
+
+    //未读信息
+    @POST("api/messageBox/readList")
+    @FormUrlEncoded
+    Call<String> apiReadList(
+            @Field("userId") int userId
+
+    );
+
+    //错误日志
+    @POST("api/phoneLog/add")
+    @FormUrlEncoded
+    Call<String> apiPhoneLog(
+            @Field("content") String content,
+            @Field("version") String version,
+            @Field("phoneType") String phoneType
+
+
+    );
+
+    //banner
+    @GET("api/banner/list")
+    Call<String> apiBanener(
+            @Query("type") int type
+    );
+
+    //个人信息
+    @GET("api/v2/user/homePage")
+    Call<String> userHomePage(
+            @Query("phone") String phone
+    );
+
+    //个人中心 发布的
+    @POST("api/v2/business/publishList")
+    @FormUrlEncoded
+    Call<String> businessPublishList(
+            @Field("phone") String phone,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+
+
+    );
+
+    //个人中心 领取的
+    @POST("api/v2/business/receivelist")
+    @FormUrlEncoded
+    Call<String> businessReceivelist(
+            @Field("userId") int userId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+
+
+    );
+
+    //发布的
+    @POST("api/comment/add")
+    @FormUrlEncoded
+    Call<String> commentAdd(
+            @Field("userId") String userId,
+            @Field("orderId") String orderId,
+            @Field("content") String content,
+            @Field("score") String score
+
+
+    );
+
+    //隐藏显示任务
+    @POST("api/v2/business/isHide")
+    @FormUrlEncoded
+    Call<String> businessIsHide(
+            @Field("businessId") int businessId,
+            @Field("isHide") int isHide
+
+
+    );
+
+
+    //添加显示标签
+    @POST("api/v2/user/addTag")
+    @FormUrlEncoded
+    Call<String> userAddTag(
+            @Field("phone") String phone,
+            @Field("tagsId") String tagsId
+
+
+    );
+
+
+    //浏览记录
+    @POST("api/advertising/browseList")
+    @FormUrlEncoded
+    Call<String> browseList(
+            @Field("userId") int userId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+
+
+    );
+
+    //关注的圈子
+    @POST("api/circle/myList")
+    @FormUrlEncoded
+    Call<String> circleMyList(
+            @Field("userId") int userId
+
+
+    );
+
+    //新增关注圈子
+    @POST("api/circle/attention")
+    @FormUrlEncoded
+    Call<String> circleAttention(
+            @Field("userId") int userId,
+            @Field("cirleIds") List<String> circleId
+    );
+
+    //创建圈子
+    @POST("api/circle/add")
+    @FormUrlEncoded
+    Call<String> apiCircleAdd(
+            @Field("name") String name,
+            @Field("abbreviation") String abbreviation,
+            @Field("definition") String definition,
+            @Field("createUserId") int createUserId
+    );
+
+    //删除圈子
+    @POST("api/circle/remove")
+    @FormUrlEncoded
+    Call<String> circleRemove(
+
+            @Field("ids") List<String> ids
+    );
+
+    //推荐圈子
+    @POST("api/circle/list")
+    @FormUrlEncoded
+    Call<String> recommendCircle(
+
+            @Field("isRecommend") int isRecommend
+    );
+
+    //搜索圈子
+    @POST("api/circle/search")
+    @FormUrlEncoded
+    Call<String> circleSearch(
+
+            @Field("name") String name
+    );
+
+    //关注(未关注)圈子
+    @POST("api/circle/isAttention")
+    @FormUrlEncoded
+    Call<String> circleIsAttention(
+
+            @Field("userId") int userId,
+            @Field("circleId") String circleId
+    );
+
+    //我的发布
+    @POST("api/v2/user/myRelease")
+    @FormUrlEncoded
+    Call<String> userMyRelease(
+
+            @Field("createUserId") int createuserId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize,
+            @Field("businessType") String businessType
+    );
+
+    //查询评论
+    @POST("api/comment/findCommentByBusiness")
+    @FormUrlEncoded
+    Call<String> getFindCommentByBusiness(
+
+            @Field("bId") int bId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+    );
+
+    //添加评论
+    @POST("api/comment/add")
+    @FormUrlEncoded
+    Call<String> getCommentAdd(
+
+            @Field("userId") int userId,
+            @Field("content") String content,
+            @Field("bId") int bId
+    );
+
+    //添加回复
+    @POST("api/comment/addReply")
+    @FormUrlEncoded
+    Call<String> addcommentAddReply(
+
+            @Field("userId") int userId,
+            @Field("cId") String cId,
+            @Field("content") String content,
+            @Field("replyUserId") Integer replyUserId,
+            @Field("pId") String pId
+
+
+    );
+
+    //我的回复
+    @POST("api/comment/myReply")
+    @FormUrlEncoded
+    Call<String> commentMyReply(
+
+            @Field("userId") int userId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+
+    );
+
+    //回复我的
+    @POST("api/comment/replyMe")
+    @FormUrlEncoded
+    Call<String> commentReplyMe(
+
+            @Field("userId") int userId,
+            @Field("pageNum") int pageNum,
+            @Field("pageSize") int pageSize
+
+    );
+    //分配赏金
+    @POST("api/reward/add")
+    @FormUrlEncoded
+    Call<String> rewardAdd(
+
+            @Field("commentId") String commentId,
+            @Field("userId") int userId,
+            @Field("businessId") int businessId,
+            @Field("reawrdMoney") double reawrdMoney
+
+    );
+    //获取标签
+
+    @GET("api/v2/user/getAllTag")
+    Call<String> getAllTag();
+
+
+    @GET("api/version/checkVersion")
+    Call<String> versionUpdate();
+
+    //获取银行卡列表
+    @GET("apibank/list")
+    Call<String> getBankCard(); ///用户ID
+
+
 }

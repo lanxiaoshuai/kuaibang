@@ -11,14 +11,18 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.MissionBean;
 import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -36,21 +40,23 @@ public class MissionFilterDialog extends Dialog {
     private TagFlowLayout tfl_price_type;
 
     private TagAdapter filterAdapter;
-    private TagAdapter typeAdapter;
+
+
     private TagAdapter isNeedBondAdapter;
     private TagAdapter priceTypeAdapter;
 
-    private Button btn_commit;
-
+    private LinearLayout btn_commit;
+    private LinearLayout withdraw;
     private String[] filterData = {"信息咨询", "悬赏帮忙", "紧急求助", "失物招领"};
-    private String[] typeData = {"普通", "竞标"};
+    //   private String[] typeData = {"普通", "竞标"};
     private String[] isNeedBondData = {"是", "否"};
-    private String[] priceTypeData = {"人命币", "钻石"};
-
+    private String[] priceTypeData = {"人民币", "钻石"};
+    private String[] regionTypeData = {"附近的悬赏", "不限制地域"};
     private Context context; //tagflowlayout需要context  getcontext不可以
 
-    private ICommitOnclickListener onclickListener;
+    public ICommitOnclickListener onclickListener;
     private View belowView;
+
 
     public interface ICommitOnclickListener {
         void onCommit(MissionBean missionBean);
@@ -66,6 +72,7 @@ public class MissionFilterDialog extends Dialog {
         this.context = context;
         this.missionBean = missionBean;
         this.belowView = belowView;
+
     }
 
 
@@ -74,11 +81,9 @@ public class MissionFilterDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         //点击空余位置不可关闭
-        this.setCanceledOnTouchOutside(false);
+        this.setCanceledOnTouchOutside(true);
         this.setContentView(R.layout.dia_mission_filter);
         //弹窗点击周围空白处弹出层自动消失弹窗消失(false时为点击周围空白处弹出层不自动消失)
-        this.setCanceledOnTouchOutside(false);
-
 //        开始:显示到某个控件下方
         //获取当前Activity所在的窗体
         Window window = this.getWindow();
@@ -98,30 +103,20 @@ public class MissionFilterDialog extends Dialog {
         window.setAttributes(wlp);
 //      结束:显示到某个控件下方
         initView();
+
+    }
+
+    @Override
+    public void show() {
+        super.show();
         showData();
     }
 
     private void showData() {
         if (missionBean != null) {
-            //任务分类
-//            filterAdapter = new TagAdapter<String>(filterData) {
-//                @Override
-//                public View getView(FlowLayout parent, int position, String str) {
-//                    TextView tv = (TextView) LayoutInflater.from(
-//                            getContext()).inflate(R.layout.item_tag_mission_filter, tfl_mission_filter, false);
-//                    tv.setText(str);
-//                    return tv;
-//                }
-//            };
-//            tfl_mission_filter.setAdapter(filterAdapter);
-//            String businessType = missionBean.getBusinessType();
-//            if (businessType != null) {
-//                int businessTypeNum = Integer.parseInt(businessType);
-//                businessType = filterData[businessTypeNum - 1];
-//            }
-//            setTagSelect(businessType, filterAdapter, filterData);
-            //任务类型
-            typeAdapter = new TagAdapter<String>(typeData) {
+
+
+            filterAdapter = new TagAdapter<String>(regionTypeData) {
                 @Override
                 public View getView(FlowLayout parent, int position, String s) {
                     TextView tv = (TextView) LayoutInflater.from(
@@ -130,8 +125,13 @@ public class MissionFilterDialog extends Dialog {
                     return tv;
                 }
             };
-            tfl_mission_type.setAdapter(typeAdapter);
-            setTagSelect(missionBean.getProductType(), typeAdapter, typeData);
+
+            tfl_mission_type.setAdapter(filterAdapter);
+            if (this.missionBean.getUnareaType() != null) {
+                setTagSelect(Integer.parseInt(missionBean.getUnareaType()) == 1 ? "附近的悬赏" : "不限制地域", filterAdapter, regionTypeData);
+            }
+
+
             //是否有保证金
             isNeedBondAdapter = new TagAdapter<String>(isNeedBondData) {
                 @Override
@@ -157,55 +157,99 @@ public class MissionFilterDialog extends Dialog {
                 }
             };
             tfl_price_type.setAdapter(priceTypeAdapter);
-            if (this.missionBean.getBiddingType() != null) {
-                setTagSelect(Integer.parseInt(this.missionBean.getPaymentType()) == 1 ? "人命币" : "钻石", priceTypeAdapter, priceTypeData);
+
+
+            tfl_mission_type.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+                @Override
+                public boolean onTagClick(View view, int i, FlowLayout flowLayout) {
+
+                    if (i == 0) {
+                        if ((null == missionBean.getUnareaType() || missionBean.getUnareaType().equals("0")) && i == 0) {
+                            missionBean.setUnareaType("1");
+                        } else if ((missionBean.getUnareaType().equals("1") || missionBean.getUnareaType().equals("0")) && i == 0) {
+                            missionBean.setUnareaType(null);
+                        }
+                    }
+                    if (i == 1) {
+                        if ((null == missionBean.getUnareaType() || missionBean.getUnareaType().equals("1")) && i == 1) {
+                            missionBean.setUnareaType("0");
+                        } else if ((missionBean.getUnareaType().equals("0") || missionBean.getUnareaType().equals("1")) && i == 1) {
+                            missionBean.setUnareaType(null);
+                        }
+
+                    }
+
+
+                    return true;
+                }
+            });
+
+            tfl_is_need_bond.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
+
+            {
+                @Override
+                public boolean onTagClick(View view, int i, FlowLayout flowLayout) {
+                    if (i == 0) {
+                        if ((null == missionBean.getBondType() || missionBean.getBondType().equals("0")) && i == 0) {
+                            missionBean.setBondType("1");
+                        } else if ((missionBean.getBondType().equals("1") || missionBean.getBondType().equals("0")) && i == 0) {
+                            missionBean.setBondType(null);
+                        }
+                    }
+                    if (i == 1) {
+                        if ((null == missionBean.getBondType() || missionBean.getBondType().equals("1")) && i == 1) {
+                            missionBean.setBondType("0");
+                        } else if ((missionBean.getBondType().equals("0") || missionBean.getBondType().equals("1")) && i == 1) {
+                            missionBean.setBondType(null);
+                        }
+
+                    }
+                    return true;
+                }
+            });
+            if (this.missionBean.getPaymentType() != null)
+
+            {
+                setTagSelect(Integer.parseInt(this.missionBean.getPaymentType()) == 1 ? "人民币" : "钻石", priceTypeAdapter, priceTypeData);
+            } else
+
+            {
+
             }
-//            tfl_mission_filter.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-//                @Override
-//                public void onSelected(Set<Integer> selectPosSet) {
-//                    if (!selectPosSet.isEmpty()) {
-//                        for (int i : selectPosSet) {
-//                            if (filterData[i].equals("信息咨询")) {
-//                                missionBean.setBusinessType(1 + "");
-//                            } else if (filterData[i].equals("悬赏帮忙")) {
-//                                missionBean.setBusinessType(2 + "");
-//                            } else if (filterData[i].equals("紧急求助")) {
-//                                missionBean.setBusinessType(3 + "");
-//                            } else if (filterData[i].equals("失物招领")) {
-//                                missionBean.setBusinessType(4 + "");
-//                            }
-//                        }
-//                    }
-//                }
-//            });
-            tfl_mission_type.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            tfl_price_type.setOnTagClickListener(new TagFlowLayout.OnTagClickListener()
+
+            {
                 @Override
-                public void onSelected(Set<Integer> selectPosSet) {
-                    if (!selectPosSet.isEmpty()) {
-                        for (int i : selectPosSet) {
-                            missionBean.setProductType(typeData[i]);
-                        }
+                public boolean onTagClick(View view, int i, FlowLayout flowLayout) {
+
+                    switch (i) {
+                        case 0:
+                            if (i == 0) {
+                                if ((null == missionBean.getPaymentType() || "2".equals(missionBean.getPaymentType())) && i == 0) {
+                                    missionBean.setPaymentType("1");
+
+                                } else if ((missionBean.getPaymentType().equals("1") || "2".equals(missionBean.getPaymentType())) && i == 0) {
+                                    missionBean.setPaymentType(null);
+
+                                }
+                            }
+                            break;
+                        case 1:
+                            if (i == 1) {
+                                if ((null == missionBean.getPaymentType() || "1".equals(missionBean.getPaymentType())) && i == 1) {
+                                    missionBean.setPaymentType("2");
+
+                                } else if ((missionBean.getPaymentType().equals("2") || "1".equals(missionBean.getPaymentType())) && i == 1) {
+                                    missionBean.setPaymentType(null);
+
+                                }
+
+                            }
+                            break;
                     }
-                }
-            });
-            tfl_is_need_bond.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-                @Override
-                public void onSelected(Set<Integer> selectPosSet) {
-                    if (!selectPosSet.isEmpty()) {
-                        for (int i : selectPosSet) {
-                            missionBean.setBondType(isNeedBondData[i].equals("是") ? 1 + "" : 0 + "");
-                        }
-                    }
-                }
-            });
-            tfl_price_type.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
-                @Override
-                public void onSelected(Set<Integer> selectPosSet) {
-                    if (!selectPosSet.isEmpty()) {
-                        for (int i : selectPosSet) {
-                            missionBean.setPaymentType(priceTypeData[i].equals("人命币") ? 1 + "" : 2 + "");
-                        }
-                    }
+
+
+                    return true;
                 }
             });
         }
@@ -213,6 +257,36 @@ public class MissionFilterDialog extends Dialog {
         btn_commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                onclickListener.onCommit(missionBean);
+                if (missionBean.getPaymentType() == "1") {
+                    MobclickAgent.onEvent(context, "chineseYuan");
+                } else {
+                    MobclickAgent.onEvent(context, "diamond");
+                }
+                if (missionBean.getUnareaType() == "1") {
+                    MobclickAgent.onEvent(context, "bountynearby");
+                } else {
+                    MobclickAgent.onEvent(context, "nlimiteduTerritory");
+                }
+                if (missionBean.getBondType() == "1") {
+                    MobclickAgent.onEvent(context, "rewardHallbond");
+                } else {
+                    MobclickAgent.onEvent(context, "NoRewardHallbond");
+                }
+
+                //关闭dialog
+                MissionFilterDialog.this.dismiss();
+
+            }
+        });
+        withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MobclickAgent.onEvent(context, "noRewardHallreset");
+                missionBean.setBondType(null);
+                missionBean.setPaymentType(null);
+                missionBean.setUnareaType(null);
                 onclickListener.onCommit(missionBean);
                 Log.d(TAG, "onClick: " + missionBean.toString());
                 //关闭dialog
@@ -228,6 +302,7 @@ public class MissionFilterDialog extends Dialog {
      * @param adapter
      * @param data
      */
+
     private void setTagSelect(String str, TagAdapter adapter, String[] data) {
         if (str != null) {
             if (!str.isEmpty()) {
@@ -247,7 +322,7 @@ public class MissionFilterDialog extends Dialog {
         tfl_is_need_bond = findViewById(R.id.tfl_is_need_bond);
         tfl_price_type = findViewById(R.id.tfl_price_type);
         btn_commit = findViewById(R.id.btn_commit);
-
+        withdraw = findViewById(R.id.withdraw);
         //设置单选
 //        tfl_mission_filter.setMaxSelectCount(1);
         tfl_mission_type.setMaxSelectCount(1);
@@ -258,7 +333,7 @@ public class MissionFilterDialog extends Dialog {
     @Override
     public void dismiss() {
         super.dismiss();
-        missionBean = null;
+        //missionBean = null;
     }
 
 }

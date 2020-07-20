@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.util.SpaceItemDecoration;
@@ -24,6 +25,7 @@ public abstract class BaseListFragment extends BaseFragment {
     @Override
     protected void initEvent() {
         //通过recyclerView的onscrolllistener的监听来实现上拉加载更多的功能
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             //滚动的三种状态包括SCROLL_STATE_IDEL 离开状态 SCROLL_STATE_DRAGGING 手指触摸 SCROLL_STATE_SETLING 加速滑动的时候
             @Override
@@ -35,13 +37,13 @@ public abstract class BaseListFragment extends BaseFragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.d("test", "onScrolled");
+                //Log.e("test", "onScrolled");
                 // 获取最后一个可见条目
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
                 if (adapter != null) {
-                    Log.d(TAG, "onScrolled: lastVisibleItemPosition=" + lastVisibleItemPosition + ",itemcount=" + adapter.getItemCount());
+                //    Log.d(TAG, "onScrolled: lastVisibleItemPosition=" + lastVisibleItemPosition + ",itemcount=" + adapter.getItemCount());
                     if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-                        Log.d(TAG, "loading executed");
+                    //    Log.d(TAG, "loading executed");
                         //获取刷新状态
                         boolean isRefreshing = swipeRefreshLayout.isRefreshing();
                         if (isRefreshing) {
@@ -51,6 +53,8 @@ public abstract class BaseListFragment extends BaseFragment {
                         }
                         onLoadMore();
                     }
+                }else {
+                    Toast.makeText(getActivity(), "adapter为空", Toast.LENGTH_SHORT).show();
                 }
 
             }

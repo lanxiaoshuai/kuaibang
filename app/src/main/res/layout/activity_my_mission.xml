@@ -1,23 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/include_primary_toolbar" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/include_title"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:paddingLeft="@dimen/toolbar_padding_left"
+            android:paddingRight="@dimen/toolbar_padding_right"
+            android:paddingTop="@dimen/toolbar_padding_top">
+
+            <ImageView
+                android:id="@+id/ivBarLeft"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@mipmap/ic_back_icon"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/include_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:paddingTop="@dimen/toolbar_padding_top"
+            android:textColor="@color/bar_titie_white"
+            android:textSize="@dimen/include_title_text_size" />
+        <Button
+            android:id="@+id/tv_confirm"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="@dimen/tv_bar_margin_top"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="confirm"
+            android:paddingBottom="@dimen/tv_bar_bottom"
+            android:paddingLeft="@dimen/tv_bar_left"
+            android:paddingRight="@dimen/tv_bar_right"
+            android:paddingTop="@dimen/tv_bar_top"
+            android:text="@string/confirm"
+            android:textColor="@drawable/selector_bt_text_color"
+            android:textSize="@dimen/tv_bar_size"
+            android:visibility="gone"
+            tools:targetApi="lollipop" />
+        <View
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/include_title"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#EEEEEE"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+
+        android:orientation="vertical"
+
+        android:paddingTop="10dp">
 
         <RadioGroup
             android:id="@+id/rg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+
             android:orientation="horizontal">
 
             <RadioButton
@@ -27,16 +93,21 @@
                 android:layout_weight="1"
                 android:button="@null"
                 android:checked="true"
+                android:drawableBottom="@drawable/task_backgroud"
+                android:drawablePadding="10dp"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="进行中"
-                android:textColor="@drawable/selector_text_color_tab" />
+                android:textColor="@drawable/selector_text_color_tab"
+
+                />
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center"
-                android:background="#5E5858" />
+                android:background="#5E5858"
+                android:visibility="gone" />
 
             <RadioButton
                 android:id="@+id/rb2"
@@ -44,6 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@null"
+                android:drawableBottom="@drawable/task_backgroud"
+                android:drawablePadding="10dp"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="已完成"
@@ -53,7 +126,8 @@
                 android:layout_width="1dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center"
-                android:background="#5E5858" />
+                android:background="#5E5858"
+                android:visibility="gone" />
 
             <RadioButton
                 android:id="@+id/rb3"
@@ -61,6 +135,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@null"
+                android:drawableBottom="@drawable/task_backgroud"
+                android:drawablePadding="10dp"
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="任务异常"
@@ -71,7 +147,8 @@
                 android:layout_width="1dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center"
-                android:background="#5E5858" />
+                android:background="#5E5858"
+                android:visibility="gone" />
 
             <RadioButton
                 android:id="@+id/rb4"
@@ -82,11 +159,57 @@
                 android:gravity="center"
                 android:padding="4dp"
                 android:text="未发布"
-                android:textColor="@drawable/selector_text_color_tab" />
+                android:textColor="@drawable/selector_text_color_tab"
+                android:visibility="gone" />
 
 
         </RadioGroup>
-    </RelativeLayout>
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:background="#00000000"-->
+        <!--android:orientation="horizontal"-->
+        <!--&gt;-->
+
+        <!--<Button-->
+        <!--android:id="@+id/btn_my"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="#00000000"-->
+        <!--android:visibility="visible"-->
+        <!--/>-->
+
+        <!--<Button-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:visibility="invisible" />-->
+
+        <!--<Button-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="#00000000"-->
+        <!--android:visibility="invisible" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/btn_msg"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:visibility="invisible" />-->
+
+        <!--</LinearLayout>-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE" />
+
+    </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/SwipeRefreshLayout"
@@ -94,6 +217,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
@@ -103,4 +227,17 @@
         <!--android:nestedScrollingEnabled="true"-->
 
     </android.support.v4.widget.SwipeRefreshLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@color/all_bg">
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+/>
+    </LinearLayout>
 </LinearLayout>

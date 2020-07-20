@@ -68,11 +68,8 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         } else {
             onBindBiewHolder(holder, position);
         }
+
     }
-
-
-
-
     static class EmptyViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_nodata;
 
@@ -81,4 +78,5 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<RecyclerVi
             iv_nodata = (ImageView) itemView.findViewById(R.id.iv_nodata);
         }
     }
+
 }

@@ -70,7 +70,13 @@ public class UIUtils {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dip * scale + 0.5f);
     }
-
+    /**
+     * dip转换px
+     */
+    public static int dip2px(float dip) {
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dip * scale + 0.5f);
+    }
     /**
      * pxz转换dip
      */

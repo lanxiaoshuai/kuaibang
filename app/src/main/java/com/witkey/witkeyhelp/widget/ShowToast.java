@@ -1,8 +1,10 @@
 package com.witkey.witkeyhelp.widget;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -36,6 +38,26 @@ public class ShowToast extends Toast {
         this.setDuration(Toast.LENGTH_SHORT);
     }
 
+
+    public ShowToast(Context context, CharSequence message) {
+        super(context);
+        this.context = context;
+        setToast(context, message);
+        this.setDuration(Toast.LENGTH_SHORT);
+    }
+
+
+    private void setToast(Context context, CharSequence message) {
+        v = View.inflate(context, R.layout.dia_toast, null);
+        this.setView(v);
+
+        tv = (TextView) v.findViewById(R.id.tvInfo);
+        iv_hint = (ImageView) v.findViewById(R.id.iv_hint);
+
+        setGravity(Gravity.CENTER,0,0);
+        tv.setText(message);
+    }
+
     private void setToast(Context context, CharSequence message, int state) {
         v = View.inflate(context, R.layout.dia_toast, null);
         this.setView(v);
@@ -46,6 +68,7 @@ public class ShowToast extends Toast {
         tv.setText(message);
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void setState(int state) {
         if(context instanceof Application){
             state=0;

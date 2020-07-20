@@ -2,14 +2,16 @@ package com.witkey.witkeyhelp.bean;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author lingxu
  * @date 2019/7/25 16:28
  * @description 咨询, 悬赏大厅列表
  */
-public class MissionBean {
+public class MissionBean implements Serializable {
     //	否	string	标题
     @SerializedName("title")
     private String title;
@@ -70,12 +72,215 @@ public class MissionBean {
     private String createDate;
     @SerializedName("remark")
     private String remark;
+
+
     @SerializedName("tradeAmt")
     private String tradeAmt; //悬赏金额
+
+
     @SerializedName("pageNum")
     private int pageNum;
     @SerializedName("pageSize")
     private int pageSize; //默认为10
+
+    @SerializedName("status")
+    private String status; //
+
+
+    @SerializedName("coid")
+    private String coid; //
+
+
+    @SerializedName("mflag")
+    private String mflag; //
+
+
+    @SerializedName("collections")
+    private int collections; //
+
+
+    @SerializedName("deposit")
+    private int deposit; //
+    @SerializedName("payType")
+    private int payType;
+    @SerializedName("receiverPhone")
+    private String receiverPhone;
+    @SerializedName("receiverName")
+    private String receiverName;
+    @SerializedName("createUserName")
+    private String createUserName;
+    @SerializedName("unareaType")
+    private String unareaType;
+
+    @SerializedName("isComment")
+    private String isComment;
+
+    @SerializedName("createUserHeadUrl")
+    private String createUserHeadUrl;
+
+    @SerializedName("circleName")
+    private String circleName;
+
+
+    @SerializedName("residue")
+    private double residue;
+
+    public double getResidue() {
+        return residue;
+    }
+
+    public void setResidue(double residue) {
+        this.residue = residue;
+    }
+
+    public String getCircleName() {
+        return circleName;
+    }
+
+    public void setCircleName(String circleName) {
+        this.circleName = circleName;
+    }
+
+    public String getCreateUserHeadUrl() {
+        return createUserHeadUrl;
+    }
+
+    public void setCreateUserHeadUrl(String createUserHeadUrl) {
+        this.createUserHeadUrl = createUserHeadUrl;
+    }
+
+    public String getIsComment() {
+        return isComment;
+    }
+
+    public List<String> circleIds;
+
+    public List<String> getCircleIds() {
+        return circleIds;
+    }
+
+    public void setCircleIds(List<String> circleIds) {
+        this.circleIds = circleIds;
+    }
+
+    public void setIsComment(String isComment) {
+        this.isComment = isComment;
+    }
+
+    public String getUnareaType() {
+        return unareaType;
+    }
+
+    public void setUnareaType(String unareaType) {
+        this.unareaType = unareaType;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getCreateUserPhone() {
+        return createUserPhone;
+    }
+
+    public void setCreateUserPhone(String createUserPhone) {
+        this.createUserPhone = createUserPhone;
+    }
+
+    @SerializedName("createUserPhone")
+
+
+    private String createUserPhone;
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
+
+    public int getPayType() {
+        return payType;
+    }
+
+    public void setPayType(int payType) {
+        this.payType = payType;
+    }
+
+    public int getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(int deposit) {
+        this.deposit = deposit;
+    }
+
+    @SerializedName("placeName")
+    private String placeName; //
+
+
+    @SerializedName("userName")
+    private String userName; //
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCoid() {
+        return coid;
+    }
+
+    public void setCoid(String coid) {
+        this.coid = coid;
+    }
+
+    public String getMflag() {
+        return mflag;
+    }
+
+    public void setMflag(String mflag) {
+        this.mflag = mflag;
+    }
+
+    public int getCollections() {
+        return collections;
+    }
+
+    public void setCollections(int collections) {
+        this.collections = collections;
+    }
 
     /**
      * 订单状态
@@ -84,10 +289,10 @@ public class MissionBean {
      * 领取:
      * 1 进行中 2 已完成 3 任务异常
      */
-    private int orderState;
+    private String orderState;
 
     //个人中心获取列表
-    public MissionBean(int createUserId, int pageNum, int orderState) {
+    public MissionBean(int createUserId, int pageNum, String orderState) {
         this.createUserId = createUserId;
         this.pageNum = pageNum;
         this.orderState = orderState;
@@ -130,10 +335,10 @@ public class MissionBean {
                 ", bondType='" + bondType + '\'' +
                 ", photoMap=" + photoMap +
                 ", businessId=" + businessId +
-                ", orderId=" + orderId +
+//                ", orderId=" + orderId +
                 ", createDate='" + createDate + '\'' +
                 ", remark='" + remark + '\'' +
-                ", tradeAmt='" + tradeAmt + '\'' +
+
                 ", pageNum=" + pageNum +
                 ", pageSize=" + pageSize +
                 '}';
@@ -184,6 +389,9 @@ public class MissionBean {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+
+
 
     public String getTradeAmt() {
         return tradeAmt;
@@ -368,11 +576,11 @@ public class MissionBean {
         this.pageSize = pageSize;
     }
 
-    public int getOrderState() {
+    public String getOrderState() {
         return orderState;
     }
 
-    public void setOrderState(int orderState) {
+    public void setOrderState(String orderState) {
         this.orderState = orderState;
     }
 }

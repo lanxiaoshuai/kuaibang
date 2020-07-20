@@ -5,6 +5,7 @@ import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.model.IMeFragModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.MeFragModelImpl;
+import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.IMeFragView;
 
 public class MeFragPresenterImpl implements com.witkey.witkeyhelp.presenter.IMeFragPresenter {
@@ -31,11 +32,47 @@ public class MeFragPresenterImpl implements com.witkey.witkeyhelp.presenter.IMeF
         model.getAcount(userId, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
+                DialogUtil.dismissProgress();
                 view.showAcount((Acount) data);
             }
 
             @Override
             public void onError(Object data) {
+                DialogUtil.dismissProgress();
+                view.onError((String) data);
+            }
+        });
+    }
+
+    @Override
+    public void getDeductionData(int userId, int deduction) {
+        model.getDeductionData(userId, deduction, new IModel.AsyncCallback() {
+            @Override
+            public void onSuccess(Object data) {
+                DialogUtil.dismissProgress();
+                view.showDeductionData(data.toString());
+            }
+
+            @Override
+            public void onError(Object data) {
+                DialogUtil.dismissProgress();
+                view.onError((String) data);
+            }
+        });
+    }
+
+    @Override
+    public void updateUserInfo(int userId, String realName, String headUrl, String sex) {
+        model.updateUserInfo(userId, realName, headUrl, sex, new IModel.AsyncCallback() {
+            @Override
+            public void onSuccess(Object data) {
+                DialogUtil.dismissProgress();
+                view.updateUserInfo(data.toString());
+            }
+
+            @Override
+            public void onError(Object data) {
+                DialogUtil.dismissProgress();
                 view.onError((String) data);
             }
         });

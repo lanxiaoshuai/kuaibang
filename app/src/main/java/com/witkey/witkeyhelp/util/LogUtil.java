@@ -58,7 +58,7 @@ public class LogUtil {
      * Error表示出现错误，是最需要关注解决的
      */
     private static void loge(String str) {
-        Log.e(Contacts.Use_TAG, str);
+
     }
 
 

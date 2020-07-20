@@ -7,4 +7,10 @@ public interface IMeFragView extends IView{
     void showUser(User user);
 
     void showAcount(Acount data);
+
+
+    void showDeductionData(String data);
+
+
+    void updateUserInfo(String data);
 }

@@ -13,7 +13,7 @@ public interface ILoginModel extends IModel {
     void Login(LoginRequest loginRequest, AsyncCallback callback);
 
     /**
-     * 登录
+     * 注册
      */
     void register(LoginRequest loginRequest, AsyncCallback callback);
 

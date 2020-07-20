@@ -6,6 +6,7 @@ import com.witkey.witkeyhelp.model.IMissionModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.MissionModelImpl;
 import com.witkey.witkeyhelp.presenter.IReawardHallFragPresenter;
+import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.IReawardHallFragView;
 
 public class ReawardHallFragPresenterImpl implements IReawardHallFragPresenter {
@@ -19,15 +20,17 @@ public class ReawardHallFragPresenterImpl implements IReawardHallFragPresenter {
     }
 
     @Override
-    public void getMissionList( MissionBean missionBean,String searchKeyWord) {
-        model.getMissionList(missionBean,searchKeyWord, new IModel.AsyncCallback() {
+    public void getMissionList( MissionBean missionBean,String circleId) {
+        model.getMissionList(missionBean,circleId, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
+                DialogUtil.dismissProgress();
                 view.showMissionList((PagingResponse) data);
             }
 
             @Override
             public void onError(Object data) {
+                DialogUtil.dismissProgress();
                 view.onError((String) data);
             }
         });

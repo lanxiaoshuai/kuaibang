@@ -14,4 +14,6 @@ public interface ILoginPresenter extends IPresenter<ILoginView> {
      * 发送验证码成功
      */
     void GetCode(LoginRequest loginRequest);
+
+    void register(LoginRequest loginRequest);
 }

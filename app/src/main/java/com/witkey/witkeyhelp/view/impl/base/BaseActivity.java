@@ -1,14 +1,22 @@
 package com.witkey.witkeyhelp.view.impl.base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.IntentFilter;
+
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,28 +25,48 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
 import com.witkey.witkeyhelp.MyAPP;
 import com.witkey.witkeyhelp.R;
 import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.dialog.InternetDia;
+import com.witkey.witkeyhelp.event.GeographyBean;
+import com.witkey.witkeyhelp.event.InternetEvent;
+import com.witkey.witkeyhelp.event.LoginEvent;
 import com.witkey.witkeyhelp.services.ReceiveMsgService;
-import com.witkey.witkeyhelp.util.CalendarUtil;
+import com.witkey.witkeyhelp.util.DialogCreator;
+import com.witkey.witkeyhelp.util.FileHelper;
+import com.witkey.witkeyhelp.util.SharePreferenceManager;
+import com.witkey.witkeyhelp.util.SpUtils;
 import com.witkey.witkeyhelp.util.StatusbarColorUtils;
 import com.witkey.witkeyhelp.util.SystemBarTintManager;
 import com.witkey.witkeyhelp.util.ToastUtils;
 import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.IView;
 import com.witkey.witkeyhelp.util.Error;
+import com.witkey.witkeyhelp.view.impl.LoginActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import java.io.File;
+import java.util.Set;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.event.LoginStateChangeEvent;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
 
 
 /**
@@ -76,6 +104,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
     protected boolean isRefresh;
 
 
+    public static boolean NETWORKBOOLEAN = true;
+
     static {
         //使用svg图片
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -100,21 +130,41 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         super.onConfigurationChanged(newConfig);
     }
 
-    private Bundle savedInstanceState;
 
+
+    private  Bundle savedInstanceState;
     public Bundle getSavedInstanceState() {
         return savedInstanceState;
     }
 
+    protected float mDensity;
+    protected int mDensityDpi;
+    protected int mWidth;
+    protected int mHeight;
+    protected float mRatio;
+    protected int mAvatarSize;
+    private Context mContext;
+    private Dialog dialoglogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        this.savedInstanceState=savedInstanceState;
         // fragment:getActivity()空指针解决方法
         if (savedInstanceState != null) {
             savedInstanceState.remove("android:support:fragments");
             //注意：基类是Activity时参数为android:fragments， 一定要在super.onCreate函数前执行！！！
         }
         super.onCreate(savedInstanceState);
-        this.savedInstanceState = savedInstanceState;
+       setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+
+
+        if (isGetUser()) {
+            user = SpUtils.getObject(this, "LOGIN");
+        } else {
+
+
+        }
         mActivity = BaseActivity.this;
 
         //配置状态栏
@@ -130,25 +180,208 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         //Activity操作
         onCreateActivity();
         //如果为绑定,即绑定
-        bind();
+        //bind();
+
+
+        JMessageClient.registerEventReceiver(this);
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        mDensity = dm.density;
+        mDensityDpi = dm.densityDpi;
+        mWidth = dm.widthPixels;
+        mHeight = dm.heightPixels;
+        mRatio = Math.min((float) mWidth / 720, (float) mHeight / 1280);
+        mAvatarSize = (int) (50 * mDensity);
+
+
+        MyAPP.getInstance().addActivity(this);
+        EventBus.getDefault().register(this);
+         //initReceiver();
     }
 
-    /**
-     * 是否需要user信息
-     * @return
-     *  false 不需要
-     *  true 需要
-     */
-    protected boolean isGetUser() {
-        return false;
+
+    public void onEventMainThread(LoginStateChangeEvent event) {
+
+        final LoginStateChangeEvent.Reason reason = event.getReason();
+        UserInfo myInfo = event.getMyInfo();
+        if (myInfo != null) {
+            String path;
+            File avatar = myInfo.getAvatarFile();
+            if (avatar != null && avatar.exists()) {
+                path = avatar.getAbsolutePath();
+            } else {
+                path = FileHelper.getUserAvatarPath(myInfo.getUserName());
+            }
+            SharePreferenceManager.setCachedUsername(myInfo.getUserName());
+            SharePreferenceManager.setCachedAvatarPath(path);
+            JMessageClient.logout();
+        }
+        switch (reason) {
+            case user_logout:
+                setAlias("");
+                JMessageClient.logout();
+                View.OnClickListener listener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (v.getId()) {
+                            case R.id.jmui_cancel_btn:
+//                                setAlias("");
+//                                JMessageClient.logout();
+                                MyAPP.getInstance().exit();
+                                Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+                                intent.putExtra("type", "0");
+                                startActivity(intent);
+                                SpUtils.putObject(BaseActivity.this, "LOGIN", null);
+                                dialoglogin.dismiss();
+                                finish();
+                                break;
+                            case R.id.jmui_commit_btn:
+                                final User user = SpUtils.getObject(BaseActivity.this, "LOGIN");
+                                JMessageClient.login(user.getUserName(), "123456", new BasicCallback() {
+                                    @Override
+                                    public void gotResult(int responseCode, String responseMessage) {
+                                        if (responseCode == 0) {
+
+                                            setAlias(user.getUserName());
+                                            ToastUtils.showTestShort(BaseActivity.this, "登录成功");
+//                                            Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+//                                            intent.putExtra("type", "0");
+                                            dialoglogin.dismiss();
+                                            EventBus.getDefault().post(new LoginEvent("响应事件"));
+                                        } else {
+                                            setAlias("");
+                                            ToastUtils.showTestShort(BaseActivity.this, "登录失败，请重新登录");
+                                            JMessageClient.logout();
+                                            MyAPP.getInstance().exit();
+                                            Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+                                            intent.putExtra("type", "0");
+                                            startActivity(intent);
+                                            SpUtils.putObject(BaseActivity.this, "LOGIN", null);
+                                            dialoglogin.dismiss();
+                                            finish();
+                                        }
+                                    }
+                                });
+                                dialoglogin.dismiss();
+                                break;
+                        }
+                    }
+                };
+                dialoglogin = DialogCreator.createLogoutStatusDialog(this, "您的账号在其他设备上登录", listener);
+                dialoglogin.getWindow().setLayout((int) (0.8 * mWidth), WindowManager.LayoutParams.WRAP_CONTENT);
+                dialoglogin.setCanceledOnTouchOutside(false);
+                dialoglogin.setCancelable(false);
+                dialoglogin.show();
+                break;
+            case user_password_change:
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    private void setAlias(String name) {
+        // EditText aliasEdit = (EditText) findViewById(R.id.et_alias);
+        String alias = name;
+
+//        if (TextUtils.isEmpty(alias)) {
+//            // Toast.makeText(this,R.string.error_alias_empty, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        if (!ExampleUtil.isValidTagAndAlias(alias)) {
+//            //  Toast.makeText(this,R.string.error_tag_gs_empty, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+        // 调用 Handler 来异步设置别名
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
+    }
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Log.i(TAG, logs);
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    break;
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Log.i(TAG, logs);
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    logs = "Failed with errorCode = " + code;
+
+            }
+            // ExampleUtil.showToast(logs, getApplicationContext());
+        }
+    };
+    private static final int MSG_SET_ALIAS = 1001;
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MobclickAgent.onPageStart(getClass().getSimpleName());
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (isGetUser()) {
-            user = MyAPP.getInstance().getUser();
-        }
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(getClass().getSimpleName());
+        MobclickAgent.onPause(this);
+
+    }
+
+    /**
+     * 是否需要user信息
+     *
+     * @return false 不需要
+     * true 需要
+     */
+    protected boolean isGetUser() {
+        return false;
+    }
+
+
+    // 通过注解方式响应事件
+    @Subscribe(threadMode = ThreadMode.POSTING, priority = 1, sticky = false)
+    public void onEvent(LoginEvent event) {
+        // 响应事件
+
+        dialoglogin.dismiss();
     }
 
     /**
@@ -222,43 +455,74 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    /**
-     * 绑定服务
-     */
-    private void bind() {
-        Intent intent = new Intent(BaseActivity.this, ReceiveMsgService.class);
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
-    }
+//    /**
+//     * 绑定服务
+//     */
+//    private void bind() {
+//        Intent intent = new Intent(BaseActivity.this, ReceiveMsgService.class);
+//        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+//    }
 
-    /**
-     * 监控网络的service
-     */
-    protected ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-        }
+//    /**
+//     * 监控网络的service
+//     */
+//    protected ServiceConnection serviceConnection = new ServiceConnection() {
+//        @Override
+//        public void onServiceDisconnected(ComponentName name) {
+//        }
+//
+//        @Override
+//        public void onServiceConnected(ComponentName name, IBinder service) {
+//            receiveMsgService = ((ReceiveMsgService.MyBinder) service)
+//                    .getService();
+//            receiveMsgService.setOnGetConnectState(new ReceiveMsgService.GetConnectState() { // 添加接口实例获取连接状态
+//                @Override
+//                public void GetState(boolean isConnected) {
+//                    if (conncetState != isConnected) { // 如果当前连接状态与广播服务返回的状态不同才进行通知显示
+//                        conncetState = isConnected;
+//                        if (conncetState) {// 已连接
+//                            handler.sendEmptyMessage(1);
+//                            NETWORKBOOLEAN = true;
+//                        } else {// 未连接
+//                            handler.sendEmptyMessage(2);
+//                            NETWORKBOOLEAN = false;
+//                        }
+//                    }
+//                }
+//            });
+//        }
+//    };
+//    private NetworkReceiver mReceiver;
+//    private void initReceiver() {
+//        mReceiver = new NetworkReceiver();
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+//        registerReceiver(mReceiver, filter);
+//    }
+
+    //监听网络状态的广播
+    private class NetworkReceiver extends BroadcastReceiver {
 
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            receiveMsgService = ((ReceiveMsgService.MyBinder) service)
-                    .getService();
-            receiveMsgService.setOnGetConnectState(new ReceiveMsgService.GetConnectState() { // 添加接口实例获取连接状态
-                @Override
-                public void GetState(boolean isConnected) {
-                    if (conncetState != isConnected) { // 如果当前连接状态与广播服务返回的状态不同才进行通知显示
-                        conncetState = isConnected;
-                        if (conncetState) {// 已连接
-                            handler.sendEmptyMessage(1);
-                        } else {// 未连接
-                            handler.sendEmptyMessage(2);
-                        }
-                    }
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null && intent.getAction().equals("android.net.conn.CONNECTIVITY_CHANGE")) {
+                ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeInfo = manager.getActiveNetworkInfo();
+                if (null == activeInfo) {
+                    handler.sendEmptyMessage(2);
+                    NETWORKBOOLEAN = true;
+
+                } else {
+                    handler.sendEmptyMessage(1);
+                    NETWORKBOOLEAN = false;
+
+                 EventBus.getDefault().post(new InternetEvent("有网"));
                 }
-            });
+            }
         }
-    };
-
+    }
     //监听网络
+    @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             if (dialog == null) {
@@ -269,14 +533,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
                     if (dialog != null || dialog.isShowing()) {
                         dialog.dismiss();
                     }
-                    ToastUtils.showShort(mActivity, "网络已经连接,请刷新", 3);
+                   // ToastUtils.showShort(mActivity, "网络已经连接,请刷新", 3);
                     //网络恢复,自动刷新界面
 //                    startRefresh(targetView, callback);
                     break;
                 case 2:// 未连接
                     Log.d(TAG, "handleMessage:网络未连接 ");
                     if (!mActivity.isFinishing()) {
-                        dialog.show();
+                        //dialog.show();
                         onError("请确认网络已连接~~");
                     }
                     break;
@@ -305,13 +569,16 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
             //FLAG_TRANSLUCENT_STATUS 华为手机不显示
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+           getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
 //            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 //                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 //            fwRootLayout.setSystemUiVisibility(option);
             //设置不起作用
 //            fwRootLayout.setFitsSystemWindows(true);//需要把根布局设置为这个属性 子布局则不会占用状态栏位置
 //            fwRootLayout.setClipToPadding(true);//需要把根布局设置为这个属性 子布局则不会占用状态栏位置
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 getWindow().setStatusBarColor(Color.TRANSPARENT);
             }
@@ -322,15 +589,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         tintManager.setNavigationBarTintEnabled(true);// 激活导航栏设置
 //        tintManager.setStatusBarTintColor(0xff111111);//设置状态栏颜色
 //        tintManager.setStatusBarTintResource(Color.RED);//设置状态栏颜色
+
         if (isLight()) {
             tintManager.setStatusBarDarkMode(false, this);//false 状态栏字体颜色是白色 MIUI
             fwRootLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE); //HUAWEI
             StatusbarColorUtils.setStatusBarDarkIcon(this, false);  //参数 false 白色 true 黑色 MEIZU
         } else {
             tintManager.setStatusBarDarkMode(true, this);//false 状态栏字体 true 颜色是黑色
-            fwRootLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+           fwRootLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             StatusbarColorUtils.setStatusBarDarkIcon(this, true);  //参数 false 白色 true 黑色
         }
+
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -355,15 +624,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /**
-     * 当前界面关闭时的操作
-     */
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        dialog = null;
-        MyAPP.getInstance().activityList.remove(this);
-    }
 
     /**
      * 发生错误时操作
@@ -372,104 +632,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
     public void onError(String error) {
         DialogUtil.dismissProgress();
         if (!"请确认网络已连接~~".equals(error)) {
-            Log.d(TAG, "onError: " + error);
-            Error.showError(error, mActivity);
-        }
-//        // ReplaceView: 进行覆盖errorView
-//        if (callback != null) {
-//            if (callback.isDefaultError()) {
-//                showErrorView();
-//            }
-//        }
-    }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//update date: 2019/7/12 12:25
-//author:lingxu
 
-    //替换view的util
-//    public ReplaceViewHelper replaceViewHelper;
-//    /**
-//     * ReplaceView: 覆盖上errorView
-//     */
-//    protected void showErrorView() {
-//        if (replaceViewHelper != null) {
-//            //删除refreshView
-//            removeOtherView();
-//            //显示errorView
-//            replaceViewHelper.toReplaceView(targetView, R.layout.layout_error);
-//            isMainView = false;
-//            //刷新操作
-//            replaceViewHelper.getView().setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //判断是否联网,联网才进行刷新
-//                    if (MyAPP.getInstance().isNetContect()) {
-//                        //错误时
-//                        startRefresh(targetView, callback);
-//                    } else {
-//                        Toast("请检查网络哦~", 3);
-//                    }
-//                }
-//            });
-//        }
-//    }
-//
-//    /**
-//     * 当前是否为原本的view
-//     */
-//    private boolean isMainView = true;
-//
-//    public interface IIsDefaultCallback {
-//        /**
-//         * 判断是否显示为默认的错误
-//         *
-//         * @return true 默认 false 非默认,手动调用showErrorView()
-//         */
-//        boolean isDefaultError();
-//
-//        /**
-//         * 刷新操作
-//         */
-//        void refreshWork();
-//    }
-//
-//    private IIsDefaultCallback callback;
-//
-//    /**
-//     * ReplaceView: 开启刷新
-//     *
-//     * @param targetView 要覆盖的view
-//     */
-//    protected void startRefresh(View targetView, IIsDefaultCallback callback) {
-//        if (targetView != null) {
-//            this.callback = callback;
-//            this.targetView = targetView;
-//            if (targetView != null) {
-//                //刷新操作
-//                if (replaceViewHelper == null) {
-//                    replaceViewHelper = new ReplaceViewHelper(mActivity);
-//                }
-//                if (!isMainView) {
-//                    removeOtherView();
-//                }
-//                replaceViewHelper.toReplaceView(targetView, R.layout.layout_refresh);
-//                callback.refreshWork();
-//                isMainView = false;
-//            }
-//        }
-//    }
-//
-//    /**
-//     * 成功后删除
-//     * ReplaceView: 删除覆盖的View
-//     */
-//    protected void removeOtherView() {
-//        if (replaceViewHelper != null) {
-//            replaceViewHelper.removeView();
-//            isMainView = true;
-//        }
-//    }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            Error.showError(error, mActivity);
+
+        }
+
+    }
+
+
+
 
     //封装通用toast方法
     protected void Toast(String info, int state) {
@@ -477,65 +648,44 @@ public abstract class BaseActivity extends AppCompatActivity implements IView {
         ToastUtils.showShort(this, info, state);
     }
 
-    /**
-     * 获取当前年月日
-     */
-//    protected void getTime() {
-//        Calendar cal = Calendar.getInstance();
-//        monthOfYear = cal.get(Calendar.MONTH);
-//        dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-//        year = cal.get(Calendar.YEAR);
-//    }
 
 
-    private DatePickerDialog datePickerDialog;
+
+
+
+
+
+
+
+
 
     /**
-     * 显示日历dialog
-     *
-     * @param tv 要显示到那个textview
+     * 获取到权限进行的操作
      */
-    protected DatePickerDialog showCalendarDialog(final TextView tv) {
-        if (datePickerDialog == null) {
-            datePickerDialog = new DatePickerDialog(mActivity, R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    tv.setText(setTimeShow(year, monthOfYear, dayOfMonth));
-                }
-            }, CalendarUtil.getTime()[0], CalendarUtil.getTime()[1], CalendarUtil.getTime()[2]);
-        }
-        datePickerDialog.show();
-        return datePickerDialog;
+    protected void startLoad() {
+        //  getLocationClient();
+        EventBus.getDefault().post(new GeographyBean("获取地理位置成功"));
+
     }
 
-    /**
-     * 设置时间显示
-     *
-     * @return xxxx-xx-xx
-     */
-    protected String setTimeShow(int year, int monthOfYear, int dayOfMonth) {
-        String format = "%02d";
-        return year + "-" + String.format(format, (monthOfYear + 1)) + "-" + String.format(format, dayOfMonth);
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dialog = null;
+        MyAPP.getInstance().activityList.remove(this);
+        EventBus.getDefault().unregister(this);
+
+        //  mLocationClient.onDestroy();//销毁定位客户端，同时销毁本地定位服务。
+
+   //     unbindService(serviceConnection);
     }
 
-//    /**
-//     * 跳转输入界面
-//     *
-//     * @param tv          传入数据所在的tv
-//     * @param requestCode 设置返回值
-//     */
-//    protected void intentChangeInfo(TextView tv, int requestCode) {
-//        String str = tv.getText().toString();
-//        Intent i = new Intent(getApplicationContext(), ChangeInfoActivity.class);
-//        i.putExtra(Contacts.EXTRAS_CHANGE_INFO, requestCode);
-//        i.putExtra(Contacts.EXTRAS_CHANGE_INFO_DETAIL, str.equals("请填写") ? null : str);
-//        startActivityForResult(i, requestCode);
-//    }
-//
-//    protected void intentChangeInfo(ChangeInfoBean changeInfoBean) {
-//        Intent i = new Intent(getApplicationContext(), ChangeInfoActivity.class);
-//        i.putExtra(Contacts.EXTRAS_CHANGE_INFO_DETAIL, changeInfoBean);
-//        startActivityForResult(i, changeInfoBean.getDifCode());
-//    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //  mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+    }
+
 
 }

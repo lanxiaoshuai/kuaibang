@@ -1,6 +1,8 @@
 package com.witkey.witkeyhelp.util;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.witkey.witkeyhelp.widget.ShowToast;
@@ -59,14 +61,17 @@ public class ToastUtils {
      * @param message
      */
     public static void showTestShort(Context context, CharSequence message) {
-        if (!isShow) {
-            if (mToast == null) {
-                mToast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
-            } else {
-                mToast.setText(message);
-                mToast.setDuration(Toast.LENGTH_SHORT);
-            }
+        if (isShow) {
+           // if (mToast == null) {
+                mToast = new ShowToast(context, message);
+//            } else {
+//                mToast.setText(message);
+//                mToast.setDuration(Toast.LENGTH_SHORT);
+//            }
+
             mToast.show();
+        }else {
+
         }
 
     }
@@ -87,6 +92,7 @@ public class ToastUtils {
                 mToast = new ShowToast(context, message, Toast.LENGTH_LONG, state);
             } else {
                 mToast.setText(message);
+
                 mToast.setDuration(Toast.LENGTH_LONG);
             }
             mToast.show();

@@ -126,7 +126,7 @@ public abstract class BaseListActivity extends ToolbarBaseActivity {
 
     @Override
     protected boolean isLight() {
-        return true;
+        return false;
     }
 }
 

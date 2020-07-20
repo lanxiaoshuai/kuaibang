@@ -3,26 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_bg">
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/include_title_by"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#CCCCCC" />
+
+        <Button
+            android:id="@+id/btn_publish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="4.5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_gray_home_jianbian"
+            android:text="立即发布"
+            android:textColor="@color/white"
+
+
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/ll_bottom">
+        android:layout_above="@id/ll_bottom"
+        android:layout_below="@+id/include_title_by"
+
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:orientation="vertical">
 
-            <include layout="@layout/include_toolbar" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:padding="8dp">
 
                 <TextView
@@ -32,172 +74,667 @@
                     android:drawableLeft="@drawable/ic_primary_ver_line"
                     android:drawablePadding="5dp"
                     android:text="咨询内容"
-                    android:textColor="@color/colorPrimary" />
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone" />
+                <!--android:background="@drawable/shape_gray_stroke"-->
+
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tv_title_content"-->
+                <!--android:layout_marginTop="8dp"-->
+
+                <!--android:focusable="true"-->
+                <!--android:focusableInTouchMode="true"-->
+                <!--android:padding="5dp">-->
+
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="top|left"
+                    android:hint="输入您的问题"
+                    android:lineSpacingExtra="5dp"
+                    android:minLines="9"
+                    android:padding="5dp"
+                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_title_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/shape_gray_stroke"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:padding="5dp">
+                    android:layout_below="@+id/et_content"
 
-                    <EditText
-                        android:id="@+id/et_content"
+
+                    >
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/photolist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:gravity="top|left"
-                        android:hint="输入您的问题"
-                        android:minLines="9"
-                        android:textSize="14sp" />
+                        android:layout_toRightOf="@+id/iv_pic"
+
+                        />
+
 
                     <ImageView
-                        android:id="@+id/iv_pic"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_below="@+id/et_content" />
-
-                    <TextView
-                        android:id="@+id/btn_add_pic"
+                        android:id="@+id/expression"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/et_content"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/shape_primary_solid"
-                        android:padding="5dp"
-                        android:text="添加图片"
-                        android:textColor="@color/white" />
-                </RelativeLayout>
-            </RelativeLayout>
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/shixin_delete"
+                        android:visibility="gone" />
 
-            <RelativeLayout
+
+                </RelativeLayout>
+
+                <!--<TextView-->
+                <!--android:id="@+id/btn_add_pic"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/et_content"-->
+                <!--android:background="@drawable/shape_primary_solid"-->
+                <!--android:padding="5dp"-->
+                <!--android:text="添加图片"-->
+                <!--android:textColor="@color/white" />-->
+            </RelativeLayout>
+            <!--</RelativeLayout>-->
+
+            <TextView
+                android:id="@+id/position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/shape_gray_home"
+                android:drawableLeft="@mipmap/dingwei_left"
+                android:drawableRight="@mipmap/dingwei_right"
+                android:drawablePadding="10dp"
+                android:paddingLeft="11dp"
+                android:paddingTop="5dp"
+                android:paddingRight="11dp"
+                android:paddingBottom="5dp"
+                android:text="万里长城好汉坡"
+                android:textColor="#ff666666"
+                android:textSize="13sp" />
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:background="@color/white"-->
+            <!--android:padding="8dp">-->
+
+            <TextView
+                android:id="@+id/tv_title_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@color/white"
-                android:padding="8dp">
+                android:layout_marginBottom="8dp"
+                android:drawableLeft="@drawable/ic_primary_ver_line"
+                android:drawablePadding="5dp"
+                android:text="悬赏金额"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:id="@+id/addcircle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp">
 
                 <TextView
-                    android:id="@+id/tv_title_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_primary_ver_line"
-                    android:drawablePadding="5dp"
-                    android:text="任务截止时间"
-                    android:textColor="@color/colorPrimary" />
-
-
-                <TextView
-                    android:id="@+id/tv_date"
+                    android:id="@+id/select_circle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_title_date"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_gray_stroke"
-                    android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:drawablePadding="12dp"
-                    android:gravity="center_vertical|start"
-                    android:paddingLeft="24dp"
-                    android:paddingTop="6dp"
-                    android:paddingRight="6dp"
-                    android:paddingBottom="6dp"
-                    android:text="选择结束日期"
-                    android:textColor="#000000" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="@color/white"
-                android:padding="8dp">
+                    android:drawableLeft="@mipmap/seletecicle_icon"
+                    android:drawablePadding="11dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="16dp"
+                    android:text="选择圈子"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_title_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:drawableLeft="@drawable/ic_primary_ver_line"
-                    android:drawablePadding="5dp"
-                    android:text="悬赏金额"
-                    android:textColor="@color/colorPrimary" />
+                    android:layout_toRightOf="@+id/select_circle"
+                    android:drawableRight="@mipmap/arrow_light"
+                    android:drawablePadding="13dp"
+                    android:gravity="right"
+                    android:hint="请选择您发布的圈子（多选）"
+                    android:paddingTop="13dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="16dp"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line_dynamic"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <com.donkingliang.labels.LabelsView
+                android:id="@+id/cloud_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="15dp"
+                app:labelBackground="@drawable/select_home_lable"
+                app:labelTextColor="@color/white"
+                app:labelTextPaddingBottom="4dp"
+                app:labelTextPaddingTop="4dp"
+                app:labelTextSize="12sp"
+                app:wordMargin="18dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <LinearLayout
+                android:id="@+id/dynamic_publishing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_title_money"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:background="@drawable/shape_gray_stroke">
+                    android:layout_marginLeft="15dp">
+
+                    <TextView
+                        android:id="@+id/reward_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/reward_amount_icon"
+                        android:drawablePadding="11dp"
+                        android:paddingTop="13dp"
+                        android:paddingBottom="16dp"
+                        android:text="悬赏金额"
+                        android:textColor="#ff333333"
+                        android:textSize="14sp" />
 
                     <EditText
                         android:id="@+id/et_money"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_toLeftOf="@+id/rg_money_type"
+                        android:layout_toRightOf="@+id/reward_amount"
                         android:background="@null"
-                        android:hint="输入您的任务金额"
-                        android:padding="8dp"
-                        android:textSize="14sp" />
+                        android:digits="0123456789"
+                        android:drawableRight="@mipmap/arrow_light"
+                        android:drawablePadding="13dp"
+                        android:gravity="right"
+                        android:hint="输入您的悬赏金额"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingTop="13dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="16dp"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="#EEEEEE" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
 
                     <RadioGroup
                         android:id="@+id/rg_money_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
                         android:orientation="horizontal"
                         android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                        android:paddingRight="15dp">
 
                         <RadioButton
                             android:id="@+id/rb_RMB"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="false"
-                            android:text="人民币" />
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/select_home_back"
+                            android:button="@null"
+                            android:checked="true"
+                            android:paddingLeft="14dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="14dp"
+                            android:paddingBottom="6dp"
+                            android:text="人民币"
+                            android:textColor="@drawable/selector_text_color_home"
+                            android:textSize="12sp" />
 
                         <RadioButton
                             android:id="@+id/rb_diamonds"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="钻石" />
+                            android:background="@drawable/select_home_back"
+                            android:button="@null"
+                            android:checked="false"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="6dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="6dp"
+                            android:text="钻石"
+                            android:textColor="@drawable/selector_text_color_home"
+                            android:textSize="12sp" />
                     </RadioGroup>
                 </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/consult_line"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:id="@+id/btn_open_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:visibility="gone">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/advanced_settings"
+                    android:drawablePadding="11dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="16dp"
+                    android:text="更多高级设置"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:drawableRight="@mipmap/arrow_light"
+
+                    android:drawablePadding="13dp"
+                    android:gravity="right"
+                    android:paddingTop="13dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="16dp"
+                    android:text="展开更多设置"
+                    android:textColor="#999999"
+                    android:textSize="13sp" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/btn_open_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:background="@drawable/shape_primary_solid"
-                android:padding="5dp"
-                android:text="展开更多高级设置"
-                android:textColor="@color/white" />
 
             <LinearLayout
                 android:id="@+id/ll_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                >
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/dynamic_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp">
+
+                        <TextView
+                            android:id="@+id/dynamic_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/reward_amount_icon"
+                            android:drawablePadding="11dp"
+                            android:paddingTop="13dp"
+                            android:paddingBottom="16dp"
+                            android:text="悬赏金额"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/dynamic_money"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/dynamic_amount"
+                            android:background="@null"
+                            android:digits="0123456789"
+                            android:drawableRight="@mipmap/arrow_light"
+                            android:drawablePadding="13dp"
+                            android:gravity="right"
+                            android:hint="输入您的悬赏金额"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:paddingTop="13dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="16dp"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="#EEEEEE" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:paddingBottom="5dp">
+
+                        <RadioGroup
+                            android:id="@+id/dynamic_money_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="15dp">
+
+                            <RadioButton
+                                android:id="@+id/dynamic_RMB"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:background="@drawable/select_home_back"
+                                android:button="@null"
+                                android:checked="true"
+                                android:paddingLeft="14dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="14dp"
+                                android:paddingBottom="6dp"
+                                android:text="人民币"
+                                android:textColor="@drawable/selector_text_color_home"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/dynamic_diamonds"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/select_home_back"
+                                android:button="@null"
+                                android:checked="false"
+                                android:paddingLeft="20dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="20dp"
+                                android:paddingBottom="6dp"
+                                android:text="钻石"
+                                android:textColor="@drawable/selector_text_color_home"
+                                android:textSize="12sp" />
+                        </RadioGroup>
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/rewardtohelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="#EEEEEE" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="26dp">
+
+                        <TextView
+                            android:id="@+id/lianxidianhua"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ellipse_icon"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="13dp"
+                            android:paddingBottom="16dp"
+                            android:text="联系电话"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_contact"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@+id/lianxidianhua"
+                            android:background="@null"
+                            android:digits="0123456789"
+
+                            android:gravity="right"
+                            android:hint="输入您的联系电话（选填）"
+                            android:inputType="number"
+                            android:lines="1"
+                            android:paddingTop="13dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="16dp"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="42dp"
+                        android:layout_marginRight="15dp"
+                        android:background="#EEEEEE"
+                        android:visibility="gone" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="26dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@mipmap/ellipse_icon"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="13dp"
+                            android:paddingBottom="16dp"
+                            android:text="帮忙者地理位置"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_isPosition"
+                            android:layout_width="wrap_content"
+
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="13dp"
+
+                            android:layout_marginRight="15dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RadioButton
+                                android:id="@+id/rb_isPosition_true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/select_home_back"
+                                android:button="@null"
+                                android:checked="true"
+                                android:paddingLeft="8dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="8dp"
+                                android:paddingBottom="6dp"
+                                android:text="附近的人"
+                                android:textColor="@drawable/selector_text_color_home"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_isPosition_false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/select_home_back"
+                                android:button="@null"
+                                android:checked="false"
+                                android:paddingLeft="8dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="8dp"
+                                android:paddingBottom="6dp"
+                                android:text="不限地域"
+                                android:textColor="@drawable/selector_text_color_home"
+                                android:textSize="12sp" />
+                        </RadioGroup>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="42dp"
+                        android:layout_marginRight="15dp"
+                        android:background="#EEEEEE" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="26dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="32dp"
+                            android:layout_marginRight="32dp"
+
+                            android:drawableLeft="@mipmap/ellipse_icon"
+                            android:drawablePadding="10dp"
+                            android:paddingTop="13dp"
+                            android:paddingBottom="16dp"
+                            android:text="是否需要帮忙者缴纳保证金"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <RadioGroup
+                            android:id="@+id/rg_isNeedBond"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="13dp"
+
+                            android:layout_marginRight="15dp"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp">
+
+                            <RadioButton
+                                android:id="@+id/rb_isNeedBond_true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/select_home_back"
+                                android:button="@null"
+                                android:checked="true"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="6dp"
+                                android:text="是"
+                                android:textColor="@drawable/selector_text_color_home"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_isNeedBond_false"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/select_home_back"
+                                android:button="@null"
+                                android:checked="false"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="6dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="6dp"
+                                android:text="否"
+                                android:textColor="@drawable/selector_text_color_home"
+                                android:textSize="12sp" />
+                        </RadioGroup>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/text_view_xian"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginLeft="42dp"
+                        android:layout_marginRight="15dp"
+                        android:background="#EEEEEE" />
+
+                    <EditText
+                        android:id="@+id/bond_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:digits="0123456789"
+                        android:gravity="right"
+                        android:hint="输入保证金金额 ￥：0.00"
+                        android:inputType="number"
+                        android:lines="1"
+                        android:paddingTop="16dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="20dp"
+
+                        android:textSize="13sp" />
+                    >
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/white"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_title_title"
@@ -221,93 +758,127 @@
                         android:textSize="14sp" />
                 </RelativeLayout>
 
-                <RelativeLayout
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/white"
-                    android:padding="8dp">
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    android:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/tv_title_isBargaining"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:drawableLeft="@drawable/ic_primary_ver_line"
-                        android:drawablePadding="5dp"
-                        android:text="是否可以议价"
-                        android:textColor="@color/colorPrimary" />
-
-                    <RadioGroup
-                        android:id="@+id/rg_isBargaining"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_title_isBargaining"
                         android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                        android:visibility="gone">
 
-                        <RadioButton
-                            android:id="@+id/rb_isBargaining_true"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="是" />
+                            android:layout_marginBottom="8dp"
+                            android:drawableLeft="@drawable/ic_primary_ver_line"
+                            android:drawablePadding="5dp"
+                            android:text="位置"
+                            android:textColor="@color/colorPrimary" />
 
-                        <RadioButton
-                            android:id="@+id/rb_isBargaining_false"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:text="否" />
-                    </RadioGroup>
-                </RelativeLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/white"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:visibility="gone">
 
                     <TextView
-                        android:id="@+id/tv_title_contact"
+                        android:id="@+id/tv_title_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:drawableLeft="@drawable/ic_primary_ver_line"
                         android:drawablePadding="5dp"
-                        android:text="联系方式"
+                        android:text="任务截止时间"
                         android:textColor="@color/colorPrimary" />
 
-                    <EditText
-                        android:id="@+id/et_contact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_title_contact"
-                        android:layout_alignParentLeft="true"
-                        android:background="@drawable/shape_gray_stroke"
-                        android:gravity="top|left"
-                        android:hint="输入您的联系方式"
-                        android:minLines="3"
-                        android:padding="8dp"
-                        android:textSize="14sp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_date"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/et_contact"
-                        android:hint="非必填项默认威客帮app聊天进行沟通"
-                        android:paddingTop="5dp"
-                        android:textSize="12sp" />
+                        android:layout_below="@+id/tv_title_date"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_gray_stroke"
+                        android:drawableRight="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:drawablePadding="12dp"
+                        android:gravity="center_vertical|start"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="6dp"
+                        android:paddingRight="6dp"
+                        android:paddingBottom="6dp"
+                        android:text="选择结束日期"
+                        android:textColor="#000000" />
+
                 </RelativeLayout>
+
+
+                <!--<RelativeLayout-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:padding="8dp">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_title_contact"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:drawableLeft="@drawable/ic_primary_ver_line"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:text="联系电话"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:visibility="gone" />-->
+
+                <!--<EditText-->
+                <!--android:id="@+id/et_contact"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_below="@+id/tv_title_contact"-->
+                <!--android:background="@drawable/shape_gray_stroke"-->
+                <!--android:digits="0123456789"-->
+                <!--android:gravity="top|left"-->
+                <!--android:hint="输入您的联系电话（选填）"-->
+                <!--android:inputType="number"-->
+                <!--android:maxLength="11"-->
+                <!--android:minLines="1"-->
+                <!--android:padding="8dp"-->
+                <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/et_contact"-->
+                <!--android:hint="非必填项默认威客帮app聊天进行沟通"-->
+                <!--android:paddingTop="5dp"-->
+                <!--android:textSize="12sp"-->
+                <!--android:visibility="gone" />-->
+                <!--</RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/white"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_title_mission_num"
@@ -333,7 +904,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@color/white"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_title_isNeedBidding"
@@ -370,74 +942,121 @@
                     </RadioGroup>
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@color/white"
-                    android:padding="8dp">
 
-                    <TextView
-                        android:id="@+id/tv_title_isNeedBond"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_primary_ver_line"
-                        android:drawableRight="@mipmap/ic_home_consult_hint"
-                        android:drawablePadding="5dp"
-                        android:text="是否需要保证金"
-                        android:textColor="@color/colorPrimary" />
+                <!--<RelativeLayout-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:padding="8dp">-->
 
-                    <RadioGroup
-                        android:id="@+id/rg_isNeedBond"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_title_isNeedBond"
-                        android:orientation="horizontal"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                <!--<TextView-->
+                <!--android:id="@+id/tv_title_isPosition"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawableLeft="@drawable/ic_primary_ver_line"-->
 
-                        <RadioButton
-                            android:id="@+id/rb_isNeedBond_true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="是" />
+                <!--android:drawablePadding="5dp"-->
+                <!--android:text="帮忙者地理位置"-->
+                <!--android:textColor="@color/colorPrimary" />-->
 
-                        <RadioButton
-                            android:id="@+id/rb_isNeedBond_false"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="3"
-                            android:text="否" />
-                    </RadioGroup>
-                </RelativeLayout>
+                <!--<RadioGroup-->
+                <!--android:id="@+id/rg_isPosition"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tv_title_isPosition"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/rb_isPosition_true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="2"-->
+                <!--android:text="附近的人" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/rb_isPosition_false"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="3"-->
+                <!--android:text="不限地域" />-->
+                <!--</RadioGroup>-->
+                <!--</RelativeLayout>-->
+
+
+                <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="5dp"-->
+                <!--android:background="@color/white"-->
+                <!--android:padding="8dp">-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_title_isNeedBond"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawableLeft="@drawable/ic_primary_ver_line"-->
+                <!--android:drawablePadding="5dp"-->
+                <!--android:drawableRight="@mipmap/ic_home_consult_hint"-->
+                <!--android:text="是否需要保证金"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:visibility="gone" />-->
+
+                <!--<RadioGroup-->
+                <!--android:id="@+id/rg_isNeedBond"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/tv_title_isNeedBond"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:paddingRight="5dp">-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/rb_isNeedBond_true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="2"-->
+                <!--android:text="是" />-->
+
+                <!--<RadioButton-->
+                <!--android:id="@+id/rb_isNeedBond_false"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="3"-->
+                <!--android:text="否" />-->
+
+
+                <!--</RadioGroup>-->
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/bondrelativeLayout"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_below="@+id/tv_title_isNeedBond"-->
+                <!--android:background="@drawable/shape_gray_stroke"-->
+                <!--android:visibility="gone">-->
+
+                <!--<EditText-->
+                <!--android:id="@+id/bond_price"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:background="@null"-->
+                <!--android:digits="0123456789"-->
+                <!--android:hint="输入保证金"-->
+                <!--android:inputType="number"-->
+                <!--android:maxLines="1"-->
+                <!--android:padding="8dp"-->
+                <!--android:singleLine="true"-->
+                <!--android:textSize="14sp" />-->
+                <!--</RelativeLayout>-->
+                <!--</RelativeLayout>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:text="暂时保存"
-            android:textColor="#535353" />
-
-        <Button
-            android:id="@+id/btn_publish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:text="立即发布"
-            android:textColor="@color/white" />
-    </LinearLayout>
 </RelativeLayout>

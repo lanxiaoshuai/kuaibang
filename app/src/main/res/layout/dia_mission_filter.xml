@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:paddingLeft="8dp"
-    android:paddingTop="15dp"
     android:paddingRight="8dp"
     android:paddingBottom="15dp">
 
 
     <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="任务类型"
+        android:text="悬赏任务的位置"
         android:textColor="@color/black"
         android:textSize="@dimen/dia_mission_filter_title" />
 
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp" />
+        android:paddingBottom="5dp"
+        app:max_select="1"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,19 +59,57 @@
         android:layout_marginTop="6dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp" />
-
-    <Button
-        android:id="@+id/btn_commit"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:background="@color/colorPrimary"
-        android:paddingLeft="15dp"
-        android:paddingTop="5dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="5dp"
-        android:text="@string/ok"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_gray_home_true"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="     重置      "
+                android:textColor="@color/white"
+                android:textSize="16sp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_commit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="38dp"
+            android:background="@drawable/shape_gray_home_true"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="     确定      "
+                android:textColor="@color/white"
+                android:textSize="16sp"
+
+                />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

@@ -23,7 +23,7 @@ public abstract class PermissionActivity extends ToolbarBaseActivity {
     /**
      * 判断是否需要检测，防止不停的弹框
      */
-    private boolean isNeedCheck = true;
+    public boolean isNeedCheck = true;
     private boolean isStartSetting = false;
     protected String[] locationPermissions = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -131,9 +131,9 @@ public abstract class PermissionActivity extends ToolbarBaseActivity {
      */
     private void showMissingPermissionDialog() {
         if (getPermissionType() == TYPE_LOCATION) {
-            showLocationMissingPermissionDialog();
+            //showLocationMissingPermissionDialog();
         } else if (getPermissionType() == TYPE_PIC) {
-            showPicMissingPermissionDialog();
+           // showPicMissingPermissionDialog();
         }
     }
 

@@ -1,8 +1,8 @@
 package com.witkey.witkeyhelp.bean;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author lingxu
@@ -31,7 +31,7 @@ public class PagingResponse<T> {
         this.total = total;
     }
 
-    public ArrayList<T> getRows() {
+    public List<T> getRows() {
         return rows;
     }
 
@@ -42,7 +42,7 @@ public class PagingResponse<T> {
     public PagingResponse() {
     }
 
-    public PagingResponse(int total, ArrayList<T> rows) {
+    public PagingResponse(int total,ArrayList<T> rows) {
         this.total = total;
         this.rows = rows;
     }

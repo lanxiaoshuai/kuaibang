@@ -33,7 +33,7 @@ public class FileUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("获取文件大小", "获取失败!");
+
         }
         return FormetFileSize(blockSize, sizeType);
     }
@@ -55,7 +55,7 @@ public class FileUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("获取文件大小", "获取失败!");
+
         }
         return FormetFileSize(blockSize);
     }
@@ -75,7 +75,7 @@ public class FileUtil {
             size = fis.available();
         } else {
             file.createNewFile();
-            Log.e("获取文件大小", "文件不存在!");
+
         }
         return size;
     }
@@ -179,5 +179,16 @@ public class FileUtil {
                     }
                 }
             }
+    }
+
+    // 获取文件扩展名
+    public static String getExtensionName(String filename) {
+        if ((filename != null) && (filename.length() > 0)) {
+            int dot = filename.lastIndexOf('.');
+            if ((dot > -1) && (dot < (filename.length() - 1))) {
+                return filename.substring(dot + 1);
+            }
+        }
+        return "";
     }
 }

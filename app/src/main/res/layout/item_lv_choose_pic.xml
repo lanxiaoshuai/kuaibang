@@ -27,5 +27,6 @@
         android:layout_marginRight="8dp"
         android:button="@null"
         android:checked="true"
-        android:drawableLeft="@drawable/selector_checkbox_style" />
+        android:drawableLeft="@drawable/selector_checkbox_style"
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

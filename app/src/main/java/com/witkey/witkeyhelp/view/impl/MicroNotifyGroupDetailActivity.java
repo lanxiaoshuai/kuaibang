@@ -165,7 +165,7 @@ public class MicroNotifyGroupDetailActivity extends BaseListActivity implements 
                 microNotifyGroupMember = member;
             }
         }
-        ImgUtil.loadImg(mActivity, microNotifyGroupMember.getHeadUrl(), iv_avatar);
+       // ImgUtil.loadImg(mActivity, microNotifyGroupMember.getHeadUrl(), iv_avatar);
         tv_mission_title.setText(microNotifyGroupMember.getRealName());
         tv_mission_content.setText(microNotifyGroupMember.getRemark());
     }

@@ -162,7 +162,7 @@ public class FormatUtil {
 		 * 总结起来就是第一位必定为1，第二位必定为3或5或8，其他位置的可以为0-9
 		 */
         mobiles = mobiles.trim().replaceAll(" ", "");
-        String telRegex = "[1][3578]\\d{9}";// "[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
+        String telRegex = "[1][3456789]\\d{9}";// "[1]"代表第1位为数字1，"[3578]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
         if (TextUtils.isEmpty(mobiles)) {
             return false;
         } else

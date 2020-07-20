@@ -1,9 +1,13 @@
 package com.witkey.witkeyhelp.presenter;
 
+import android.util.Log;
+
 import com.witkey.witkeyhelp.bean.LoginRequest;
+import com.witkey.witkeyhelp.bean.User;
 import com.witkey.witkeyhelp.model.ILoginModel;
 import com.witkey.witkeyhelp.model.IModel;
 import com.witkey.witkeyhelp.model.impl.LoginModelImpl;
+import com.witkey.witkeyhelp.util.viewUtil.DialogUtil;
 import com.witkey.witkeyhelp.view.ILoginView;
 
 public class LoginPresenterImpl implements ILoginPresenter {
@@ -13,15 +17,18 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
     @Override
     public void Login(final LoginRequest loginRequest) {
-        model.Login( loginRequest, new IModel.AsyncCallback() {
+        model.Login(loginRequest, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
-                    view.passSuccess();
-                    view.codeSuccess();
+
+                view.passSuccess((User) data);
+
             }
 
             @Override
             public void onError(Object data) {
+
+
                 view.onError((String) data);
             }
         });
@@ -32,12 +39,30 @@ public class LoginPresenterImpl implements ILoginPresenter {
         model.GetCode(loginRequest, new IModel.AsyncCallback() {
             @Override
             public void onSuccess(Object data) {
-                view.getCodeSuccess();
+                view.getCodeSuccess(data.toString());
             }
 
             @Override
             public void onError(Object data) {
                 view.onError((String) data);
+            }
+        });
+    }
+
+    @Override
+    public void register(LoginRequest loginRequest) {
+        model.register(loginRequest, new IModel.AsyncCallback() {
+            @Override
+            public void onSuccess(Object data) {
+
+                view.passRegisterSuccess();
+
+            }
+
+            @Override
+            public void onError(Object data) {
+
+                view.onError(data.toString());
             }
         });
     }

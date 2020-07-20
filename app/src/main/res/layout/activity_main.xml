@@ -9,19 +9,19 @@
     tools:context="com.witkey.witkeyhelp.view.impl.MainActivity">
 
     <FrameLayout
+        android:layout_weight="1"
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
+       />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_height="50dp"
         android:background="?android:attr/windowBackground"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/navigation" />
+
+        app:menu="@menu/navigation"
+        />
     <!--app:labelVisibilityMode="labeled" 3个以上时,去除动画效果,全部显示-->
 </LinearLayout>

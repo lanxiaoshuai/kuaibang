@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">witkeyhelp</string>
+    <string name="app_name">酷爱帮</string>
     <string name="title_home">首页</string>
     <string name="title_rewardhall">悬赏大厅</string>
     <string name="title_message">消息</string>
@@ -10,4 +10,146 @@
     <string name="consult">信息咨询</string>
     <string name="offerWard">悬赏帮忙</string>
     <string name="ok">确定</string>
+
+
+    <string name="dialog_cancel">取消</string>
+
+    <string name="btn_send">发送</string>
+
+    <string name="jmui_loading">正在加载</string>
+
+    <string name="jmui_sdcard_not_exist_toast">暂无外部存储</string>
+
+    <string name="jmui_cancel">取消</string>
+    <string name="jmui_symbol_second">\"</string>
+
+    <string name="download_file_failed">下载失败</string>
+
+    <string name="download_file_succeed">下载成功</string>
+
+
+    <string name="jmui_send">发送</string>
+
+    <string name="load_origin_image">查看原图</string>
+
+    <string name="origin_picture">原图</string>
+
+    <string name="choose">选择</string>
+
+    <string name="picture_save_to">图片已保存到手机</string>
+    <string name="picture_save_fail">图片保存失败</string>
+
+    <string name="picture_num_limit_toast">你最多只能同时发送9张图片</string>
+
+    <string name="combine_title">(%s)</string>
+    <string name="jmui_local_picture_not_found_toast">暂无外部存储，某些本地图片不可预览</string>
+
+    <string name="sending_hint">正在发送</string>
+    <string name="downloading_hint">正在下载</string>
+    <string name="download_completed_toast">下载完成</string>
+
+    <string name="jmui_file_not_found_toast">文件丢失, 尝试重新获取</string>
+
+    <string name="file_fetch_failed">文件获取失败</string>
+    <string name="file_not_support_hint">无法打开该类型的文件</string>
+
+    <string name="jmui_voice_length">10"</string>
+
+    <string name="jmui_time_format_accuracy">yyyy-MM-dd HH:mm:ss </string>
+
+    <string name="jmui_monday">周一</string>
+    <string name="jmui_tuesday">周二</string>
+    <string name="jmui_wednesday">周三</string>
+    <string name="jmui_thursday">周四</string>
+    <string name="jmui_friday">周五</string>
+    <string name="jmui_saturday">周六</string>
+    <string name="jmui_sunday">周日</string>
+
+    <string name="group_notification">[群组消息]</string>
+    <string name="group">群聊</string>
+
+    <string name="jmui_send_voice_hint">松开 结束</string>
+
+    <string name="btn_text_speak">按住录音</string>
+    <string name="jmui_record_voice_hint">按住 说话</string>
+
+    <string name="jmui_cancel_record_voice_hint">松开手指，取消发送</string>
+    <string name="jmui_create_file_failed">创建文件失败</string>
+    <string name="jmui_move_to_cancel_hint">手指上滑，取消发送</string>
+    <string name="jmui_record_voice_permission_request">若要使用语音功能，请选择允许录音</string>
+
+    <string name="picker_image_folder_info">共%d张</string>
+
+    <string name="picker_image_exceed_max_image_select">最多选择%d张图片！</string>
+
+    <string name="picker_image_preview">预览</string>
+
+    <string name="all_images">全部图片</string>
+
+    <string name="picker_image_preview_original">发送原图</string>
+
+    <string name="folder_image_count">共%1$d张</string>
+
+    <string name="select_limit">最多选择%1$s张图片</string>
+
+    <string name="select_complete">完成(%1$s/%2$s)</string>
+    <string name="select_send">完成(%1$s/%2$s)</string>
+    <string name="preview_count">预览(%1$s)</string>
+
+    <string name="preview_image_count">%1$s/%2$s</string>
+
+    <string name="origin_size">原图(%1$s)</string>
+
+
+    <string name="picker_image_error">获取图片出错</string>
+
+    <string name="picker_image_folder">相机胶卷</string>
+
+    <string name="picker_image_album_loading">相册加载中…</string>
+    <string name="picker_image_album_empty">相册中没有图片！</string>
+    <string name="unknow_size">未知大小</string>
+
+    <string name="picker_image_send_select">发送（%d）</string>
+
+    <string name="picker_image_preview_original_select">发送原图（%s）</string>
+
+    <string name="sdcard_not_enough_error">存储空间不足</string>
+
+    <string name="gallery_invalid">未找到图库</string>
+    <string name="sdcard_not_enough_head_error">SD卡被拔出或存储空间不足</string>
+
+    <!--以下为错误码提示-->
+    <string name="jmui_server_803008">消息已发出，但被对方拒收了。</string>
+
+    <!--聊天相关-->
+    <string name="network_disconnected_hint">当前网络不可用, 请检查您的网络设置</string>
+
+    <string name="type_picture">[图片]</string>
+    <string name="type_voice">[语音]</string>
+    <string name="type_location">[位置]</string>
+    <string name="type_file">[文件]</string>
+    <string name="type_smallvideo">[小视频]</string>
+    <string name="type_video">[视频]</string>
+
+    <string name="type_custom">[自定义消息]</string>
+
+    <string name="somebody_at_me">[有人@我]</string>
+
+    <string name="draft">[草稿]</string>
+
+    <string name="cancel">取消</string>
+
+    <!--以下为错误码提示-->
+    <string name="jmui_delete_conv">删除该聊天</string>
+
+    <string name="jmui_resend_message_hint">重发该消息？</string>
+    <string name="jmui_resend_commit">重发</string>
+    <string name="protocol">亲爱的用户，欢迎使用本软件，请您使用前\n
+务充分阅读我们的\"隐私政策和用户协议\"\n
+各条款，在您使用\"酷爱帮\"APP时，我们\n
+时发生发射点发射点发顺丰撒旦发生发\n
+将严格按照\"隐私政策和用户协议\"为您提\n
+供服务，保护您的个人信息。\n
+如您同意，请点击"同意使用"开始使用我们的\n
+产品和服务</string>
 </resources>

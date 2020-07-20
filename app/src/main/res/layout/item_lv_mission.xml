@@ -1,64 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="@color/white"
-        android:padding="8dp">
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal"
+        android:paddingRight="15dp">
+
+        <com.witkey.witkeyhelp.widget.CircleImageView
+            android:id="@+id/createUserHeadUrl"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/systemmessagenone" />
 
         <LinearLayout
-            android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="3dp"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/publisher_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="我是一只小兔兔"
+                android:textColor="@color/price_bli_color"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:id="@+id/release_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:includeFontPadding="false"
+                    android:text="22秒前发布"
+                    android:textColor="#b2b2b2"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/release_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/release_time"
+                    android:drawableLeft="@mipmap/release_location"
+                    android:drawablePadding="3dp"
+                    android:includeFontPadding="false"
+                    android:text="山西大学"
+                    android:textColor="#ffb2b2b2"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:id="@+id/tv_mission_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+
+                    android:includeFontPadding="false"
+                    android:text="30元"
+                    android:textColor="@color/shape_org"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:id="@+id/price_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_mission_money"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_toLeftOf="@+id/tv_mission_money"
+                    android:drawableLeft="@mipmap/renminbi"
+
+                    />
+
+                <TextView
+                    android:id="@+id/price_image_diamond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_mission_money"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_toLeftOf="@+id/tv_mission_money"
+                    android:drawableLeft="@mipmap/home_diamond"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_mission_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:lineSpacingExtra="3dp"
+        android:maxLines="6"
+
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容"
+        android:textColor="@color/price_bli_color"
+        android:textSize="15sp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/photolistrecy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" />
+
+    <TextView
+        android:id="@+id/cicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/search_view_bg"
+        android:drawableLeft="@mipmap/cicle_icon_quanbu"
+        android:drawableRight="@mipmap/cicle_icon_right"
+        android:drawablePadding="1.5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="2.5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="2.5dp"
+        android:text=""
+        android:textColor="#ff808080"
+        android:textSize="10sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        android:background="#F0F0F0" />
+
+    <LinearLayout
+        android:id="@+id/orders_relayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tv_mission_type"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_red_stroke"
-                android:ellipsize="end"
-                android:padding="4dp"
-                android:text="紧急求助"
-                android:textColor="@color/item_mission_red" />
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/forward_png" />
 
             <TextView
-                android:id="@+id/tv_mission_title"
-                android:layout_width="match_parent"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:maxLines="1"
-                android:text="任务名称" />
+                android:gravity="center"
+                android:text="转发"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_mission_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll"
-            android:layout_marginTop="10dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容" />
-
-        <TextView
-            android:id="@+id/tv_mission_date"
+        <LinearLayout
+            android:id="@+id/private_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_mission_content"
-            android:layout_alignParentRight="true"
-            android:drawableLeft="@mipmap/ic_mission_money"
-            android:drawablePadding="5dp"
-            android:text="30元"
-            android:textColor="@color/item_mission_red"
-            android:textSize="16sp" />
-    </RelativeLayout>
-</RelativeLayout>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/private_chat" />
+
+            <TextView
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/forward"
+                android:text="回复"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/immediately"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:src="@mipmap/collection_icon" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="收藏"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#F0F0F0" />
+</LinearLayout>
