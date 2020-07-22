@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/release_task_icon"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/informationconsulting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/consultation_hone_icon"
+            android:drawablePadding="14dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="15dp"
+            android:text="咨询"
+            android:textColor="#ffffffff"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="78dp"
+            android:layout_height="0.5dp"
+            android:layout_gravity="right"
+            android:background="#4D4D4D" />
+
+        <TextView
+            android:id="@+id/reward_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/reward_home_icon"
+            android:drawablePadding="14dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="找人帮忙"
+            android:textColor="#ffffffff"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="78dp"
+            android:layout_height="0.5dp"
+            android:layout_gravity="right"
+            android:background="#4D4D4D" />
+
+        <TextView
+            android:id="@+id/dynamic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/dynamic_hone_icon"
+            android:drawablePadding="14dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="20dp"
+            android:text="发动态"
+            android:textColor="#ffffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="match_parent" />
+</LinearLayout>

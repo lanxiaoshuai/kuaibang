@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/incule_toolbar_to" />
+
+    <LinearLayout
+       android:id="@+id/text_cs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="35dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/bond" />
+
+        <TextView
+            android:id="@+id/bond_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="38dp"
+            android:text="0.00"
+            android:textColor="#2B343B"
+            android:textSize="45sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:text="保证金（元）"
+            android:textColor="#2B343B"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/shape_gray_home_jianbian"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="75dp"
+            android:paddingRight="75dp"
+            android:paddingTop="10dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="充值"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:id="@+id/withdraw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="75dp"
+            android:paddingRight="75dp"
+            android:paddingTop="10dp"
+            android:background="@drawable/shape_gray_details_an">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提现"
+                android:textColor="#05C471"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

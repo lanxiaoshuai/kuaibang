@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_about"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                android:text="任务解除原因"
+                android:textColor="#666666"
+                android:textSize="16sp" />
+
+
+
+
+                <TextView
+                    android:id="@+id/text_yuanyin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
+                    android:text="只能选择自己的原因进行解除，若因为悬赏者的原因请点击举报。选择自己的原因解除后将扣除自己一分信誉分"
+                    android:textColor="#999999"
+                    android:textSize="12sp" />
+
+
+
+
+            <com.witkey.witkeyhelp.widget.NoScrollListview
+                android:id="@+id/main_listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                />
+
+            <RelativeLayout
+                android:id="@+id/groupdeitText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/shape_gray_stroke"
+                android:padding="5dp"
+                android:visibility="gone">
+
+                <EditText
+
+                    android:id="@+id/cancel_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="top|left"
+                    android:hint="在此填写原因"
+                    android:minLines="8"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btn_publish"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_gray_home_jianbian"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

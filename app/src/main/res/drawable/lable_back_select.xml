@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 标签的背景 label_bg -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item  android:state_selected="true">
+        <shape>
+            <corners android:radius="45dp" />
+            <solid android:color="@color/labletextColor" />
+        </shape>
+    </item>
+    <item >
+        <shape>
+            <stroke android:color="#05C471" android:width="0.5dp"/>
+            <corners android:radius="45dp" />
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+
+
+
+</selector>

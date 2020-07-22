@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!-- view的各种状态(正常无焦点,焦点,onclick按下、放开等等) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+            <!-- 按钮四个圆角      	radius:半径 -->
+            <corners android:bottomLeftRadius="20dp" android:bottomRightRadius="20dp" android:topLeftRadius="20dp" android:topRightRadius="20dp" />
+            <solid android:color="@color/successsendColor"></solid>
+            <!-- 按钮文字和边缘距离(内边距) -->
+            <padding android:bottom="10dp" android:left="35dp" android:right="35dp" android:top="10dp" />
+
+
+
+</shape>

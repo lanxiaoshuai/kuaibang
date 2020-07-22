@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="33dp"
+                android:text="圈子名称"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/circlename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/createcircle"
+                android:hint="请输入您圈子的名字"
+
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="27dp"
+                android:text="圈子简称"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/circle_abbreviation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/createcircle"
+                android:hint="选填，不超过6个字"
+
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="27dp"
+                android:text="圈子定义"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/circle_definition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="17dp"
+                android:background="@drawable/createcircle"
+                android:hint="选填，不超过200个字"
+
+                android:paddingBottom="15dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <Button
+
+            android:id="@+id/btn_create_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_gray_home_tixian"
+            android:text="创建"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/regis_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_above="@+id/btn_create_now"
+
+            android:layout_marginLeft="15dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_is_cicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="1dp"
+                android:button="@null"
+                android:checked="true"
+                android:drawableLeft="@drawable/selector_registration_opinion" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:drawablePadding="8dp"
+                android:text="我已阅读并同意"
+                android:textColor="#7F7F7F"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/connection_is_cicle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:drawablePadding="8dp"
+                android:text="《圈子规则》"
+                android:textColor="#6DAFF9"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@+id/regis_agreement"
+            android:layout_marginBottom="5dp"
+            android:background="#CCCCCC" />
+    </RelativeLayout>
+</LinearLayout>

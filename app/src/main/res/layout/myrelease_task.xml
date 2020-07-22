@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/white"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_title_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_primary_ver_line"
+            android:drawablePadding="5dp"
+            android:text="反馈内容"
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title_content"
+            android:layout_marginTop="8dp"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top|left"
+                android:hint="在此输入内容..."
+                android:lineSpacingExtra="5dp"
+                android:minLines="7"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/photolist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_pic"
+
+            />
+
+        <ImageView
+            android:id="@+id/expression"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/shixin_delete"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_gray_home"
+        android:drawableLeft="@mipmap/dingwei_left"
+        android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/dingwei_right"
+        android:paddingBottom="5dp"
+        android:paddingLeft="11dp"
+        android:paddingRight="11dp"
+        android:paddingTop="5dp"
+        android:text="定位中"
+        android:textColor="#ff666666"
+        android:textSize="13sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="18dp"
+        android:background="#EEEEEE" />
+
+    <RelativeLayout
+        android:id="@+id/telephone_dial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:background="@color/white"
+        android:paddingBottom="15dp"
+
+        android:paddingLeft="15dp"
+
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="联系方式"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/lianxidianhua"
+            android:background="@null"
+            android:digits="0123456789"
+            android:drawablePadding="13dp"
+            android:drawableRight="@mipmap/arrow_light"
+            android:gravity="right"
+            android:hint="选填"
+            android:inputType="number"
+            android:maxLength="11"
+            android:paddingBottom="16dp"
+            android:paddingRight="15dp"
+            android:paddingTop="13dp"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#EEEEEE" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#CCCCCC" />
+
+            <Button
+                android:id="@+id/btn_publish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="4.5dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_gray_home_jianbian"
+                android:text="立即发布"
+                android:textColor="@color/white"
+
+
+                android:textSize="15sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

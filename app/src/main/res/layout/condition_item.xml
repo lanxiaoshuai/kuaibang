@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/condition_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:background="@drawable/shape_gray_home_true"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+
+    <TextView
+
+        android:id="@+id/condition_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="发布时间"
+        android:textColor="@color/white"
+        android:textSize="10sp" />
+
+</RelativeLayout>

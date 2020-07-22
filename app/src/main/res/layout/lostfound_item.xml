@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+            <com.witkey.witkeyhelp.widget.RoundImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+
+                android:scaleType="centerCrop"
+                android:src="@drawable/jmui_head_icon"
+                app:type="circle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/releasename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="金鱼睡觉干瞪眼"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/releasetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="11-12"
+                    android:textColor="#ff999999"
+                    android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/releasecontent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:text="这是一句认真走心的文案，我没捡到狗，"
+            android:textColor="#ff333333"
+           android:textSize="15sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+
+        <com.witkey.witkeyhelp.widget.NoTouchRecyclerView
+            android:id="@+id/photolist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_pic"
+            android:layout_below="@+id/et_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:visibility="gone"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/all_bg" />
+    </LinearLayout>
+</RelativeLayout>

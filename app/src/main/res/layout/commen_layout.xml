@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.witkey.witkeyhelp.widget.CircleImageView
+            android:id="@+id/comment_item_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/comment_item_userName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="沐风"
+                    android:textColor="#5B595A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/release_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@+id/comment_item_userName"
+                    android:background="#FFC000"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="2dp"
+                    android:text="发布者"
+                    android:textColor="#ffffff"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:id="@+id/bounty_layout"
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/reply_shape"
+                    android:orientation="horizontal"
+                    android:paddingLeft="6dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/bountystatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="公示"
+                        android:textColor="#ffffbd5c"
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:id="@+id/price_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginRight="3dp"
+                        android:src="@mipmap/reply_money_icon" />
+
+                    <TextView
+                        android:id="@+id/amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:text="0.01"
+                        android:textColor="#ffffbd5c"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/comment_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="2020-6-22"
+                android:textColor="#ffb3b3b3"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <ImageView
+
+            android:id="@+id/comment_item_like"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_margin="10dp"
+            android:padding="8dp"
+
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/comment_item_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
+        android:text="从前有座山从前有座山从前有座山从前有座山从前有座山从前有座山从前有座山"
+        android:textColor="#333333"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="15dp"
+        android:text="回复"
+        android:textColor="#ff999999"
+        android:textSize="10sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="15dp"
+        android:background="#F0F0F0" />
+
+</LinearLayout>

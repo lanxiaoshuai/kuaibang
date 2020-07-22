@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+
+
+    <RelativeLayout
+        android:id="@+id/seconday_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/include_title"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/toolbar_padding_left"
+            android:paddingTop="@dimen/toolbar_padding_bottom"
+            android:paddingRight="@dimen/toolbar_padding_right"
+            android:paddingBottom="@dimen/toolbar_padding_bottom">
+
+            <ImageView
+                android:id="@+id/ivBarLeft"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+
+                app:srcCompat="@mipmap/ic_back_icon"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/include_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="10"
+            android:maxLines="1"
+            android:paddingTop="@dimen/toolbar_padding_bottom"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:textColor="@color/bar_titie_white"
+            android:textSize="@dimen/include_title_text_size" />
+
+
+        <Button
+            android:id="@+id/tv_confirm"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/tv_bar_margin_top"
+            android:layout_marginRight="5dp"
+
+            android:onClick="confirm"
+            android:paddingLeft="@dimen/tv_bar_left"
+            android:paddingTop="@dimen/tv_bar_top"
+            android:paddingRight="@dimen/tv_bar_right"
+            android:paddingBottom="@dimen/tv_bar_bottom"
+            android:text="@string/confirm"
+            android:textColor="@drawable/selector_bt_text_color"
+            android:textSize="@dimen/tv_bar_size"
+            android:visibility="gone"
+            tools:targetApi="lollipop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/include_title"
+            android:layout_marginTop="8dp"
+            android:background="#EEEEEE" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:id="@+id/send_layout"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/comment_bt_selector"
+            android:paddingLeft="18dp"
+
+            >
+
+            <EditText
+                android:id="@+id/detail_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="说点什么吧..."
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textColor="#B6B6B6"
+                android:textSize="12sp" />
+        </ScrollView>
+
+
+        <TextView
+            android:id="@+id/comment_btn_pop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="发布"
+            android:textColor="@color/defaultsendColor"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/level_review"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/send_layout"
+        android:layout_below="@+id/seconday_header" />
+
+    <View
+        android:id="@+id/popups_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/popupsColor"
+        android:visibility="gone"/>
+</RelativeLayout>

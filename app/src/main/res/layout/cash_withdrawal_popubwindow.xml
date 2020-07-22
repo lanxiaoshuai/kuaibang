@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/miaobian_biankuan">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_alignParentLeft="true"
+            android:id="@+id/coles_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:padding="10dp"
+           android:paddingLeft="10dp"
+           android:paddingTop="14dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/close_tixian_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="确认提现金额"
+            android:layout_centerInParent="true"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提现"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/cash_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="￥100"
+        android:textColor="#333333"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务费"
+            android:textColor="#ff666666"
+            android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/service_charge"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥1.00"
+            android:textColor="#ff333333"
+            android:textSize="13sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="费率"
+            android:textColor="#ff666666"
+            android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/rate"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1%(最低￥1.00)"
+            android:textColor="#ff333333"
+            android:textSize="13sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/confirmationWithdrawals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="34dp"
+        android:background="@drawable/miaobian_tixian"
+        android:paddingBottom="12dp"
+        android:paddingLeft="34dp"
+        android:paddingRight="34dp"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认提现"
+            android:textColor="#ff45c663"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="                                                                                " />
+</LinearLayout>

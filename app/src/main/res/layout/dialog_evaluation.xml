@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/miaobian_biankuan"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/expression"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/close_dialog" />
+
+    <TextView
+        android:id="@+id/valuation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="您对悬赏者满意吗？"
+        android:textColor="#333333"
+        android:textSize="18sp" />/>
+
+    <com.witkey.witkeyhelp.widget.RatingBar
+        android:id="@+id/rating_bar0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        app:starCount="5"
+        app:starEmpty="@mipmap/cs_weixuanzhong"
+        app:starFill="@mipmap/cs_xuanzhong"
+        app:starHalf="@mipmap/cs_xuanzhong"
+        app:starPadding="10dp"
+        app:starStep="0"
+        app:stepSize="Full"
+        app:starImageSize="32dp"
+        />
+
+    <EditText
+        android:id="@+id/evaluation_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="38dp"
+        android:background="@drawable/back_pingjia"
+        android:gravity="top|left"
+        android:hint="  输入对他的评价吧~                            "
+        android:lineSpacingMultiplier="1.2"
+        android:minLines="4"
+        android:paddingLeft="12dp"
+
+        android:paddingTop="10dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="10dp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/to_evaluate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/lable_back_select"
+        android:paddingBottom="10dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:paddingTop="10dp"
+        android:text="去评价"
+        android:textColor="#ff05c471"
+        android:textSize="13sp" />
+</LinearLayout>

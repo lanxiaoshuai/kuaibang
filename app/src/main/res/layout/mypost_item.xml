@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/release_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:includeFontPadding="false"
+            android:text="23"
+            android:textColor="#333333"
+            android:textSize="30sp" />
+
+        <TextView
+
+            android:id="@+id/release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/release_month"
+            android:layout_toRightOf="@+id/release_month"
+            android:paddingBottom="6dp"
+            android:text="/6"
+            android:textColor="#333333"
+            android:textSize="15sp"
+
+            />
+
+        <TextView
+            android:id="@+id/types_of"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/release_month"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/release_date"
+            android:paddingTop="2dp"
+
+            android:text="信息咨询"
+            android:textColor="#ff333333"
+            android:textSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/types_of"
+            android:layout_alignLeft="@+id/types_of"
+            android:layout_marginTop="10dp">
+
+            <com.witkey.witkeyhelp.widget.RoundImageView
+
+                android:id="@+id/mission_picture"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
+
+                android:scaleType="centerCrop"
+
+                app:type="round" />
+
+            <View
+                android:id="@+id/mission_picture_line"
+                android:layout_width="0.5dp"
+                android:layout_height="80dp" />
+
+            <TextView
+                android:id="@+id/task_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="20dp"
+                android:layout_toRightOf="@+id/mission_picture"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:paddingRight="15dp"
+                android:text="请问有没有太原理工大学学长学姐有物理与光电工程学院集成电路专硕的真..."
+                android:textColor="#ff333333"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/privte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="40dp"
+                android:paddingRight="15dp"
+                android:text="设为私密"
+                android:textColor="@color/color_b3b3b3"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/mission_picture_line"
+
+                android:layout_marginRight="1.5dp"
+
+                android:background="#F0F0F0" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:paddingTop="2dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@+id/bounty_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="赏金:    "
+                android:textColor="#808080"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/bounty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50"
+                android:textColor="#FC6B06"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

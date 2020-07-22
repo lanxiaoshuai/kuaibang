@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/include_emotion_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_emotion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.example.jie.liaotian.emotionkeyboardview.NoHorizontalScrollerViewPager
+            android:id="@+id/vp_emotionview_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_horizontal_line_color" />
+
+        <android.support.v7.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/recyclerview_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/text_function_item"
+            android:drawablePadding="5dp"
+            android:drawableTop="@mipmap/icon_album"
+            android:gravity="center"
+            android:text="相册"
+            android:textColor="#000000"/>
+
+        <TextView
+            style="@style/text_function_item"
+            android:drawablePadding="5dp"
+            android:drawableTop="@mipmap/icon_capture"
+            android:gravity="center"
+            android:text="拍照" />
+
+        <TextView
+            android:visibility="invisible"
+            style="@style/text_function_item"
+            android:drawablePadding="5dp"
+
+            android:gravity="center"
+            android:text="联系人" />
+
+
+        <TextView
+            android:visibility="invisible"
+            style="@style/text_function_item"
+            android:drawablePadding="5dp"
+
+            android:gravity="center"
+            android:text="位置" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/miaobian_biankuan">
+
+    <ImageView
+        android:id="@+id/expression"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/close_dialog" />
+
+    <ImageView
+        android:id="@+id/receipt_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+
+        android:src="@mipmap/look_misery" />
+     <TextView
+         android:id="@+id/receipt_title"
+         android:layout_marginTop="6dp"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:textSize="18sp"
+         android:textColor="#FF333333"
+         android:text="您的悬赏任务已被领取"
+         android:layout_marginBottom="20dp"/>
+    <View
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFDCDCDC"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:text="悬赏内容："
+        android:textColor="#999999"
+        android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/ways_release"
+        android:layout_marginTop="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:text="问一下如何改变图片分辨率呀呀呀呀呀..."
+        android:textColor="#333333"
+        android:textSize="14sp"/>
+
+
+    <LinearLayout
+android:visibility="gone"
+        android:layout_marginTop="75dp"
+        android:layout_gravity="center"
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_gray_home_true"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:paddingTop="10dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系帮忙者"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_marginBottom="22dp"
+        android:layout_gravity="center"
+        android:id="@+id/withdraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_gray_details_an"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="56dp"
+        android:paddingRight="56dp"
+        android:paddingTop="10dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好的，知道了"
+            android:textColor="#05C471"
+            android:textSize="16sp"
+
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_marginTop="75dp"
+        android:id="@+id/content_one"
+        android:layout_gravity="center"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_gray_home_true"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="56dp"
+        android:paddingRight="56dp"
+        android:paddingTop="10dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是，确认完成"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="22dp"
+        android:layout_gravity="center"
+        android:id="@+id/content_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_gray_details_an"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:paddingTop="10dp"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="否，未完成"
+            android:textColor="#05C471"
+            android:textSize="16sp"
+
+            />
+    </LinearLayout>
+</LinearLayout>

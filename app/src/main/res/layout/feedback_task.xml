@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:background="@drawable/miaobian_biankuan">
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/coles_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/close_dialog" />
+    <TextView
+        android:id="@+id/feedback_task"
+        android:layout_marginTop="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="#333333"
+     />
+
+
+
+    <LinearLayout
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+       android:layout_marginBottom="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/shape_gray_home_true"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="72dp"
+        android:paddingRight="72dp"
+        android:paddingTop="10dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我知道了"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

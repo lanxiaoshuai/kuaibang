@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lin_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/toolbar_padding_right">
+
+            <ImageView
+                android:id="@+id/return_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:paddingLeft="15dp"
+                app:srcCompat="@mipmap/ic_back_icon" />
+
+            <RelativeLayout
+                android:id="@+id/search_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/search_view_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/circle_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/search_icon"
+                    android:drawablePadding="16dp"
+                    android:gravity="center_vertical"
+                    android:hint="搜索圈子"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:layout_gravity="center"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:textColorHint="#9B9B9B"
+                    android:textSize="14sp" />
+
+
+                <ImageView
+                    android:id="@+id/search_edit_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@mipmap/guanbi"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/search_for"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:paddingRight="15dp"
+                android:text="搜索"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="8dp"
+            android:background="#EEEEEE" />
+
+        <TextView
+
+            android:id="@+id/history_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="历史搜索"
+            android:textColor="#ff808080"
+            android:textSize="12sp"
+            />
+
+        <com.donkingliang.labels.LabelsView
+            android:id="@+id/cloud_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="26dp"
+            app:labelTextColor="@color/price_bli_color"
+            app:labelTextPaddingBottom="6dp"
+            app:labelTextPaddingLeft="8dp"
+            app:labelTextPaddingRight="10dp"
+            app:labelTextPaddingTop="6dp"
+            app:labelTextSize="12sp"
+            app:lineMargin="20dp"
+            app:wordMargin="18dp"
+            app:labelBackground="@drawable/cicler_laber_back"
+    />
+
+        <TextView
+            android:id="@+id/circle_recommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+
+            android:text="圈子推荐"
+            android:textColor="#ff808080"
+            android:textSize="12sp"
+            android:layout_marginTop="26dp"/>
+
+        <com.donkingliang.labels.LabelsView
+            android:id="@+id/ecommended_circles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="26dp"
+            app:labelTextColor="@color/price_bli_color"
+            app:labelBackground="@drawable/cicler_laber_back"
+            app:labelTextPaddingBottom="6dp"
+            app:labelTextPaddingLeft="8dp"
+            app:labelTextPaddingRight="10dp"
+            app:labelTextPaddingTop="6dp"
+            app:labelTextSize="12sp"
+            app:lineMargin="20dp"
+            app:wordMargin="18dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/create_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:drawablePadding="5dp"
+        android:drawableRight="@mipmap/circle_icon"
+        android:focusable="false"
+        android:gravity="bottom"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:text="如果没有您需要的圈子，您可以去创建"
+        android:textSize="10sp" />
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/on_cicle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+  >
+
+        <TextView
+            android:id="@+id/to_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/shape_gray_home_true"
+            android:gravity="center"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="去创建“奇幻小说”圈"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/no_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/to_create"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="暂无“奇幻小说”相关内容"
+            android:textColor="#808080"
+            android:textSize="15sp"
+
+            />
+    </RelativeLayout>
+</LinearLayout>

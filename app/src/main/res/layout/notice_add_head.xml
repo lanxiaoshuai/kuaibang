@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/notification_relay"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/jmui_list_item_bg"
+        android:focusable="false"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="14dp"
+                android:gravity="center_vertical">
+
+                <com.witkey.witkeyhelp.widget.RoundImageView
+                    android:id="@+id/msg_item_head_icon"
+                    android:layout_width="47.33dp"
+                    android:layout_height="47.33dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/fabulous_icon"
+                    app:type="circle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/new_msg_number"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@mipmap/unread_msg_red"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="2dp">
+
+            <LinearLayout
+                android:id="@+id/title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10.33dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/conv_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_marginTop="8dp"
+                    android:singleLine="true"
+                    android:text="赞与收藏"
+                    android:textColor="#2C2C2C"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/msg_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12.67dp"
+                    android:gravity="top"
+                    android:text="06-08"
+                    android:textColor="#B3B3B3"
+                    android:textSize="11.33sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msg_item_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_layout"
+                android:layout_marginTop="1.33dp"
+                android:ems="10"
+                android:singleLine="true"
+                android:text="赏金已到账"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="12.67dp"
+        android:background="#D9D9D9"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/relayout_rebly"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/jmui_list_item_bg"
+        android:focusable="false"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="14dp"
+                android:gravity="center_vertical">
+
+                <com.witkey.witkeyhelp.widget.RoundImageView
+                    android:id="@+id/msg_item_head_icon_two"
+                    android:layout_width="47.33dp"
+                    android:layout_height="47.33dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/reply_icon"
+                    app:type="circle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/new_msg_number_two"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="4dp"
+                android:background="@mipmap/unread_msg_red"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="2dp">
+
+            <LinearLayout
+                android:id="@+id/title_layout_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10.33dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/conv_item_name_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="回复"
+                    android:textColor="#2C2C2C"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/msg_item_date_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12.67dp"
+                    android:gravity="top"
+                    android:text="06-08"
+                    android:textColor="#B3B3B3"
+                    android:textSize="11.33sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msg_item_content_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_layout_two"
+                android:layout_marginTop="1.33dp"
+                android:ems="10"
+                android:singleLine="true"
+                android:text="赏金已到账"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="12.67dp"
+        android:background="#D9D9D9"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/official_layout"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/jmui_list_item_bg"
+
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="14dp"
+                android:gravity="center_vertical">
+
+                <com.witkey.witkeyhelp.widget.RoundImageView
+                    android:id="@+id/msg_item_head_icon_there"
+                    android:layout_width="47.33dp"
+                    android:layout_height="47.33dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/message_icon"
+                    app:type="circle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/new_msg_number_there"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/unread_msg_red"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="74dp"
+            android:layout_marginTop="2dp">
+
+            <LinearLayout
+                android:id="@+id/title_layout_there"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10.33dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/conv_item_name_there"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="官方小助手"
+                    android:textColor="#2C2C2C"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/msg_item_date_there"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12.67dp"
+                    android:gravity="top"
+                    android:text="06-08"
+                    android:textColor="#B3B3B3"
+                    android:textSize="11.33sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/msg_item_content_there"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_layout_there"
+                android:layout_marginTop="1.33dp"
+                android:ems="10"
+                android:singleLine="true"
+                android:text="赏金已到账"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+
+        android:background="#F0F0F0" />
+</LinearLayout>

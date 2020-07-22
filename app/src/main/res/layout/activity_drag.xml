@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dragView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+
+
+    <com.witkey.witkeyhelp.widget.drag.DragScrollView
+        android:id="@+id/dragScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:paddingRight="15dp"
+        android:scrollbars="none">
+
+        <com.witkey.witkeyhelp.widget.drag.DragView
+            android:id="@+id/dragView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            dragView:column="3"
+            dragView:horizontal_padding="10dp"
+            dragView:ratio="2.33"
+            dragView:vertical_padding="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:text="我的圈子"
+                    android:textColor="#808080"
+                    android:textSize="16dp" />
+                <ImageView
+                    android:id="@+id/colse_cicle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/colse_cicle_icon"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="10dp"
+                  />
+                <TextView
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/colse_cicle"
+                    android:id="@+id/edit_circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+
+                    android:gravity="center_vertical"
+                    android:text="编辑"
+                    android:textColor="#808080"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_vertical"
+
+                android:text="浏览记录"
+                android:textColor="#808080"
+                android:textSize="16dp" />
+        </com.witkey.witkeyhelp.widget.drag.DragView>
+    </com.witkey.witkeyhelp.widget.drag.DragScrollView>
+</LinearLayout>

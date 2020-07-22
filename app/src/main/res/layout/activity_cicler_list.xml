@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ListView
+        android:id="@+id/cicle_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:divider="@null" />
+
+    <com.lihang.ShadowLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:hl_cornerRadius="18dp"
+        app:hl_shadowColor="@color/black"
+        app:hl_shadowLimit="15dp"
+        android:layout_marginBottom="50dp"
+        >
+
+        <TextView
+               android:id="@+id/create_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/shape_gray_home_true"
+            android:paddingLeft="28dp"
+
+            android:paddingTop="10dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="10dp"
+            android:text=" + 创建圈子"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </com.lihang.ShadowLayout>
+</LinearLayout>

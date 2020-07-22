@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white"
+>
+    <include
+        android:id="@+id/mypublish_list"
+        layout="@layout/include_toolbar"
+        />
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/publish_list"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/tvBack_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/include_title"
+            android:layout_centerVertical="true"
+            android:onClick="goBack"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:paddingLeft="@dimen/toolbar_padding_left"
+            android:paddingRight="@dimen/toolbar_padding_bottom"
+            android:paddingTop="33dp">
+
+            <ImageView
+                android:id="@+id/ivBarLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@mipmap/ic_back_icon"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/include_title_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:paddingTop="@dimen/toolbar_padding_top"
+            android:text="钻石通知"
+            android:textColor="@color/bar_titie_white"
+            android:textSize="@dimen/include_title_text_size" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/select_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/include_title_icon"
+            android:drawablePadding="10dp"
+            android:drawableRight="@mipmap/dingwei_right"
+            android:gravity="center"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:paddingTop="32dp"
+            android:text="万里长城好汉坡"
+            android:textColor="@color/bar_titie_white"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/tv_confirm_a"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="@dimen/tv_bar_margin_top"
+            android:background="?android:attr/selectableItemBackground"
+
+            android:paddingBottom="@dimen/tv_bar_bottom"
+            android:paddingLeft="@dimen/tv_bar_left"
+            android:paddingRight="@dimen/tv_bar_right"
+            android:paddingTop="10dp"
+            android:src="@mipmap/publish_sign" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/include_title_icon"
+            android:layout_marginTop="8dp"
+            android:background="#EEEEEE" />
+    </RelativeLayout>
+
+    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:id="@+id/pullLoadMoreRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
+
+</LinearLayout>

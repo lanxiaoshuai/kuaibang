@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="1.用户任务解除后，钻石和赏金没有打回账户？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="用户解除任务后，将会选择解除任务原因，系统判定解除者无责任后赏金会返回到账户，如果是解除者单方面原因，为创造良好的网络环境系统会扣掉解除者相应的信誉分或赏金以示警告，赏金将在3个工作日内返还"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:text="2.保证金不足无法接单？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="当悬赏者标明需要保证金数额时，帮忙者需缴纳规定保证金；当悬赏者未标注时，帮忙者无需缴纳保证金"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:text="3.我发布任务后，对方迟迟不做任务，我可以无责解除 任务吗？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="用户解除任务后，将会选择解除任务原因，系统判定解除者无责任后赏金会返回到账户，如果是解除者单方面原因，为创造良好的网络环境系统会扣掉解除者相应的信誉分或赏金以示警告"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:text="4.保证金提现后会有手续费吗？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="保证金提现后会直接提到银行卡里，银行会收取0.6%的手续费保证金提现后会直接提到银行卡里，银行会收取0.6%的手续费"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:text="5.平台资金安全有保障吗？？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="您应正确使用及妥善保管、维护您的酷爱帮账号及密码，如发生泄露、遗失、被盗行为，而该行为并非酷爱帮法定过错导致，所有损失将由您自行承担 您在此授予酷爱帮保护您账号安全的相关权利，酷爱帮可定期或不定期采用不同的方式对您账号的使用安全进行检查、验证，包括但不限于主动联系您进行身份验证、短信消 息验证、邮箱认证等。 如您无法完成验证或无正当理由拒绝验证的，酷爱帮可合理怀疑您的账号出现异常或被盗，并中止向该账号提供一切服务"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="保证金提现后会直接提到银行卡里，银行会收取0.6%的手续费保证金提现后会直接提到银行卡里，银行会收取0.6%的手续费"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:text="6.什么是钻石？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="钻石是流通于酷爱帮的货币。在酷爱帮平台中，钻石可以发布信息咨询、悬赏帮助、持有钻石的用户做完悬赏后可用钻石抵扣平台费，若钻石不足，则使用钻石抵扣部分平台费。（可在设置中更改）"
+                android:textColor="#666666"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
+                android:text="7.如何获得钻石？"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="10dp"
+                android:text="a.可系统活动发放 "
+                android:textColor="#666666"
+                android:textSize="13sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="4dp"
+                android:text="b.完成悬赏任务获得"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:layout_marginBottom="40dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

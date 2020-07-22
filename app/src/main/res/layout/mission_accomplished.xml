@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_about"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/finish_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="18dp"
+        android:paddingTop="18dp"
+        android:text="拍摄"
+        android:textColor="#333333"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+
+
+        android:background="#EEEEEE" />
+
+    <TextView
+         android:id="@+id/mobile_Album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="18dp"
+        android:paddingTop="18dp"
+        android:text="从手机相册选择"
+        android:textColor="#333333"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#EEEEEE" />
+
+    <TextView
+        android:id="@+id/claner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="18dp"
+        android:paddingTop="18dp"
+        android:text="取消"
+        android:textColor="#333333"
+
+        android:textSize="18sp" />
+</LinearLayout>

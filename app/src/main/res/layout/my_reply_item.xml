@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+
+    android:orientation="vertical"
+
+    android:paddingTop="15dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <com.witkey.witkeyhelp.widget.RoundImageView
+            android:id="@+id/createUserHeadUrl"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/systemmessagenone"
+            app:type="circle" />
+
+        <TextView
+            android:id="@+id/replyname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/createUserHeadUrl"
+            android:text="长江七七七号"
+            android:textColor="#ff333333"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/replytime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/replyname"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/createUserHeadUrl"
+            android:text="2020-6-23"
+            android:textColor="#ffb3b3b3"
+            android:textSize="9sp" />
+
+        <LinearLayout
+            android:id="@+id/bounty_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/reply_shape"
+            android:orientation="horizontal"
+            android:paddingLeft="6dp"
+            android:paddingTop="5dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/bountystatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="获得"
+                android:textColor="#ffffbd5c"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/reply_money_icon"
+                android:drawablePadding="3.5dp"
+                android:text="0.01"
+                android:textColor="#ffffbd5c"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/my_reply_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="15dp"
+        android:text="这个是有的你直接去申请就可以了"
+        android:textColor="#ff333333"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/replycontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:background="#F0F0F0"
+        android:ellipsize="end"
+        android:lineSpacingExtra="1dp"
+        android:maxLines="2"
+        android:paddingLeft="8dp"
+        android:paddingTop="10dp"
+        android:paddingRight="6dp"
+        android:paddingBottom="8dp"
+        android:text="山西大学的普通学生有饭补吗？就是直接打到卡里
+那种怎么申请这个啊？需要什么条件..."
+        android:textColor="#808080"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="30dp"
+        android:background="#F0F0F0" />
+</LinearLayout>

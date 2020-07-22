@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bar_bg_white">
+
+    <RelativeLayout
+        android:id="@+id/tvBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/include_title"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:onClick="goBack"
+        android:paddingLeft="@dimen/toolbar_padding_left"
+        android:paddingTop="@dimen/toolbar_padding_top"
+        android:paddingRight="@dimen/toolbar_padding_right"
+        android:paddingBottom="@dimen/toolbar_padding_bottom">
+
+        <ImageView
+            android:id="@+id/ivBarLeft"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            app:srcCompat="@mipmap/ic_back_icon"
+            tools:targetApi="lollipop" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/include_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:paddingTop="@dimen/toolbar_padding_top"
+        android:paddingBottom="@dimen/toolbar_padding_bottom"
+        android:textColor="@color/bar_titie_white"
+        android:textSize="@dimen/include_title_text_size" />
+
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/tv_bar_margin_top"
+        android:layout_marginRight="5dp"
+        android:background="?android:attr/selectableItemBackground"
+
+        android:paddingLeft="@dimen/tv_bar_left"
+        android:paddingTop="@dimen/tv_bar_bottom"
+        android:paddingRight="@dimen/tv_bar_right"
+        android:paddingBottom="@dimen/tv_bar_bottom"
+        android:text="账单"
+        android:textColor="#2B343B"
+        android:textSize="@dimen/tv_bar_size"
+        tools:targetApi="lollipop" />
+
+</RelativeLayout>

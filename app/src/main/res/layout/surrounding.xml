@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+
+   >
+
+    <include layout="@layout/include_toolbar" />
+
+    <LinearLayout
+        android:id="@+id/search_box"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/search_view_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:drawableRight="@mipmap/xialai"
+            android:paddingLeft="10dp"
+            android:text="太原市"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="6dp"
+            android:background="#CCCCCC" />
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="@drawable/search_edit_bg"
+            android:drawableLeft="@mipmap/search_icon"
+            android:drawablePadding="16dp"
+            android:hint="搜索当前城市的地址"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="10dp"
+            android:textColorHint="#9B9B9B"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/search_edit_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="8dp"
+            android:src="@mipmap/guanbi"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_dibu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xian"
+            android:layout_marginLeft="15dp"
+
+
+            android:text="定位位置"
+            android:textColor="#ff999999"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="3dp"
+
+            >
+
+            <TextView
+                android:id="@+id/ctual_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="定位中"
+                android:textColor="#333333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/relocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:drawableLeft="@mipmap/dingwei"
+                android:drawablePadding="6dp"
+                android:text="重新定位"
+                android:textColor="#01C474"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/earbynpopular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xian"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="14dp"
+
+
+            android:text="附近位置"
+            android:textColor="#ff999999"
+            android:textSize="13sp" />
+
+
+        <ListView
+            android:id="@+id/search_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:divider="@null" />
+
+        <GridView
+            android:id="@+id/popular_cities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:numColumns="4"
+            android:verticalSpacing="10dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

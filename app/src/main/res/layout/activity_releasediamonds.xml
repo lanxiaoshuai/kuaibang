@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <RelativeLayout
+        android:id="@+id/include_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar" />
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#CCCCCC" />
+
+        <Button
+            android:id="@+id/btn_publish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_gray_home_jianbian"
+            android:text="发布"
+            android:textColor="@color/white"
+
+
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_below="@+id/include_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <EditText
+                android:id="@+id/issue_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="标题"
+                android:maxLength="20"
+                android:paddingBottom="13dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="13dp"
+
+
+                android:textSize="19sp"
+
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#EEEEEE" />
+
+            <EditText
+                android:id="@+id/issue_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top|left"
+
+                android:hint="内容"
+                android:lineSpacingExtra="5dp"
+                android:minLines="9"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="14dp"
+                android:textSize="16sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/photolist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/iv_pic"
+
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="8.5dp"
+                android:background="#EEEEEE" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:id="@+id/reward_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:drawableLeft="@mipmap/reward_amount_icon"
+                    android:drawablePadding="11dp"
+                    android:text="支付方式"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_money_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="11dp"
+                    android:orientation="horizontal"
+
+                    android:paddingRight="15dp">
+
+                    <RadioButton
+                        android:id="@+id/rb_RMB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/select_home_back"
+                        android:button="@null"
+                        android:checked="true"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:paddingTop="6dp"
+                        android:text="人民币"
+                        android:textColor="@drawable/selector_text_color_home"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_diamonds"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/select_home_back"
+                        android:button="@null"
+                        android:checked="false"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="6dp"
+                        android:text="钻石"
+                        android:textColor="@drawable/selector_text_color_home"
+                        android:textSize="12sp" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="12dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@mipmap/number_icon"
+                    android:drawablePadding="11dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="13dp"
+                    android:text="投放人数"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="@null"
+
+                    android:digits="0123456789"
+                    android:drawablePadding="13dp"
+                    android:drawableRight="@mipmap/arrow_light"
+                    android:gravity="right"
+                    android:hint="输入人数"
+                    android:inputType="number"
+                    android:paddingBottom="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="13dp"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:drawableLeft="@mipmap/launch_area_icon"
+                    android:drawablePadding="11dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="13dp"
+                    android:text="投放区域"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:id="@+id/whole_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="26dp">
+
+                <CheckBox
+                    android:id="@+id/cb_is"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:button="@null"
+                    android:checked="true"
+                    android:clickable="false"
+                    android:drawableLeft="@drawable/selector_checkbox_opinion"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cb_is"
+
+
+                    android:paddingBottom="15dp"
+                    android:paddingTop="13dp"
+                    android:text="全国"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="42dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:id="@+id/provinces"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="26dp"
+                android:paddingRight="15dp">
+
+                <CheckBox
+                    android:id="@+id/cb_is_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:button="@null"
+                    android:checked="false"
+                    android:clickable="false"
+                    android:drawableLeft="@drawable/selector_checkbox_opinion"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cb_is_two"
+
+                    android:paddingBottom="15dp"
+                    android:paddingTop="13dp"
+                    android:text="全省(市)"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text_provinces"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="16dp"
+                    android:drawablePadding="4dp"
+                    android:drawableRight="@mipmap/arrow_light" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="42dp"
+                android:layout_marginRight="15dp"
+                android:background="#EEEEEE" />
+
+            <RelativeLayout
+                android:id="@+id/mylocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="26dp"
+                android:paddingRight="15dp">
+
+                <CheckBox
+                    android:id="@+id/cb_is_there"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:button="@null"
+                    android:checked="false"
+                    android:clickable="false"
+                    android:drawableLeft="@drawable/selector_checkbox_opinion"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+                <TextView
+                    android:id="@+id/position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/cb_is_there"
+
+                    android:clickable="false"
+                    android:drawableLeft="@mipmap/dingwei_left"
+                    android:drawablePadding="6dp"
+                    android:drawableRight="@mipmap/dingwei_right"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="13dp"
+                    android:text="定位失败"
+                    android:textColor="#333333"
+                    android:textSize="14sp" />
+
+
+                <EditText
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:digits="0123456789"
+                    android:gravity="right"
+                    android:hint="方圆：km"
+                    android:inputType="number"
+                    android:lineSpacingExtra="5dp"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/map_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="42dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/map_icon" />
+
+            <com.amap.api.maps2d.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:layout_marginLeft="42dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

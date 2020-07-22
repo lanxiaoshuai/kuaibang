@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+
+        <RelativeLayout
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/include_title"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:onClick="goBack"
+            android:paddingLeft="@dimen/toolbar_padding_left"
+            android:paddingTop="@dimen/toolbar_padding_top"
+            android:paddingRight="@dimen/toolbar_padding_right"
+            android:paddingBottom="@dimen/toolbar_padding_bottom">
+
+            <ImageView
+                android:id="@+id/ivBarLeft"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/ic_back_icon"
+                tools:targetApi="lollipop" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/include_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingTop="@dimen/toolbar_padding_top"
+            android:paddingBottom="@dimen/toolbar_padding_bottom"
+            android:textColor="@color/bar_titie_white"
+            android:textSize="@dimen/include_title_text_size" />
+
+
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/picker_bottombar"
+        android:layout_below="@id/tvBack">
+
+        <FrameLayout
+            android:id="@+id/picker_album_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+
+        <FrameLayout
+            android:id="@+id/picker_photos_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/picker_bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e6e6e6"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/picker_bottombar_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/picker_preview_btn_selector"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:text="@string/picker_image_preview"
+            android:textColor="@color/color_picker_preview_selector"
+            android:textSize="14.0sp"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/picker_bottombar_select"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/blue_btn_selector"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:text="@string/btn_send"
+            android:textColor="@drawable/blue_text_selector"
+            android:textSize="14.0sp"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+</RelativeLayout>
