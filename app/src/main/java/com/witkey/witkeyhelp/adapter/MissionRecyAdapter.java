@@ -64,7 +64,6 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
         this.status = status;
     }
 
-    private String[] filterData = {"信息咨询", "悬赏帮忙", "紧急求助", "失物招领"};
 
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
@@ -118,7 +117,7 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
             }
 
         }
-        if (null == mission.getCircleName() || "".equals(mission.getCircleName())) {
+        if (null == mission.getCircleName() || "".equals(mission.getCircleName()) || "全部".equals(mission.getCircleName())) {
             ((ViewHolder) holder).cicle.setVisibility(View.GONE);
         } else {
             ((ViewHolder) holder).cicle.setVisibility(View.VISIBLE);
@@ -283,5 +282,9 @@ public class MissionRecyAdapter extends BaseRecyAdapter<MissionBean> {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-
+    @Override
+    public void setCcontent(TextView textView) {
+        super.setCcontent(textView);
+        textView.setText("还没有人发布任务啊");
+    }
 }

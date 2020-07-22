@@ -2,6 +2,7 @@ package com.witkey.witkeyhelp.view.impl;
 
 import android.annotation.TargetApi;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,10 +14,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 
 import android.support.v7.widget.GridLayoutManager;
@@ -229,6 +232,12 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
     private TextView price_image;
     private LinearLayout forward;
     private View popups_id;
+    private View inflate;
+    private RoundImageView comment_item_logo;
+    private TextView comment_item_userName;
+    private TextView comment_item_time;
+    private TextView comment_item_content;
+    private LinearLayout hideshow;
 
     @Override
     protected IPresenter[] getPresenters() {
@@ -313,10 +322,11 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             @Override
             public void onClick(View v) {
                 if (detail_page_do_comment.getText().toString().trim().equals("")) {
+                    ToastUtils.showTestShort(MissionDetailActivity.this, "请输入回复内容");
                     return;
                 }
                 addComment();
-                hideInput();
+
             }
         });
         if (taskorder) {
@@ -358,12 +368,23 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                 }
                 adapter.notifyDataSetChanged();
                 multitasking();
+
+                if (commentsList.size() == 0) {
+                    hideshow.setVisibility(View.VISIBLE);
+                    refreshLayout.setVisibility(View.GONE);
+                } else {
+                    hideshow.setVisibility(View.GONE);
+                    refreshLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
 
 
     }
 
+    /**
+     * 添加回复
+     */
     private void addComment() {
         MyAPP.getInstance().getApi().getCommentAdd(user.getUserId(), detail_page_do_comment.getText().toString(), businessId).enqueue(new Callback(callback, "获取评论失败") {
 
@@ -384,8 +405,15 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                     rowsBean.setList(new ArrayList<ReplyBean.ReturnObjectBean.RowsBean.ListBean>());
                     commentsList.add(0, rowsBean);
                     adapter.notifyDataSetChanged();
-
                     detail_page_do_comment.setText("");
+                    hideInput();
+                    if (commentsList.size() == 0) {
+                        hideshow.setVisibility(View.VISIBLE);
+                        refreshLayout.setVisibility(View.GONE);
+                    } else {
+                        hideshow.setVisibility(View.GONE);
+                        refreshLayout.setVisibility(View.VISIBLE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -423,6 +451,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
      */
     private void initExpandableListView(final List<ReplyBean.ReturnObjectBean.RowsBean> commentList) {
         expandableListView.setGroupIndicator(null);
+
         //默认展开所有回复
         adapter = new CommentExpandAdapter(this, commentList, user.getUserId(), missionBean.getCreateUserId(), missionBean.getBusinessType(), missionBean.getPaymentType(), missionBean.getReceiverPhone());
         expandableListView.setAdapter(adapter);
@@ -455,7 +484,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             @Override
             public void onItemClick(int position) {
                 if (Double.parseDouble(amount.getText().toString()) > 0) {
-                    popubBFounty(MissionDetailActivity.this, commentList.get(position).getId(), position, true, 0);
+                    popubBFdounty(MissionDetailActivity.this, commentList.get(position).getId(), commentList.get(position).getUserId(), position, true, 0);
                 } else {
                     ToastUtils.showTestShort(MissionDetailActivity.this, "赏金已分配完");
                 }
@@ -487,6 +516,9 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             disableAutoFill();
         }
         ll_share = findViewById(R.id.ll_share);
+        hideshow = findViewById(R.id.hideshow);
+
+
         reply = findViewById(R.id.reply);
         tv_chat = findViewById(R.id.tv_chat);
         amount = findViewById(R.id.amount);
@@ -1048,6 +1080,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             String businessType = missionBean.getBusinessType();
 
             bond.setText("￥" + missionBean.getDeposit());
+
             price.setText(missionBean.getPrice() + ".00");
             if (missionBean.getPaymentType().equals("1")) {
 
@@ -1061,11 +1094,25 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                 price.setTextColor(getResources().getColor(R.color.shape_lan));
             }
             if ("2".equals(businessType)) {
-                bond_layout.setVisibility(View.VISIBLE);
-                telephone_dial_line.setVisibility(View.VISIBLE);
-                bond_line.setVisibility(View.VISIBLE);
-                telephone_dial.setVisibility(View.VISIBLE);
-                include_title.setText("悬赏帮忙");
+
+                if (missionBean.getDeposit() == 0) {
+                    bond_layout.setVisibility(View.GONE);
+                    bond_line.setVisibility(View.GONE);
+                } else {
+                    bond_line.setVisibility(View.VISIBLE);
+                    bond_layout.setVisibility(View.VISIBLE);
+                }
+                if (missionBean.getContactsPhone() == null || missionBean.getContactsPhone().equals("")) {
+                    telephone_dial_line.setVisibility(View.GONE);
+                    telephone_dial.setVisibility(View.GONE);
+                } else {
+                    contact_information.setText(hidePhoneNum(missionBean.getContactsPhone()) + "");
+                    telephone_dial_line.setVisibility(View.VISIBLE);
+                    telephone_dial.setVisibility(View.VISIBLE);
+                }
+
+
+                include_title.setText("帮忙");
                 orders_relayout.setVisibility(View.GONE);
                 amount.setVisibility(View.GONE);
                 allocated.setVisibility(View.GONE);
@@ -1088,6 +1135,13 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                                 has_released.setVisibility(View.VISIBLE);
                                 break;
                             case "4":
+
+                                break;
+                            case "6":
+                                renwu = "任务完成！";
+                                chap_liaotian.setText("回复");
+                                // 任务进行中
+                                has_released.setVisibility(View.VISIBLE);
                                 break;
                             case "8":
                                 rewardall.setVisibility(View.VISIBLE);
@@ -1118,6 +1172,15 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                                 has_released.setVisibility(View.VISIBLE);
                                 mission_accomplished.setText("任务提交");
                                 break;
+                            case "3":
+                                rewardall.setVisibility(View.VISIBLE);
+                                chap_liaotian.setText("回复");
+                                tv_commit.setText("等待悬赏者取消中...");
+                                tv_commit.setTextColor(getResources().getColor(R.color.colortext_size));
+                                tv_commit.setBackground(getResources().getDrawable(R.drawable.shape_gray_details_an));
+                                break;
+                            case "4":
+                                break;
                             //接单已提交完成
                             case "6":
                                 rewardall.setVisibility(View.VISIBLE);
@@ -1126,13 +1189,13 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                                 tv_commit.setTextColor(getResources().getColor(R.color.colortext_size));
                                 tv_commit.setBackground(getResources().getDrawable(R.drawable.shape_gray_details_an));
                                 break;
-                            case "3":
-                                rewardall.setVisibility(View.VISIBLE);
+                            case "7":
+                                renwu = "任务提交";
                                 chap_liaotian.setText("回复");
-                                tv_commit.setText("等待悬赏者取消中...");
-                                tv_commit.setTextColor(getResources().getColor(R.color.colortext_size));
-                                tv_commit.setBackground(getResources().getDrawable(R.drawable.shape_gray_details_an));
+                                has_released.setVisibility(View.VISIBLE);
+                                mission_accomplished.setText("任务提交");
                                 break;
+
                             case "8":
                                 renwu = "任务提交";
                                 chap_liaotian.setText("回复");
@@ -1148,7 +1211,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
                 }
             } else if ("1".equals(businessType)) {
-                include_title.setText("信息咨询");
+                include_title.setText("咨询");
                 orders_relayout.setVisibility(View.VISIBLE);
                 amount.setVisibility(View.VISIBLE);
                 amount.setText(missionBean.getResidue() + "");
@@ -1195,7 +1258,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             String[] strings = linkString(et_content.getText().toString());
             webUrl(strings, et_content.getText().toString());
 
-            contact_information.setText(hidePhoneNum(missionBean.getContactsPhone()) + "");
+
             if (missionBean.getPlaceName() == null || "".equals(missionBean.getPlaceName())) {
 
             } else {
@@ -1460,7 +1523,6 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
     }
 
     private void addBackgroundPopub(PopupWindow popup) {
-        // 设置背景颜色变暗
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.alpha = 0.7f;//调节透明度
         getWindow().setAttributes(lp);
@@ -1473,7 +1535,6 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                 WindowManager.LayoutParams lp = getWindow().getAttributes();
                 lp.alpha = 1f;
                 getWindow().setAttributes(lp);
-                popups_id.setVisibility(View.GONE);
             }
         });
     }
@@ -1717,11 +1778,7 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View vPopupWindow = inflater.inflate(R.layout.bond_renwu, null, false);//引入弹窗布局
-
-
         ImageView colose_image = vPopupWindow.findViewById(R.id.colose_image);
-
-
         LinearLayout cancel = vPopupWindow.findViewById(R.id.cancel);
         TextView withdraw = vPopupWindow.findViewById(R.id.withdraw);
         final PopupWindow relievepopupWindow = new PopupWindow(vPopupWindow, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
@@ -1729,15 +1786,14 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             @Override
             public void onClick(View view) {
                 relievepopupWindow.dismiss();
-                //  finish();
-                //     popubReasonTermination(MissionDetailActivity.this);
+
             }
         });
         colose_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 relievepopupWindow.dismiss();
-                //   finish();
+
             }
         });
         withdraw.setOnClickListener(new View.OnClickListener() {
@@ -1824,15 +1880,15 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
     }
 
-    private void istributiondBounty(String id, final double price, final int position, final boolean taskorder, final int groupPosition) {
+    private void istributiondBounty(String id, int userId, final double price, final int position, final boolean taskorder, final int groupPosition) {
 
-        MyAPP.getInstance().getApi().rewardAdd(id, user.getUserId(), businessId, price).enqueue(new Callback(callback, "获取任务详情失败") {
+        MyAPP.getInstance().getApi().rewardAdd(id, userId, businessId, price).enqueue(new Callback(callback, "获取任务详情失败") {
 
             @Override
             public void getSuc(String body) {
 
                 relievepopupWindow.dismiss();
-                popubBFountySuccessfully(MissionDetailActivity.this);
+
                 amount.setText((Double.parseDouble(amount.getText().toString()) - price) + "");
                 if (taskorder) {
                     commentsList.get(position).setRewardMoney(price + "");
@@ -1840,20 +1896,31 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
                 } else {
                     commentsList.get(groupPosition).getList().get(position - 1).setRewardMoney(price + "");
                     headerAndFooterWrapper.notifyDataSetChanged();
+                    popups_id.setVisibility(View.VISIBLE);
                 }
-
+                popubBFountySuccessfully(MissionDetailActivity.this, taskorder);
                 adapter.notifyDataSetChanged();
             }
         });
     }
 
-    private void popubBFounty(Context context, final String id, final int position, final boolean taskorder, final int groupPosition) {
+    private void popubBFdounty(Context context, final String id, final int userId, final int position, final boolean taskorder, final int groupPosition) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View vPopupWindow = inflater.inflate(R.layout.bounty_popub_distribution, null, false);//引入弹窗布局
+        final View vPopupWindow = inflater.inflate(R.layout.bounty_popub_distribution, null);//引入弹窗布局
         TextView allocation = vPopupWindow.findViewById(R.id.allocation);
         TextView unassign = vPopupWindow.findViewById(R.id.unassign);
         final EditText ed_distribution = vPopupWindow.findViewById(R.id.ed_distribution);
+
+        if (Double.parseDouble(amount.getText().toString()) > 0) {
+            if (missionBean.getPaymentType().equals("1")) {
+                ed_distribution.setHint("     最多可分配" + amount.getText().toString() + "元               ");
+            } else {
+                ed_distribution.setHint("     最多可分配" + amount.getText().toString() + "钻石               ");
+            }
+
+        }
+
         ed_distribution.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         ed_distribution.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable edt) {
@@ -1871,14 +1938,23 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
             }
         });
+        if (relievepopupWindow == null) {
+            relievepopupWindow = new PopupWindow(vPopupWindow, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+        }
+       // relievepopupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
 
-        relievepopupWindow = new PopupWindow(vPopupWindow, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+      //  relievepopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        relievepopupWindow.setFocusable(true);
+
+//        InputMethodManager imm = (InputMethodManager)ed_distribution.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
         allocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismissInput(vPopupWindow);
                 relievepopupWindow.dismiss();
-                istributiondBounty(id, Double.parseDouble(ed_distribution.getText().toString()), position, taskorder, groupPosition);
+                istributiondBounty(id, userId, Double.parseDouble(ed_distribution.getText().toString()), position, taskorder, groupPosition);
             }
         });
 
@@ -1891,12 +1967,35 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
         });
         View parentView = LayoutInflater.from(context).inflate(R.layout.task_view, null);
         //相对于父控件的位置（例如正中央Gravity.CENTER，下方Gravity.BOTTOM等），可以设置偏移或无偏移
-        addBackgroundPopub(relievepopupWindow);
+        // 设置背景颜色变暗
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.7f;//调节透明度
+        getWindow().setAttributes(lp);
+
+
+
+
+
+        relievepopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+                if (!taskorder) {
+                    popups_id.setVisibility(View.GONE);
+                }
+            }
+        });
         relievepopupWindow.showAtLocation(parentView, Gravity.CENTER, 0, 0);
+
     }
 
-    private void popubBFountySuccessfully(Context context) {
-        popups_id.setVisibility(View.VISIBLE);
+
+
+    private void popubBFountySuccessfully(Context context, final boolean taskorder) {
+
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View vPopupWindow = inflater.inflate(R.layout.bounty_chengon_distribution, null, false);//引入弹窗布局
 
@@ -1913,7 +2012,23 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
         View parentView = LayoutInflater.from(context).inflate(R.layout.task_view, null);
         //相对于父控件的位置（例如正中央Gravity.CENTER，下方Gravity.BOTTOM等），可以设置偏移或无偏移
-        addBackgroundPopub(relievepopupWindow);
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.7f;//调节透明度
+        getWindow().setAttributes(lp);
+        //dismiss时恢复原样
+        relievepopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+                if (!taskorder) {
+                    popups_id.setVisibility(View.GONE);
+                }
+
+            }
+        });
         relievepopupWindow.showAtLocation(parentView, Gravity.CENTER, 0, 0);
     }
 
@@ -1929,86 +2044,6 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
     private void secondLevel(final View vPopupWindow, final int groupPosition) {
 
-        View inflate = LayoutInflater.from(this).inflate(R.layout.secondary_heard, null, true);
-
-        RoundImageView comment_item_logo = (RoundImageView) inflate.findViewById(R.id.comment_item_logo);
-        TextView comment_item_userName = (TextView) inflate.findViewById(R.id.comment_item_userName);
-        TextView comment_item_time = (TextView) inflate.findViewById(R.id.comment_item_time);
-        TextView comment_item_content = (TextView) inflate.findViewById(R.id.comment_item_content);
-
-        detail_comment = vPopupWindow.findViewById(R.id.detail_comment);
-        sendcomment = (TextView) vPopupWindow.findViewById(R.id.comment_btn_pop);
-
-
-        detail_comment.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().trim().equals("")) {
-                    sendcomment.setTextColor(getResources().getColor(R.color.defaultsendColor));
-                } else {
-                    sendcomment.setTextColor(getResources().getColor(R.color.successsendColor));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        level_review = (RecyclerView) vPopupWindow.findViewById(R.id.level_review);
-        level_review.setLayoutManager(new LinearLayoutManager(this));
-        Glide.with(this).load(URL.getImgPath + commentsList.get(groupPosition).getHeadUrl()).into(comment_item_logo);
-        comment_item_userName.setText(commentsList.get(groupPosition).getUserName());
-        comment_item_time.setText(commentsList.get(groupPosition).getCreateTime());
-        comment_item_content.setText(commentsList.get(groupPosition).getContent());
-        commentsList.get(groupPosition).getList();
-        secondaryAdapter = new SecondaryAdapter(MissionDetailActivity.this, commentsList.get(groupPosition).getList(), missionBean.getCreateUserId(), releaseTaskPopob, user.getUserId(), missionBean.getBusinessType(), missionBean.getPaymentType(), missionBean.getReceiverPhone());
-        headerAndFooterWrapper = new HeaderAndFooterWrapper(secondaryAdapter);
-
-        headerAndFooterWrapper.addHeaderView(inflate);
-        level_review.setAdapter(headerAndFooterWrapper);
-
-        secondaryAdapter.setOnItemClickListener(new SecondaryAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-                showInput(detail_comment);
-                subscript = position;
-            }
-        });
-        secondaryAdapter.setOnDistributionItemClickListener(new SecondaryAdapter.OnItemDistributionClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                if (Double.parseDouble(amount.getText().toString()) > 0) {
-
-                    popups_id.setVisibility(View.VISIBLE);
-                    popubBFounty(MissionDetailActivity.this, commentsList.get(groupPosition).getList().get(position - 1).getId(), position, false, groupPosition);
-                } else {
-                    ToastUtils.showTestShort(MissionDetailActivity.this, "赏金已分配完");
-                }
-
-            }
-        });
-        sendcomment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (detail_comment.getText().toString().equals("")) {
-                    return;
-                }
-                if (subscript == -2) {
-                    addCommentLevel(groupPosition);
-                } else {
-                    addCommentLevel(groupPosition);
-                }
-                dismissInput(vPopupWindow);
-            }
-        });
     }
 
     private void addSecondaryAdapter(final int groupPosition, String id) {
@@ -2081,9 +2116,9 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
 
     }
 
-    private void popubWiodowReply(int groupPosition) {
+    private void popubWiodowReply(final int groupPosition) {
 
-        View vPopupWindow = getLayoutInflater().inflate(R.layout.activity_secondary, null, true);//引入弹窗布局
+        final View vPopupWindow = getLayoutInflater().inflate(R.layout.activity_secondary, null, true);//引入弹窗布局
 
         RelativeLayout tvBack = vPopupWindow.findViewById(R.id.tvBack);
         TextView include_title = vPopupWindow.findViewById(R.id.include_title);
@@ -2095,9 +2130,22 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
         }
 
         if (releaseTaskPopob == null) {
+
+            level_review = (RecyclerView) vPopupWindow.findViewById(R.id.level_review);
+            level_review.setLayoutManager(new LinearLayoutManager(this));
             releaseTaskPopob = new PopupWindow(vPopupWindow, ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
+
+            inflate = getLayoutInflater().inflate(R.layout.secondary_heard, null, false);
+
+            comment_item_logo = (RoundImageView) inflate.findViewById(R.id.comment_item_logo);
+            comment_item_userName = (TextView) inflate.findViewById(R.id.comment_item_userName);
+            comment_item_time = (TextView) inflate.findViewById(R.id.comment_item_time);
+            comment_item_content = (TextView) inflate.findViewById(R.id.comment_item_content);
+
+            detail_comment = vPopupWindow.findViewById(R.id.detail_comment);
+            sendcomment = (TextView) vPopupWindow.findViewById(R.id.comment_btn_pop);
         }
-        secondLevel(vPopupWindow, groupPosition);
+        //   secondLevel(vPopupWindow, groupPosition);
         releaseTaskPopob.setAnimationStyle(R.style.anim_pop_bottombar);
         releaseTaskPopob.setOutsideTouchable(true);
         releaseTaskPopob.setFocusable(true);
@@ -2109,6 +2157,75 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             }
         });
 
+
+        detail_comment.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().trim().equals("")) {
+                    sendcomment.setTextColor(getResources().getColor(R.color.defaultsendColor));
+                } else {
+                    sendcomment.setTextColor(getResources().getColor(R.color.successsendColor));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        Glide.with(this).load(URL.getImgPath + commentsList.get(groupPosition).getHeadUrl()).into(comment_item_logo);
+        comment_item_userName.setText(commentsList.get(groupPosition).getUserName());
+        comment_item_time.setText(commentsList.get(groupPosition).getCreateTime());
+        comment_item_content.setText(commentsList.get(groupPosition).getContent());
+        commentsList.get(groupPosition).getList();
+        secondaryAdapter = new SecondaryAdapter(MissionDetailActivity.this, commentsList.get(groupPosition).getList(), missionBean.getCreateUserId(), releaseTaskPopob, user.getUserId(), missionBean.getBusinessType(), missionBean.getPaymentType(), missionBean.getReceiverPhone());
+        headerAndFooterWrapper = new HeaderAndFooterWrapper(secondaryAdapter);
+
+        headerAndFooterWrapper.addHeaderView(inflate);
+        level_review.setAdapter(headerAndFooterWrapper);
+
+        secondaryAdapter.setOnItemClickListener(new SecondaryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                showInput(detail_comment);
+                subscript = position;
+            }
+        });
+        secondaryAdapter.setOnDistributionItemClickListener(new SecondaryAdapter.OnItemDistributionClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (Double.parseDouble(amount.getText().toString()) > 0) {
+
+                    popups_id.setVisibility(View.VISIBLE);
+                    popubBFdounty(MissionDetailActivity.this, commentsList.get(groupPosition).getList().get(position - 1).getId(), commentsList.get(groupPosition).getList().get(position - 1).getUserId(), position, false, groupPosition);
+                } else {
+                    ToastUtils.showTestShort(MissionDetailActivity.this, "赏金已分配完");
+                }
+
+            }
+        });
+        sendcomment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (detail_comment.getText().toString().equals("")) {
+                    return;
+                }
+                if (subscript == -2) {
+                    addCommentLevel(groupPosition);
+                } else {
+                    addCommentLevel(groupPosition);
+                }
+                dismissInput(vPopupWindow);
+            }
+        });
 
     }
 
@@ -2168,7 +2285,10 @@ public class MissionDetailActivity extends InitPresenterBaseActivity implements 
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(MissionDetailActivity.this, ProblemFeedbackActivity.class);
-                intent2.putExtra("type", 2);
+
+                intent2.putExtra("type", 1);
+
+
                 intent2.putExtra("businessId", missionBean.getBusinessId());
                 intent2.putExtra("orderId", missionBean.getOrderId());
                 startActivity(intent2);

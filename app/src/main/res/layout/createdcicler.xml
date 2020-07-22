@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_toolbar" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/success_picture" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:text="您已成功提交审核"
+        android:textColor="#333333"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:text="请等待官方24小时审核"
+        android:textColor="#61abff"
+        android:textSize="12sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lihang.ShadowLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="80dp"
+            app:hl_cornerRadius="45dp"
+            app:hl_shadowBackColor="#37EC9A"
+            app:hl_shadowColor="@color/black"
+            app:hl_shadowLimit="15dp"
+
+            >
+
+            <TextView
+                android:id="@+id/create_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:paddingLeft="28dp"
+
+                android:paddingTop="10dp"
+                android:paddingRight="32dp"
+                android:paddingBottom="10dp"
+                android:text="返回首页"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </com.lihang.ShadowLayout>
+    </RelativeLayout>
+</LinearLayout>

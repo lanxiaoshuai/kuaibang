@@ -339,7 +339,7 @@
 
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">@dimen/dia_mission_filter_title</item>
-        <item name="android:textStyle">bold</item>
+
     </style>
 
 

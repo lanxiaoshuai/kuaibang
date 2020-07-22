@@ -537,7 +537,7 @@ public interface Api {
                           @Field("orderId") int orderId
     );
 
-    //举报  反馈
+    //不同意解除
     @POST("apiorder/isUser/reportOrder")
     @FormUrlEncoded
     Call<String> reportOrder(@Field("content") String content,
@@ -977,6 +977,7 @@ public interface Api {
             @Field("pageSize") int pageSize
 
     );
+
     //分配赏金
     @POST("api/reward/add")
     @FormUrlEncoded

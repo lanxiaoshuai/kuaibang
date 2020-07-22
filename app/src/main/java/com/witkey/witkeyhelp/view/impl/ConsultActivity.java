@@ -382,14 +382,14 @@ public class ConsultActivity extends InitPresenterBaseActivity implements View.O
 
         businessTypeNum = Integer.parseInt(businessType);
         if (businessTypeNum == 1) {
-            setIncludeTitle("信息咨询");
+            setIncludeTitle("咨询");
             tv_title_content.setText("咨询内容");
             et_content.setHint("在此输入咨询内容");
             btn_open_more.setVisibility(View.GONE);
             ll_more.setVisibility(View.GONE);
             consult_line.setVisibility(View.GONE);
         } else if (businessTypeNum == 2) {
-            setIncludeTitle("悬赏帮忙");
+            setIncludeTitle("帮忙");
             tv_title_content.setText("帮助内容");
             et_content.setHint("在此输入帮助内容");
             rewardtohelp.setVisibility(View.VISIBLE);

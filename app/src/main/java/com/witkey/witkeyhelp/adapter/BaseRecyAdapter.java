@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.witkey.witkeyhelp.R;
 
@@ -51,6 +52,7 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<RecyclerVi
         if (viewType == EMPTY_VIEW) {
             View view = LayoutInflater.from(context).inflate(R.layout.include_no_data, parent,
                     false);
+
             return new EmptyViewHolder(view);
         } else {
             return onCreateViewHolder(parent);
@@ -60,22 +62,28 @@ public abstract class BaseRecyAdapter<T> extends RecyclerView.Adapter<RecyclerVi
     protected abstract RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent);
 
     protected abstract void onBindBiewHolder(RecyclerView.ViewHolder holder, int position);
+    public void setCcontent(TextView textView){
 
+    }
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EmptyViewHolder) {
             ((EmptyViewHolder) holder).iv_nodata.setVisibility(View.VISIBLE);
+            setCcontent(  ((EmptyViewHolder) holder).nodata);
         } else {
             onBindBiewHolder(holder, position);
         }
 
     }
+
     static class EmptyViewHolder extends RecyclerView.ViewHolder {
         ImageView iv_nodata;
+        TextView nodata;
 
         public EmptyViewHolder(View itemView) {
             super(itemView);
             iv_nodata = (ImageView) itemView.findViewById(R.id.iv_nodata);
+            nodata = (TextView) itemView.findViewById(R.id.nodata);
         }
     }
 

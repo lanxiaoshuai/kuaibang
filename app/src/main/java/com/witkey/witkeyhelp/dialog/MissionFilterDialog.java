@@ -47,7 +47,7 @@ public class MissionFilterDialog extends Dialog {
 
     private LinearLayout btn_commit;
     private LinearLayout withdraw;
-    private String[] filterData = {"信息咨询", "悬赏帮忙", "紧急求助", "失物招领"};
+
     //   private String[] typeData = {"普通", "竞标"};
     private String[] isNeedBondData = {"是", "否"};
     private String[] priceTypeData = {"人民币", "钻石"};
